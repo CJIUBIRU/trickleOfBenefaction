@@ -1,0 +1,10 @@
+.nav-link{
+    color: #002B5B
+}
+.dropdown-menu.show{
+    margin-right: 100px;
+}
+.nav-link:hover{
+    border: none;
+    color: #002B5B;
+}
