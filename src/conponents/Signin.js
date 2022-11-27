@@ -59,7 +59,7 @@ function Login() {
   const loginCardStyle = {
     backgroundColor: "#D7E9F7",
     width: "450px",
-    height: "590px",
+    height: "550px",
     position: "absolute",
     top: "50%",
     left: "75%",
@@ -73,7 +73,7 @@ function Login() {
   const mulLoginPageStyle = {
     width: "380px",
     height: "100px",
-    top: "118%",
+    top: "126%",
     left: "50%",
     position: "absolute",
     margin: "-80px 0px 0px -190px",
@@ -102,7 +102,7 @@ function Login() {
     width: "240px",
     height: "40px",
     position: "absolute",
-    top: "50%",
+    top: "58.5%",
     left: "50%",
     margin: "0px 0px 0px -125px",
     marginTop: "85px",
@@ -140,7 +140,6 @@ function Login() {
   };
   const levelInStyle = {
     width: "100%",
-    marginTop: "-25px",
     marginBottom: "20px",
   };
   const levelInContentStyle = {
@@ -230,7 +229,6 @@ function Login() {
             <div style={mulLoginPageStyle}>
               <hr style={{marginTop: "50px"}} />
               <GoogleLogin />
-              <LineLogin />
               <FbLogin />
             </div>
           </div>

@@ -7,6 +7,8 @@ import Input from "../elements/input";
 import app from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { db } from "../utils/firebase";
 
 function Login() {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ function Login() {
         console.log(user);
         navigate("/loginIn");
         setIsLoading(false);
-        alert("註冊成功，正在前往登入頁面...")
+        alert("註冊成功，正在前往登入頁面...");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -33,19 +35,33 @@ function Login() {
         // alert(errorCode);
         // alert(errorMessage);
         switch (errorCode) {
-            case 'auth/email-already-in-use':
-                setErrorMessage('信箱已存在');
-                break;
-            case 'auth/invalid-email':
-                setErrorMessage('信箱格式不正確');
-                break;
-            case 'auth/weak-password':
-                setErrorMessage('密碼強度不足');
-                break;
-            default:
+          case "auth/email-already-in-use":
+            setErrorMessage("信箱已存在");
+            break;
+          case "auth/invalid-email":
+            setErrorMessage("信箱格式不正確");
+            break;
+          case "auth/weak-password":
+            setErrorMessage("密碼強度不足");
+            break;
+          default:
         }
         setIsLoading(false);
       });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // await setDoc(doc(db, "goodsDemand", user.uid), {
+      await addDoc(collection(db, "users"), {
+        email: email,
+        password: password,
+      });
+      
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const loginCardStyle = {
@@ -128,8 +144,8 @@ function Login() {
     textAlign: "center",
     marginTop: "85px",
     border: "1px red solid",
-    backgroundColor: "#FFECEC"
-  }
+    backgroundColor: "#FFECEC",
+  };
   return (
     <div style={loginBodyStyle}>
       <div style={loginLogoStyle}>
@@ -139,26 +155,28 @@ function Login() {
         <div style={loginCardStyle}>
           <div style={loginContentStyle}>
             <p style={titleStyle}>註冊</p>
-            <Form.Control
-              style={inputStyle}
-              type="email"
-              placeholder="使用者帳號"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Form.Control
-              style={inputStyle}
-              type="password"
-              placeholder="使用者密碼"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <form onSubmit={handleSubmit}>
+              <Form.Control
+                style={inputStyle}
+                type="email"
+                placeholder="使用者帳號"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Form.Control
+                style={inputStyle}
+                type="password"
+                placeholder="使用者密碼"
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-            <div style={btnContentStyle}>
-              <ButtonLink to="/loginIn" name="返回登入" />
-              &nbsp;&nbsp;
-              <button style={stepBtnStyle} onClick={signUp}>
-                註冊
-              </button>
-            </div>
+              <div style={btnContentStyle}>
+                <ButtonLink to="/loginIn" name="返回登入" />
+                &nbsp;&nbsp;
+                <button style={stepBtnStyle} type="submit" onClick={signUp}>
+                  註冊
+                </button>
+              </div>
+            </form>
             {errorMessage && <p style={errorMessageStyle}>{errorMessage}</p>}
           </div>
         </div>

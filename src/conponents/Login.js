@@ -2,7 +2,6 @@ import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReturnHome from "../elements/returnHome";
 import LoginPage from "../elements/loginPage";
-import Navbar from "../elements/navbar";
 
 function login() {
   const loginLogoStyle = {

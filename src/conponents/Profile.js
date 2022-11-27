@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, Nav } from "react-bootstrap";
 import React, { Component } from "react";
 import "../App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +17,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../elements/navbar";
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
+import Alert from "react-bootstrap/Alert";
+import { Link } from "react-router-dom";
 
 function UploadDemand() {
   const navigate = useNavigate();
@@ -71,6 +73,40 @@ function UploadDemand() {
       <Navbar />
       <TitleSec name="個人檔案管理" />
       <Container>
+        {/* <>
+          {["danger"].map((variant) => (
+            <Alert
+              key={variant}
+              variant={variant}
+            >
+              <Row style={{paddingLeft: "120px"}}>
+                <Col style={{textAlign: "right", lineHeight: "30px"}}>
+                    帳號尚未同步，立即
+                    <span style={{ color: "red" }}>前往同步</span>。
+                </Col>
+                <Col>
+                  <Nav.Link
+                    style={{
+                      border: "none",
+                      color: "white",
+                      backgroundColor: "#ff5151",
+                      borderRadius: "50px",
+                      width: "100px",
+                      height: "30px",
+                      fontWeight: "bold",
+                      lineHeight: "30px",
+                      textAlign: "center",
+                    }}
+                    to="/googleSetAccount"
+                    as={Link}
+                  >
+                    同步帳號
+                  </Nav.Link>
+                </Col>
+              </Row>
+            </Alert>
+          ))}
+        </> */}
         <Card style={{ marginTop: "40px", width: "80%", marginLeft: "10%" }}>
           <div style={profileContentStyle}>
             <Row>
@@ -100,7 +136,7 @@ function UploadDemand() {
               <Col>
                 <div style={textStyle}>
                   {user.displayName && (
-                    <p style={{marginBottom: "-40px"}}>
+                    <p style={{ marginBottom: "-40px" }}>
                       <b>用戶名稱：</b>
                       {user.displayName}&nbsp;
                     </p>
@@ -171,7 +207,6 @@ function UploadDemand() {
             </Row>
           </div>
         </Card>
-
         <div style={titleSecPage}>
           <h5 style={{ color: "#002b5b", fontWeight: "bold" }}>瀏覽紀錄</h5>
           <Slider {...settingsSec}>
@@ -195,7 +230,6 @@ function UploadDemand() {
             </div>
           </Slider>
         </div>
-
         <div style={titleSecPage}>
           <h5 style={{ color: "#002b5b", fontWeight: "bold" }}>捐贈紀錄</h5>
           <Slider {...settingsSec}>

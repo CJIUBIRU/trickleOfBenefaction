@@ -26,7 +26,7 @@ function UploadGoods() {
   };
   const uploadFiles = (file) => {
     if (!file) return;
-    const storageRef = ref(storage, `/file/${file.name}`);
+    const storageRef = ref(storage, `/goods/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on(
       "state_changed",
@@ -110,12 +110,30 @@ function UploadGoods() {
             )} */}
             
           </div>
-          <div style={{ marginLeft: "44.3%", marginTop: "80px" }}>
-            <ButtonLink
+          <div style={{ marginLeft: "44.3%", marginTop: "80px", width: "auto" }}>
+            {progress===100 && (
+              <ButtonLink
               as={Link}
               to="/uploadGoodsSec"
               name="下一步"
             ></ButtonLink>
+            )}
+            {progress!==100 && (
+              <button
+              style={{
+                  color: "#ffffff",
+                  backgroundColor: "lightgray",
+                  borderRadius: "30px",
+                  lineHeight: "30px",
+                  fontSize: "16px",
+                  width: "120px",
+                  textAlign: "center",
+                  height: "35px",
+                  fontWeight: "bold",
+                  border: "none"
+                }}
+            >下一步</button>
+            )}
           </div>
         </Row>
       </Container>

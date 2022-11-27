@@ -9,14 +9,13 @@ import ButtonLink from "../elements/button";
 
 import SuccessInfo from '../elements/successInfo';
 
-
 function UploadSuccess() {
 
     const cardStyle = {
         width: "50%",
         color: "black",
         left: "50%",
-        marginTop: "210px",
+        marginTop: "230px",
         transform: `translate(${-50}%, ${-50}%)`,
         paddingTop: "3%",
         paddingBottom: "6%",
@@ -28,7 +27,7 @@ function UploadSuccess() {
 
     const btnStyle = {
         position: "absolute",
-        marginTop: "30px",
+        marginTop: "45px",
         left: "50%",
         transform: `translate(${-50}%, ${-50}%)`,
         paddingTop: "5px",

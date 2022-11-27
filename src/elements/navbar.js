@@ -13,10 +13,16 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { Button } from "react-bootstrap";
+import ScrollToTop from "react-scroll-to-top";
 
 export default function NavbarComp() {
   const [user, loading] = useAuthState(auth);
-  if (loading) return <h1 style={{ textAlign: "center" }}>loading...</h1>;
+  if (loading)
+    return (
+      <h1 style={{ textAlign: "center", color: "#002b5b", fontWeight: "bold" }}>
+        loading...
+      </h1>
+    );
   const bodyStyle = {
     backgroundColor: "#ffffff",
   };
@@ -303,6 +309,7 @@ export default function NavbarComp() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <ScrollToTop smooth />
     </div>
   );
 }

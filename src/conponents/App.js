@@ -10,7 +10,6 @@ import UploadDemandThird from "./UploadDemandThird";
 import LoginDemand from "./LoginDemand";
 import LoginAdmin from "./LoginAdmin";
 import Signin from "./Signin";
-// import ScrollToTop from "../elements/scrollToTop";
 import MyDemand from "./MyDemand";
 import Profile from "./Profile";
 import DonateListSec from "./DonateListSec";
@@ -35,18 +34,21 @@ import PointsActivity from "./PointsActivity";
 import PointsItem from "./PointsItem";
 import PointsItemDetails from "./PointsItemDetails";
 import PointsItemSuccess from "./PointsItemSuccess";
-import ManagerProve from './ManagerProve';
-import ManagerProveMail from './ManagerProveMail';
+import ManagerProve from "./ManagerProve";
+import ManagerProveMail from "./ManagerProveMail";
 import Dashboard from "../elements/dashboard";
 import SignUp from "./SignUp";
 import UploadGoods from "./UploadGoods";
 import UploadGoodsSec from "./UploadGoodsSec";
+import ApplicationUpload2 from "./ApplicationUpload2";
+import ApplicationUpload3 from "./ApplicationUpload3";
+import ApplicationUpload4 from "./ApplicationUpload4";
+import GoogleSetAccount from "./GoogleSetAccount";
 
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        {/* <ScrollToTop> */}
+        <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<NavbarComp />} />
             <Route path="/signin" element={<SignUp />} />
@@ -67,8 +69,11 @@ function App() {
             <Route path="/process" element={<Process />} />
             <Route path="/processRecordList" element={<ProcessRecordList />} />
             <Route path="/viewRecord" element={<ViewRecord />} />
+            <Route path="/googleSetAccount" element={<GoogleSetAccount />} />
             <Route element={<ApplicationInfo />} path="/applicationInfo" />
-            <Route element={<ApplicationUpload />} path="/applicationUpload" />
+            <Route element={<ApplicationUpload2 />} path="/applicationUpload2" />
+            <Route element={<ApplicationUpload3 />} path="/applicationUpload3" />
+            <Route element={<ApplicationUpload4 />} path="/applicationUpload4" />
             <Route element={<UploadSuccess />} path="/uploadSuccess" />
             <Route element={<ManagerProve />} path="/managerProve" />
             <Route element={<ManagerProveMail />} path="/managerProveMail" />
@@ -77,7 +82,10 @@ function App() {
             <Route element={<PasswordSuccess />} path="/passwordSuccess" />
             {/* <Route element={<CharityInfo />} path="/charityInfo" /> */}
             <Route element={<CharityPreview />} path="/charityPreview" />
-            <Route element={<CharityInfoSuccess />} path="/charityInfoSuccess" />
+            <Route
+              element={<CharityInfoSuccess />}
+              path="/charityInfoSuccess"
+            />
             <Route element={<Charity />} path="/charity" />
             <Route element={<CharityDetail />} path="/charityDetail" />
             <Route element={<PointsActivity />} path="/pointsActivity" />
@@ -86,8 +94,7 @@ function App() {
             <Route element={<PointsItemSuccess />} path="/pointsItemSuccess" />
             <Route element={<Dashboard />} path="/dashboard" />
           </Routes>
-        {/* </ScrollToTop> */}
-      </BrowserRouter>
+        </BrowserRouter>
     </div>
   );
 }
