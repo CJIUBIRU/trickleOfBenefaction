@@ -50,7 +50,7 @@ function PasswordSuccess() {
 
 
                     <div style={btnStyle}>
-                        <ButtonLink to="/charityInfo" name="下一步" />
+                        <ButtonLink to="/" name="回首頁" />
                     </div>
 
                 </Card.Body>

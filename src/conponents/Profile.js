@@ -14,6 +14,7 @@ import { Card } from "react-bootstrap";
 import ButtonLink from "../elements/button";
 import { auth } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { sendEmailVerification } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../elements/navbar";
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
@@ -25,6 +26,24 @@ function UploadDemand() {
   const [user] = useAuthState(auth);
   if (!user) {
     navigate("/loginin");
+  }
+  
+  function verifiedEmail() {
+    if (user.emailVerified === false) {
+      sendEmailVerification(auth.currentUser)
+        .then(() => {
+          // 驗證信發送完成
+          navigate("/profile");
+          alert('驗證信已發送到您的信箱，請查收。\n註：若找不到信件，可查看是否被寄送至垃圾郵件裡，謝謝。')
+        }).catch(error => {
+          // 驗證信發送失敗
+          console.log(error.message);
+          alert('驗證信發送失敗。')
+      })
+    }
+    else {
+      alert("未能抓到user資訊");
+    }
   }
   const profileContentStyle = {
     borderRadius: "5px",
@@ -166,7 +185,7 @@ function UploadDemand() {
                   {user.email}
                   &nbsp;
                   {user.emailVerified == false && (
-                    <a href="#" style={{ color: "#002b5b" }}>
+                    <a href="#" style={{ color: "#002b5b" }} onClick={verifiedEmail}>
                       <FontAwesomeIcon
                         style={{ color: "lightgray" }}
                         icon={faCircleCheck}
@@ -198,7 +217,7 @@ function UploadDemand() {
                   </a>
                   <br />
                   <div style={passwordStyle}>
-                    <ButtonLink name="修改密碼" />
+                    <ButtonLink name="修改密碼" to="/userUpdatePassword" />
                     &nbsp;
                     <ButtonLink name="修改資料" />
                   </div>

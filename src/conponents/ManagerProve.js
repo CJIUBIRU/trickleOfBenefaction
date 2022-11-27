@@ -2,7 +2,7 @@ import React from 'react';
 import "../App.css";
 import Card from 'react-bootstrap/Card';
 
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 import Table from 'react-bootstrap/Table';
@@ -14,6 +14,10 @@ import TitleSec from "../elements/titleSec";
 
 
 function ManagerProve() {
+
+  const mailProve = (item) =>{
+    localStorage.setItem('proveOrg',JSON.stringify(item));
+  } 
 
   const cardStyle = {
     width: "75%",
@@ -65,6 +69,13 @@ function ManagerProve() {
     paddingRight: "6px",
     fontSize: "13px"
   }
+  const organization = [
+    {
+      "name": "財團法人董氏基金會",
+      "id": 1,
+
+    }
+  ];
   return (
     <div>
       <Navbar />
@@ -88,15 +99,20 @@ function ManagerProve() {
                 <td>財團法人董氏基金會</td>
                 <td>2022/09/20</td>
                 <td><p style={prove}>待審核</p></td>
-                <td><Button as={Link} to="/managerProveData" style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button>&nbsp;
-                  <Button as={Link} to="/managerProveMail" style={iconStyle} variant="primary"><FontAwesomeIcon icon={faEnvelope} /></Button></td>
+                <td>
+                  <Button as={Link} to="/managerProveData" style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button>&nbsp;
+                  <Button as={Link} onClick={e => mailProve({"name":"財團法人董氏基金會","id":1})} to="/managerProveMail" charityName="財團法人董氏基金會" style={iconStyle} variant="primary"><FontAwesomeIcon icon={faEnvelope} /></Button>
+                </td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>財團法人瑞信兒童醫療基金會</td>
                 <td>2022/09/25</td>
                 <td><p style={pass}>已啟用</p></td>
-                <td><Button as={Link} to="/managerProveData" style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button></td>
+                <td>
+                  <Button as={Link} to="/managerProveData" style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button>&nbsp;
+                  {/* <Button as={Link} onClick={e => mailProve({"name":"財團法人瑞信兒童醫療基金會","id":2})} to="/managerProveMail" charityName="財團法人董氏基金會" style={iconStyle} variant="primary"><FontAwesomeIcon icon={faEnvelope} /></Button> */}
+                </td>
               </tr>
               <tr>
                 <td>3</td>

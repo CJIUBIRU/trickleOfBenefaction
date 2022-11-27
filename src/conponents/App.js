@@ -44,6 +44,8 @@ import ApplicationUpload2 from "./ApplicationUpload2";
 import ApplicationUpload3 from "./ApplicationUpload3";
 import ApplicationUpload4 from "./ApplicationUpload4";
 import GoogleSetAccount from "./GoogleSetAccount";
+import ForgetPasseord from "./ForgetPassword";
+import UserUpdatePassword from "./UserUpdatePassword";
 
 function App() {
   return (
@@ -93,6 +95,8 @@ function App() {
             <Route element={<PointsItemDetails />} path="/pointsItemDetails" />
             <Route element={<PointsItemSuccess />} path="/pointsItemSuccess" />
             <Route element={<Dashboard />} path="/dashboard" />
+            <Route element={<ForgetPasseord />} path="/forgetPassword" />
+            <Route element={<UserUpdatePassword />} path="/userUpdatePassword" />
           </Routes>
         </BrowserRouter>
     </div>

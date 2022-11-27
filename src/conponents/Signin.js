@@ -17,6 +17,8 @@ import { useState } from "react";
 import React, { Component } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
+import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -59,7 +61,7 @@ function Login() {
   const loginCardStyle = {
     backgroundColor: "#D7E9F7",
     width: "450px",
-    height: "550px",
+    height: "570px",
     position: "absolute",
     top: "50%",
     left: "75%",
@@ -73,7 +75,7 @@ function Login() {
   const mulLoginPageStyle = {
     width: "380px",
     height: "100px",
-    top: "126%",
+    top: "135%",
     left: "50%",
     position: "absolute",
     margin: "-80px 0px 0px -190px",
@@ -154,9 +156,9 @@ function Login() {
     fontWeight: "bold",
     color: "red",
     textAlign: "center",
-    marginTop: "82px",
+    marginTop: "10px",
     border: "1px red solid",
-    backgroundColor: "#FFECEC"
+    backgroundColor: "#FFECEC",
   };
   const [activeItem, setActiveItem] = React.useState("loginUser");
   return (
@@ -218,16 +220,35 @@ function Login() {
               <div style={btnContentStyle}>
                 <ButtonLink to="/signin" name="前往註冊" />
                 &nbsp;&nbsp;
-                <button loading={isLoading} style={stepBtnStyle} onClick={signIn}>
+                <button
+                  loading={isLoading}
+                  style={stepBtnStyle}
+                  onClick={signIn}
+                >
                   登入
                 </button>
               </div>
-                {errorMessage && (
-                  <p style={errorMessageStyle}>{errorMessage}</p>
-                )}
+
+              <div
+                style={{ marginTop: "75px", textAlign: "center", zIndex: "2" }}
+              >
+                <Nav.Link
+                  style={{
+                    fontSize: "14px",
+                    letterSpacing: "1px",
+                    textDecoration: "underLine",
+                    color: "blue"
+                  }}
+                  as={Link}
+                  to="/forgetPassword"
+                >
+                  忘記密碼？請點擊這裡。
+                </Nav.Link>
+              </div>
+              {errorMessage && <p style={errorMessageStyle}>{errorMessage}</p>}
             </div>
             <div style={mulLoginPageStyle}>
-              <hr style={{marginTop: "50px"}} />
+              <hr style={{ marginTop: "50px" }} />
               <GoogleLogin />
               <FbLogin />
             </div>

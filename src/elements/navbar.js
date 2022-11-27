@@ -177,7 +177,7 @@ export default function NavbarComp() {
                     to="/setPassword"
                     href="#action/3.2"
                   >
-                    機構簡介
+                    初步設定密碼
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown
@@ -213,7 +213,7 @@ export default function NavbarComp() {
                     to="/charity"
                     href="#action/3.2"
                   >
-                    合作店家一覽表
+                    機構／公益團體一覽表
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2" style={navdropItemStyle}>
                     點數兌換專區
