@@ -38,40 +38,54 @@ function UserUpdatePassword() {
     }));
   };
 
-  function reauthenticate(oldPassword) {
+  function reauthenticate(password) {
+    console.log(password);
     const user = auth.currentUser;
-    const credential = EmailAuthProvider.credential(user.email, oldPassword);
+    const credential = EmailAuthProvider.credential(user.email, password.oldOne);
+    console.log(password.oldOne);
     reauthenticateWithCredential(user, credential)
-      .then(() => {
-        // User re-authenticated.
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }
+        .then(() => {
+            // User re-authenticated.
+            if (password.oldOne === password.newOne) {
+                window.location.reload();
+                alert("新密碼與舊密碼一致，請重新設定新密碼");
+            } else {
+                changePassword(password.newOne);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            const errorMes = error.code;
+            console.log(errorMes);
+            if (errorMes === 'auth/wrong-password') {
+                window.location.reload();
+                alert('舊密碼不一致，請輸入正確的密碼');
+            }
+            // else if ()
+        });
+}
 
-  function changePassword(newPassword) {
+function changePassword(newPassword) {
     const user = auth.currentUser;
-    updatePassword(user, password.newOne)
-      .then(() => {
-        console.log("更新完畢");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }
+    console.log(newPassword);
+    updatePassword(user, newPassword)
+        .then(() => {
+            console.log("更新完畢");
+            navigate("/profile");
+            alert("成功設置新密碼！");
+        }).catch((error) => {
+            console.log(error.message);
+        });
+}
 
-  function sendNewPassword(password) {
+function sendNewPassword() {
     try {
-      reauthenticate(password.oldOne);
-      changePassword(password.newOne);
-      navigate("/profile");
-      alert("成功設置新密碼！");
-    } catch (err) {
-      console.log(err.message);
-      alert("密碼設置失敗，請重試。");
+        reauthenticate(password);
+    } catch(err){
+        console.log(err.message);
+        alert("密碼設置失敗，請重試。");
     }
-  }
+};
 
   // console.log("password.oldOne", password.oldOne);
   // console.log("password.newOne", password.newOne);

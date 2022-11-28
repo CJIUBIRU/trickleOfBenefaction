@@ -19,6 +19,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
+import logo from "../img/coffee.png";
+import bgphoto from "../img/bg_chiheisen_green.jpg";
 
 function Login() {
   const navigate = useNavigate();
@@ -67,7 +69,8 @@ function Login() {
     left: "75%",
     margin: "-300px 0px 0px -225px",
     // boxShadow: "0px 0px 4px 4px #f0f0f0",
-    boxShadow: "10px 10px 15px lightgray",
+    boxShadow: "5px 5px 10px gray",
+    // boxShadow: "10px 10px 15px lightgray",
     // boxShadow: "10px 10px 25px #9d9d9d",
     // boxShadow: "6px 6px 8px 8px #E0E0E0",
     borderRadius: "30px",
@@ -112,23 +115,18 @@ function Login() {
     flexDirection: "row",
   };
   const loginLogoStyle = {
-    width: "550px",
-    height: "500px",
-    backgroundColor: "#FEF1E6",
+    width: "650px",
+    height: "600px",
     position: "absolute",
     top: "50%",
-    margin: "-250px 0px 0px 50px",
+    margin: "-300px 0px 0px 50px",
   };
   const loginPageStyle = {
-    width: "50%",
+    // width: "50%",
   };
   const loginBodyStyle = {
     display: "flex",
     flexDirection: "row",
-  };
-  const logoItemStyle = {
-    textAlign: "center",
-    lineHeight: "450px",
   };
   const stepBtnStyle = {
     color: "#ffffff",
@@ -163,8 +161,9 @@ function Login() {
   const [activeItem, setActiveItem] = React.useState("loginUser");
   return (
     <div style={loginBodyStyle}>
+      <img style={{width: "100%"}} src={bgphoto} alt="bgPhoto" />
       <div style={loginLogoStyle}>
-        <h5 style={logoItemStyle}>logo</h5>
+        <img style={loginLogoStyle} src={logo} alt="logoPhoto" />
       </div>
       <div style={loginPageStyle}>
         <div style={loginCardStyle}>
@@ -237,7 +236,7 @@ function Login() {
                     fontSize: "14px",
                     letterSpacing: "1px",
                     textDecoration: "underLine",
-                    color: "blue"
+                    color: "blue",
                   }}
                   as={Link}
                   to="/forgetPassword"
