@@ -10,17 +10,16 @@ import TitleSec from "../elements/titleSec";
 import ProductStep3 from "../elements/productStep3";
 import Navbar from "../elements/navbar";
 
-class UploadDemand extends Component {
-  render() {
-    const userTextStyle = {
-      color: "#002b5b",
-      fontWeight: "bold",
-    };
-    return (
-      <div>
-        <Navbar />
-        <div style={{ marginBottom: "50px" }}>
-        <TitleSec name="捐贈紀錄"/>
+function UploadDemand() {
+  const userTextStyle = {
+    color: "#002b5b",
+    fontWeight: "bold",
+  };
+  return (
+    <div>
+      <Navbar />
+      <div style={{ marginBottom: "50px" }}>
+        <TitleSec name="捐贈紀錄" />
         <Container>
           <div
             style={{
@@ -58,17 +57,23 @@ class UploadDemand extends Component {
             >
               <hr style={{ width: "45%" }} />
               &nbsp;
-              <span style={{ color: "#002b5b", fontWeight: "bold", marginBottom: "20px" }}>
+              <span
+                style={{
+                  color: "#002b5b",
+                  fontWeight: "bold",
+                  marginBottom: "20px",
+                }}
+              >
                 訂購資訊
               </span>
               &nbsp;
               <hr style={{ width: "45%" }} />
             </div>
             <div>
-              <ProductStep3/>
+              <ProductStep3 />
             </div>
             <div>
-              <ProductStep3/>
+              <ProductStep3 />
             </div>
             <div
               style={{
@@ -100,7 +105,7 @@ class UploadDemand extends Component {
               <span
                 style={{ borderTop: "1px solid #ced4da", paddingTop: "3px" }}
               >
-                <span style={{marginRight: "4%"}}>
+                <span style={{ marginRight: "4%" }}>
                   共<span style={userTextStyle}>2</span>項物資{" "}
                 </span>
                 總計：
@@ -156,7 +161,10 @@ class UploadDemand extends Component {
                     <br />
                     付款人電話：0987654321
                     <br />
-                    付款方式：超商代碼&nbsp;<a href="#" style={{color: "#6c6c6c"}}><FontAwesomeIcon icon={faMagnifyingGlass} /></a>
+                    付款方式：超商代碼&nbsp;
+                    <a href="#" style={{ color: "#6c6c6c" }}>
+                      <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </a>
                   </div>
                   <div
                     style={{
@@ -204,9 +212,8 @@ class UploadDemand extends Component {
           </div>
         </Container>
       </div>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default UploadDemand;

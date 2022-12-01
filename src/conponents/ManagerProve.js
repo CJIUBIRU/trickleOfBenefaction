@@ -1,60 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "../App.css";
 import Card from 'react-bootstrap/Card';
-
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faEye } from '@fortawesome/free-solid-svg-icons';
-
 import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
+import { db } from "../utils/firebase";
 
+function CharityProveList({id, num, name, time, status, mail}) {
 
-function ManagerProve() {
-
-  const mailProve = (item) =>{
+  // ManagerProveMail
+  const mailProve = (item) => {
     localStorage.setItem('proveOrg',JSON.stringify(item));
-  } 
+  }
 
-  const cardStyle = {
-    width: "75%",
-    color: "black",
-    left: "50%",
-    marginTop: "60px",
-    transform: `translate(${-50}%, ${-5}%)`,
-    paddingTop: "5%",
-    paddingBottom: "5%",
-    paddingLeft: "8%",
-    paddingRight: "8%",
-    letterSpacing: "1px",
-
-  };
-
-
+  // ManagerProveData
+  const proveData = (item) => {
+    localStorage.setItem('orgData',JSON.stringify(item));
+  }
 
   const prove = {
     backgroundColor: "#FFD2D2",
-    display: "inline-block",
-    fontSize: "12px",
-    padding: "3px",
-    letterSpacing: "1px",
-    fontWeight: "550",
-    borderRadius: "5px"
-  }
-  const pass = {
-    backgroundColor: "#DFFFDF",
-    display: "inline-block",
-    fontSize: "12px",
-    padding: "3px",
-    letterSpacing: "1px",
-    fontWeight: "550",
-    borderRadius: "5px"
-  }
-  const check = {
-    backgroundColor: "#FFF4C1",
     display: "inline-block",
     fontSize: "12px",
     padding: "3px",
@@ -69,18 +39,56 @@ function ManagerProve() {
     paddingRight: "6px",
     fontSize: "13px"
   }
-  const organization = [
-    {
-      "name": "財團法人董氏基金會",
-      "id": 1,
 
-    }
-  ];
+  return (
+    <tr>
+      <td>{num}</td>
+      <td>{name}</td>
+      <td>{time}</td>
+      <td><p style={prove}>{status}</p></td>
+      <td>
+          <Button as={Link} to="/managerProveData" onClick={e => proveData({"name": name})} style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button>&nbsp;    
+          {(status === '待審核')
+              ? <Button as={Link} onClick={e => mailProve({"name": name, "mail": mail, "id": id})} to="/managerProveMail" style={iconStyle} variant="primary"><FontAwesomeIcon icon={faEnvelope} /></Button>
+              : ""
+          }
+      </td>
+    </tr>
+  )
+}
+
+
+function ManagerProve() {
+
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+      const q = query(collection(db, 'charity'), orderBy('file.time', 'asc'))
+      onSnapshot(q, (querySnapshot) => {
+          setDetails(querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            data: doc.data()
+        })))
+      })
+  },[])
+
+  const cardStyle = {
+    width: "75%",
+    color: "black",
+    left: "50%",
+    marginTop: "60px",
+    transform: `translate(${-50}%, ${-5}%)`,
+    paddingTop: "5%",
+    paddingBottom: "5%",
+    paddingLeft: "8%",
+    paddingRight: "8%",
+    letterSpacing: "1px",
+  };
+
   return (
     <div>
       <Navbar />
       <TitleSec name="公益單位申請-資料審核" />
-
       <Card style={cardStyle}>
         <Card.Body>
           <Table striped bordered hover style={{ textAlign: "center" }}>
@@ -94,36 +102,19 @@ function ManagerProve() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>財團法人董氏基金會</td>
-                <td>2022/09/20</td>
-                <td><p style={prove}>待審核</p></td>
-                <td>
-                  <Button as={Link} to="/managerProveData" style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button>&nbsp;
-                  <Button as={Link} onClick={e => mailProve({"name":"財團法人董氏基金會","id":1})} to="/managerProveMail" charityName="財團法人董氏基金會" style={iconStyle} variant="primary"><FontAwesomeIcon icon={faEnvelope} /></Button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>財團法人瑞信兒童醫療基金會</td>
-                <td>2022/09/25</td>
-                <td><p style={pass}>已啟用</p></td>
-                <td>
-                  <Button as={Link} to="/managerProveData" style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button>&nbsp;
-                  {/* <Button as={Link} onClick={e => mailProve({"name":"財團法人瑞信兒童醫療基金會","id":2})} to="/managerProveMail" charityName="財團法人董氏基金會" style={iconStyle} variant="primary"><FontAwesomeIcon icon={faEnvelope} /></Button> */}
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>社團法人台灣怡心寶貝社群協會</td>
-                <td>2022/09/30</td>
-                <td><p style={check}>待啟用</p></td>
-                <td><Button as={Link} to="/managerProveData" style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button></td>
-              </tr>
+              {details.map((item, index) => (
+                <CharityProveList
+                  key={index} 
+                  id={item.id}
+                  num={index+1}
+                  name={item.data.info.name}
+                  status={item.data.info.status}
+                  mail={item.data.info.mail}
+                  time={new Date(item.data.file.time.seconds * 1000).toLocaleDateString("zh-TW")}
+                 />
+              ))}
             </tbody>
           </Table>
-
         </Card.Body>
       </Card>
     </div>

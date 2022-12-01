@@ -7,8 +7,7 @@ import { Container } from "react-bootstrap";
 import Product from "../elements/product";
 import Navbar from "../elements/navbar";
 
-class NavbarComp extends Component {
-  render() {
+function NavbarComp() {
     const bodyStyle = {
       backgroundColor: "#ffffff",
     };
@@ -150,6 +149,5 @@ class NavbarComp extends Component {
       </div>
     );
   }
-}
 
 export default NavbarComp;

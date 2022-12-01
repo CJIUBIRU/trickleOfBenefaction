@@ -10,16 +10,15 @@ import TitleSec from "../elements/titleSec";
 import ProductStep3 from "../elements/productStep3";
 import Navbar from "../elements/navbar";
 
-class UploadDemand extends Component {
-  render() {
-    const userTextStyle = {
-      color: "#002b5b",
-      fontWeight: "bold",
-    };
-    return (
-      <div>
-        <Navbar />
-        <div style={{ marginBottom: "50px" }}>
+function UploadDemand() {
+  const userTextStyle = {
+    color: "#002b5b",
+    fontWeight: "bold",
+  };
+  return (
+    <div>
+      <Navbar />
+      <div style={{ marginBottom: "50px" }}>
         <TitleSec name="捐贈進度追蹤" />
         <Container>
           <div
@@ -195,9 +194,8 @@ class UploadDemand extends Component {
           </div>
         </Container>
       </div>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default UploadDemand;
