@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import NavbarAdmin from "../elements/navbarAdmin";
+import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import { Container } from "react-bootstrap";
 
 function UploadGoods() {
   return (
     <div>
-      <NavbarAdmin />
+      <Navbar />
       <TitleSec name="合作店家一覽表" />
       <br />
       <Container>

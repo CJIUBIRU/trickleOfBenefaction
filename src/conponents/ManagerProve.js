@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faEye } from '@fortawesome/free-solid-svg-icons';
-import NavbarAdmin from "../elements/navbarAdmin";
+import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 import { db } from "../utils/firebase";
@@ -114,7 +114,7 @@ function ManagerProve() {
 
   return (
     <div>
-      <NavbarAdmin />
+      <Navbar />
       <TitleSec name="機構申請資料審核" />
       <Card style={cardStyle}>
         <Card.Body>

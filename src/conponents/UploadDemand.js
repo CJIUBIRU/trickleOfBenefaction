@@ -8,7 +8,7 @@ import Search from "../elements/search";
 import DemandStep1 from "../elements/demandStep1";
 import ButtonLink from "../elements/button";
 import PaginationList from "../elements/paginationList";
-import NavbarDemand from "../elements/navbarDemand";
+import Navbar from "../elements/navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { doc, getDocFromCache } from "firebase/firestore";
@@ -18,7 +18,7 @@ import { db } from "../utils/firebase";
 function UploadDemand() {
   return (
     <div>
-      <NavbarDemand />
+      <Navbar />
       <TitleSec name="刊登物資需求" />
       <Container>
         <TitleStep name="STEP1&nbsp;-&nbsp;選擇需求物資" />

@@ -2,7 +2,7 @@ import React from 'react';
 import "../App.css";
 import Card from 'react-bootstrap/Card';
 
-import NavbarAdmin from "../elements/navbarAdmin";
+import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 
 import ButtonLink from "../elements/button";
@@ -41,7 +41,7 @@ function UploadSuccess() {
     }
     return (
         <div>
-            <NavbarAdmin />
+            <Navbar />
             <TitleSec name="上架物資" />
 
             <Card style={cardStyle}>

@@ -9,7 +9,7 @@ import { faCloudDownload } from '@fortawesome/free-solid-svg-icons';
 
 import TitleSec from "../elements/titleSec";
 
-import NavbarDemand from "../elements/navbarDemand";
+import Navbar from "../elements/navbar";
 import ButtonLink from "../elements/button";
 
 function ApplicationInfo() {
@@ -51,7 +51,7 @@ function ApplicationInfo() {
     }
     return (
         <div>
-            <NavbarDemand />
+            <Navbar />
             {/* <h2 style={titleStyle}></h2> */}
             <TitleSec name="公益團體申請資料說明" />
 

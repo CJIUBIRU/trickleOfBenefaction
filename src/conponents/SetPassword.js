@@ -3,7 +3,7 @@ import "../App.css";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import NavbarDemand from "../elements/navbarDemand";
+import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
 import ButtonLink from "../elements/button";
@@ -39,7 +39,6 @@ function SetPassword() {
           // const errorMessage = error.message;
           // alert(errorCode);
           // alert(errorMessage);
-          console.log(errorCode);
           switch (errorCode) {
             case "auth/email-already-in-use":
               setErrorMessage("信箱已存在");
@@ -123,7 +122,7 @@ function SetPassword() {
   };
   return (
     <div>
-      <NavbarDemand />
+      <Navbar />
       <TitleSec name="基本資料設定" />
       <TitleStep name="STEP1&nbsp;-&nbsp;設定密碼" />
       <Card style={cardStyle}>

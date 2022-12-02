@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavbarAdmin from "../elements/navbarAdmin";
+import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
@@ -42,7 +42,7 @@ function UploadGoods() {
   };
   return (
     <div>
-      <NavbarAdmin />
+      <Navbar />
       <TitleSec name="新增合作店家" />
       <br />
       <Container>

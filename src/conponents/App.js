@@ -50,8 +50,6 @@ import AddMember from "./AddMember";
 import UploadGoodsSuccess from "./UploadGoodsSuccess";
 import AllGoods from "./AllGoods";
 import AllStores from "./AllStores";
-import HomeAdmin from "./HomeAdmin";
-import HomeDemand from "./HomeDemand";
 
 function App() {
   return (
@@ -107,8 +105,6 @@ function App() {
             <Route element={<UploadGoodsSuccess />} path="/uploadGoodsSuccess" />
             <Route element={<AllGoods />} path="/allGoods" />
             <Route element={<AllStores />} path="/allStores" />
-            <Route element={<HomeAdmin />} path="/homeAdmin" />
-            <Route element={<HomeDemand />} path="/homeDemand" />
           </Routes>
         </BrowserRouter>
     </div>

@@ -5,44 +5,44 @@ import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
 import ButtonLink from "../elements/button";
 import DemandStep2 from "../elements/demandStep2";
-import NavbarDemand from "../elements/navbarDemand";
+import Navbar from "../elements/navbar";
 
 function UploadDemand() {
-  const nextStepStyle = {
-    marginLeft: "10px",
-  };
-  const returnStepStyle = {
-    marginLeft: "39%",
-  };
-  const stepBtnStyle = {
-    display: "flex",
-    flexDirection: "row",
-    marginBottom: "40px",
-    marginTop: "20px",
-  };
-  return (
-    <div>
-      <NavbarDemand />
-      <TitleSec name="刊登物資需求" />
-      <Container>
-        <TitleStep name="STEP2&nbsp;-&nbsp;填寫資料" />
-        <div>
-          <DemandStep2 />
-        </div>
-        <div>
-          <DemandStep2 />
-        </div>
-        <div style={stepBtnStyle}>
-          <div style={returnStepStyle}>
-            <ButtonLink to="/demandstep1" name="返回" />
+    const nextStepStyle = {
+      marginLeft: "10px",
+    };
+    const returnStepStyle = {
+      marginLeft: "39%",
+    };
+    const stepBtnStyle = {
+      display: "flex",
+      flexDirection: "row",
+      marginBottom: "40px",
+      marginTop: "20px",
+    };
+    return (
+      <div>
+        <Navbar />
+        <TitleSec name="刊登物資需求" />
+        <Container>
+          <TitleStep name="STEP2&nbsp;-&nbsp;填寫資料" />
+          <div>
+            <DemandStep2 />
           </div>
-          <div style={nextStepStyle}>
-            <ButtonLink to="/demandstep3" name="下一步" />
+          <div>
+            <DemandStep2 />
           </div>
-        </div>
-      </Container>
-    </div>
-  );
-}
+          <div style={stepBtnStyle}>
+            <div style={returnStepStyle}>
+              <ButtonLink to="/demandstep1" name="返回" />
+            </div>
+            <div style={nextStepStyle}>
+              <ButtonLink to="/demandstep3" name="下一步" />
+            </div>
+          </div>
+        </Container>
+      </div>
+    );
+  }
 
 export default UploadDemand;

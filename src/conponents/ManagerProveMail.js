@@ -3,7 +3,7 @@ import "../App.css";
 import Card from 'react-bootstrap/Card';
 import ButtonLink from "../elements/button";
 import Form from 'react-bootstrap/Form';
-import NavbarAdmin from "../elements/navbarAdmin";
+import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import emailjs from 'emailjs-com';
 import { useNavigate } from "react-router-dom";
@@ -140,7 +140,7 @@ function ManagerProveMail() {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <NavbarAdmin />
+            <Navbar />
             <TitleSec name="公益單位申請-審核信件發送通知" />
             <Card style={cardStyle}>
                 <Card.Body>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavbarAdmin from "../elements/navbarAdmin";
+import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import { Container } from "react-bootstrap";
 import TitleStep from "../elements/titleStep";
@@ -7,11 +7,10 @@ import TitleStep from "../elements/titleStep";
 function UploadGoods() {
   return (
     <div>
-      <NavbarAdmin />
+      <Navbar />
       <TitleSec name="物資一覽表" />
       <br />
       <Container>
-        
       </Container>
     </div>
   );

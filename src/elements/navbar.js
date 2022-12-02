@@ -154,7 +154,7 @@ export default function NavbarComp() {
           >
             <div>
               <Nav className="me-auto" style={navpageStyle}>
-                <Nav.Link
+                {/* <Nav.Link
                   as={Link}
                   to="/charity"
                   href="#action/3.2"
@@ -169,6 +169,78 @@ export default function NavbarComp() {
                 >
                   點數兌換專區
                 </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/upload"
+                  href="#home"
+                  style={navitemStyle}
+                >
+                  刊登物資需求
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/myDemand"
+                  href="#home"
+                  style={navitemStyle}
+                >
+                  我的需求
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/applicationInfo"
+                  href="#home"
+                  style={navitemStyle}
+                >
+                  申請成為合作機構
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/setPassword"
+                  href="#home"
+                  style={navitemStyle}
+                >
+                  初步設定密碼
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/managerProve"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
+                  申請資料審核
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/addMember"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
+                  新增合作店家
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/allStores"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
+                  合作店家一覽表
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/uploadGoods"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
+                  上架物資
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/allGoods"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
+                  物資一覽表
+                </Nav.Link> */}
                 {user && (
                   <NavDropdown
                     title="登出"

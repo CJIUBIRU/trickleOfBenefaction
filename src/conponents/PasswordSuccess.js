@@ -2,7 +2,7 @@ import React from 'react';
 import "../App.css";
 import Card from 'react-bootstrap/Card';
 
-import NavbarDemand from "../elements/navbarDemand";
+import Navbar from "../elements/navbar";
 
 import TitleSec from "../elements/titleSec";
 
@@ -41,7 +41,7 @@ function PasswordSuccess() {
     }
     return (
         <div>
-            <NavbarDemand />
+            <Navbar />
             <TitleSec name="基本資料設定" />
 
             <Card style={cardStyle}>
@@ -50,7 +50,7 @@ function PasswordSuccess() {
 
 
                     <div style={btnStyle}>
-                        <ButtonLink to="/homeDemand" name="回首頁" />
+                        <ButtonLink to="/" name="回首頁" />
                     </div>
 
                 </Card.Body>
