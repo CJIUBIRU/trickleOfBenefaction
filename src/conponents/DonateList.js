@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import React, { Component } from "react";
 // import ListGroup from "react-bootstrap/ListGroup";
 import Pagination from "react-bootstrap/Pagination";
@@ -11,8 +11,11 @@ import ProductStep1 from "../elements/productStep1";
 import ButtonLink from "../elements/button";
 import PaginationList from "../elements/paginationList";
 import Navbar from "../elements/navbar";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
 
 const DonateList = () => {
+  const [user] = useAuthState(auth);
   const donPageStyle = {
     marginTop: "70px",
   };
@@ -45,7 +48,7 @@ const DonateList = () => {
               <Search />
             </div>
           </div>
-          <div style={goodsPageStyle}>
+          {/* <div style={goodsPageStyle}>
             <ProductStep1 />
             <ProductStep1 />
             <ProductStep1 />
@@ -54,18 +57,67 @@ const DonateList = () => {
             <ProductStep1 />
             <ProductStep1 />
             <ProductStep1 />
-          </div>
-          <PaginationList />
-          <div
-            style={{
-              marginTop: "25px",
-              marginBottom: "40px",
-              marginLeft: "45%",
-              marginRight: "55%",
-            }}
-          >
-            <ButtonLink to="/donateStep2" name="下一步" />
-          </div>
+          </div> */}
+          <Row>
+            <Col>
+              <ProductStep1 />
+            </Col>
+            <Col>
+              <ProductStep1 />
+            </Col>
+            <Col>
+              <ProductStep1 />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ProductStep1 />
+            </Col>
+            <Col>
+              <ProductStep1 />
+            </Col>
+            <Col>
+              <ProductStep1 />
+            </Col>
+          </Row>
+          {/* <PaginationList /> */}
+          {user && (
+            <div
+              style={{
+                marginTop: "25px",
+                marginBottom: "40px",
+                marginLeft: "45%",
+                marginRight: "55%",
+              }}
+            >
+              <ButtonLink to="/donateStep2" name="下一步" />
+            </div>
+          )}
+          {!user && (
+            <div
+              style={{
+                marginTop: "25px",
+                marginBottom: "40px",
+                marginLeft: "43%",
+              }}
+            >
+              <button
+                style={{
+                  color: "#ffffff",
+                  backgroundColor: "lightgray",
+                  border: "none",
+                  borderRadius: "30px",
+                  fontSize: "16px",
+                  width: "180px",
+                  textAlign: "center",
+                  height: "35px",
+                  fontWeight: "bold",
+                }}
+              >
+                登入後可進行下一步
+              </button>
+            </div>
+          )}
         </Container>
       </div>
     </div>

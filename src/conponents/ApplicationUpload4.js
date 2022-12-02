@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCircleArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
-import Navbar from "../elements/navbar";
+import NavbarDemand from "../elements/navbarDemand";
 
 import Form from "react-bootstrap/Form";
 
@@ -111,7 +111,7 @@ function ApplicationUpload4() {
   };
   return (
     <div style={{ paddingBottom: "80px" }}>
-      <Navbar />
+      <NavbarDemand />
       <TitleSec name="公益團體申請資料上傳" />
       <TitleStep name="STEP4&nbsp;-&nbsp;上傳勸募許可函一份" />
       <Card style={cardStyle}>

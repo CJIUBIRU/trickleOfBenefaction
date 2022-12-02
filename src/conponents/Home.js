@@ -115,7 +115,7 @@ function NavbarComp() {
             </div>
 
             <div style={titleSecPage}>
-              <h5 style={titleSec}>我要捐贈</h5>
+              <h5 style={titleSec}>機構需求物資</h5>
               <Slider {...settingsSec}>
                 <div>
                   <Product />

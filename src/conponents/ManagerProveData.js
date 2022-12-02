@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-import Navbar from "../elements/navbar";
+import NavbarAdmin from "../elements/navbarAdmin";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudDownload } from '@fortawesome/free-solid-svg-icons';
@@ -130,7 +130,7 @@ function ManagerProveData() {
 
     return (
         <div>
-            <Navbar />
+            <NavbarAdmin />
             <TitleSec name="公益單位申請-資料內容" />
             <Card style={cardStyle}>
                 {details.map((item, index) => (

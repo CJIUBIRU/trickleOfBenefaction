@@ -1,38 +1,34 @@
 import React, { Component } from "react";
-import { db } from "../utils/firebase";
 import NavbarAdmin from "../elements/navbarAdmin";
 import TitleSec from "../elements/titleSec";
-import { Card, FormControl } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import { FormControl } from "react-bootstrap";
 import { useState } from "react";
 import { doc, setDoc, addDoc, collection } from "firebase/firestore";
-import TitleStep from "../elements/titleStep";
-import ButtonLink from "../elements/button";
-import Link from "next/link";
-import { auth } from "../utils/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { db } from "../utils/firebase";
 
 function UploadGoods() {
   const [name, setName] = useState("");
   const [store, setStore] = useState("");
-  const [price, setPrice] = useState("");
+  const [phone, setPhone] = useState("");
   // const [user] = useAuthState(auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // await setDoc(doc(db, "goodsDemand", user.uid), {
-      await addDoc(collection(db, "goodsDemand"), {
+      await addDoc(collection(db, "stores"), {
         name: name,
         store: store,
-        price: price,
+        phone: phone,
       });
+      alert("新增成功。");
     } catch (err) {
       console.log(err);
     }
   };
-
   const subBtnStyle = {
     color: "#ffffff",
     backgroundColor: "#002B5B",
@@ -47,8 +43,7 @@ function UploadGoods() {
   return (
     <div>
       <NavbarAdmin />
-      <TitleSec name="上架物資" />
-      <TitleStep name="STEP2 - 填寫商品資訊" />
+      <TitleSec name="新增合作店家" />
       <br />
       <Container>
         <div>
@@ -58,24 +53,24 @@ function UploadGoods() {
                 <form onSubmit={handleSubmit}>
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
-                    placeholder="輸入物資名稱（如：【春風】超細柔抽取式衛生紙110抽24包）"
+                    placeholder="輸入店家名稱（如：7-ELEVEN 輔大門市）"
                     onChange={(e) => setName(e.target.value)}
                     type="text"
                     value={name}
                   />
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
-                    placeholder="輸入合作店家（之後改成下拉式選單）"
+                    placeholder="輸入店家地址（如：242新北市新莊區中正路510號）"
                     onChange={(e) => setStore(e.target.value)}
                     type="text"
                     value={store}
                   />
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
-                    placeholder="輸入商品金額"
-                    onChange={(e) => setPrice(e.target.value)}
+                    placeholder="輸入電話（如：02-2905-6534）"
+                    onChange={(e) => setPhone(e.target.value)}
                     type="text"
-                    value={price}
+                    value={phone}
                   />
                   <button type="submit" style={subBtnStyle}>
                     送出
@@ -111,7 +106,7 @@ function UploadGoods() {
               </button>
             </div>
           )} */}
-          {name && price && store && (
+          {/* {name && price && store && (
             <div
               style={{
                 marginLeft: "45.5%",
@@ -126,7 +121,7 @@ function UploadGoods() {
                 name="下一步"
               ></ButtonLink>
             </div>
-          )}
+          )} */}
         </div>
       </Container>
     </div>

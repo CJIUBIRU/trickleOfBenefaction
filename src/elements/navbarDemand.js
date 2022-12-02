@@ -14,8 +14,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { Button } from "react-bootstrap";
 import ScrollToTop from "react-scroll-to-top";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarComp() {
+  const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
   if (loading)
     return (
@@ -31,6 +33,10 @@ export default function NavbarComp() {
         網頁載入中...
       </h3>
     );
+
+  if (!user) {
+    navigate("/loginin");
+  }
   const bodyStyle = {
     backgroundColor: "#ffffff",
   };
@@ -141,7 +147,7 @@ export default function NavbarComp() {
         <Container>
           <Navbar.Brand
             as={Link}
-            to="/"
+            to="/homeDemand"
             className="nav-title"
             style={navtitleStyle}
           >
@@ -156,19 +162,37 @@ export default function NavbarComp() {
               <Nav className="me-auto" style={navpageStyle}>
                 <Nav.Link
                   as={Link}
-                  to="/charity"
-                  href="#action/3.2"
+                  to="/upload"
+                  href="#home"
                   style={navitemStyle}
                 >
-                  合作機構一覽表
+                  刊登物資需求
                 </Nav.Link>
                 <Nav.Link
                   as={Link}
-                  href="#action/3.2"
+                  to="/myDemand"
+                  href="#home"
                   style={navitemStyle}
                 >
-                  點數兌換專區
+                  我的需求
                 </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/applicationInfo"
+                  href="#home"
+                  style={navitemStyle}
+                >
+                  申請成為合作機構
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/setPassword"
+                  href="#home"
+                  style={navitemStyle}
+                >
+                  初步設定密碼
+                </Nav.Link>
+
                 {user && (
                   <NavDropdown
                     title="登出"
@@ -241,26 +265,6 @@ export default function NavbarComp() {
                 {!user && (
                   <Nav.Link as={Link} to="/loginIn" style={navitemStyle}>
                     註冊／登入
-                  </Nav.Link>
-                )}
-
-                <Nav.Link as={Link} to="/donate" style={navDonateBtnStyle}>
-                  我要捐贈
-                </Nav.Link>
-                {user && (
-                  <Nav.Link style={navCartBtnStyle}>
-                    <FontAwesomeIcon icon={faCartShopping} />
-                  </Nav.Link>
-                )}
-                {!user && (
-                  <Nav.Link style={navCartSecBtnStyle}>
-                    <FontAwesomeIcon icon={faCartShopping} />
-                  </Nav.Link>
-                )}
-                {user && (
-                  <Nav.Link style={navBellBtnStyle}>
-                    <FontAwesomeIcon icon={faBell} />
-                    <sup style={{ fontSize: "14px" }}>1</sup>
                   </Nav.Link>
                 )}
               </Nav>

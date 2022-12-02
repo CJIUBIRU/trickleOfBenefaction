@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { db, storage } from "../utils/firebase";
-import Navbar from "../elements/navbar";
+import NavbarAdmin from "../elements/navbarAdmin";
 import TitleSec from "../elements/titleSec";
 import { Card, FormControl } from "react-bootstrap";
 import { Form } from "react-bootstrap";
@@ -57,7 +57,7 @@ function UploadGoods() {
   };
   return (
     <div>
-      <Navbar />
+      <NavbarAdmin />
       <TitleSec name="上架物資" />
       <TitleStep name="STEP1 - 上傳圖片" />
       <br />

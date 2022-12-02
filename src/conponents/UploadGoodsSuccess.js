@@ -2,22 +2,20 @@ import React from 'react';
 import "../App.css";
 import Card from 'react-bootstrap/Card';
 
-import NavbarDemand from "../elements/navbarDemand";
-
+import NavbarAdmin from "../elements/navbarAdmin";
 import TitleSec from "../elements/titleSec";
 
 import ButtonLink from "../elements/button";
-import SuccessInfo from "../elements/successInfo";
 
+import SuccessInfo from '../elements/successInfo';
 
-
-function PasswordSuccess() {
+function UploadSuccess() {
 
     const cardStyle = {
         width: "50%",
         color: "black",
         left: "50%",
-        marginTop: "200px",
+        marginTop: "230px",
         transform: `translate(${-50}%, ${-50}%)`,
         paddingTop: "3%",
         paddingBottom: "6%",
@@ -29,7 +27,7 @@ function PasswordSuccess() {
 
     const btnStyle = {
         position: "absolute",
-        marginTop: "50px",
+        marginTop: "45px",
         left: "50%",
         transform: `translate(${-50}%, ${-50}%)`,
         paddingTop: "5px",
@@ -38,20 +36,23 @@ function PasswordSuccess() {
         paddingRight: "15px",
         borderRadius: "10px",
         letterSpacing: "1px",
+        display: "flex",
+        flexDirection: "row"
     }
     return (
         <div>
-            <NavbarDemand />
-            <TitleSec name="基本資料設定" />
+            <NavbarAdmin />
+            <TitleSec name="上架物資" />
 
             <Card style={cardStyle}>
                 <Card.Body>
-                    <SuccessInfo name="密碼設定成功！" name2="若未來需更改密碼請至＜帳號管理＞設定。" name3="" />
-
-
+               
+                    <SuccessInfo name="物資已上架成功！" name2="（可至 物資一覽表 查看已上架物資。）" />
                     <div style={btnStyle}>
-                        <ButtonLink to="/homeDemand" name="回首頁" />
+                        <ButtonLink to="/homeAdmin" name="回首頁" />&nbsp;
+                        <ButtonLink to="/allGoods" name="物資一覽表" />
                     </div>
+
 
                 </Card.Body>
             </Card>
@@ -59,4 +60,4 @@ function PasswordSuccess() {
     )
 }
 
-export default PasswordSuccess;
+export default UploadSuccess;

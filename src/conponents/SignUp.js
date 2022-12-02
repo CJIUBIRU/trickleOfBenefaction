@@ -192,13 +192,13 @@ function Login() {
               <Form.Control
                 style={inputStyle}
                 type="email"
-                placeholder="使用者帳號"
+                placeholder="請輸入帳號"
                 onChange={(e) => setEmail(e.target.value)}
               />
               <Form.Control
                 style={inputStyle}
                 type="password"
-                placeholder="使用者密碼"
+                placeholder="請輸入密碼"
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div style={{ display: "flex", flexDirection: "row" }}>
@@ -209,7 +209,7 @@ function Login() {
                     width: "90%",
                   }}
                   type="password"
-                  placeholder="確認密碼"
+                  placeholder="再次輸入密碼"
                   onChange={(e) => setCheckPassword(e.target.value)}
                 />
                 {password === checkPassword && (

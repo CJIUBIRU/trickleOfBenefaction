@@ -6,13 +6,12 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faEye } from '@fortawesome/free-solid-svg-icons';
-import Navbar from "../elements/navbar";
+import NavbarAdmin from "../elements/navbarAdmin";
 import TitleSec from "../elements/titleSec";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 import { db } from "../utils/firebase";
 
 function CharityProveList({id, num, name, time, status, mail}) {
-
   // ManagerProveMail
   const mailProve = (item) => {
     localStorage.setItem('proveOrg',JSON.stringify(item));
@@ -24,13 +23,33 @@ function CharityProveList({id, num, name, time, status, mail}) {
   }
 
   const prove = {
-    backgroundColor: "#FFD2D2",
+    backgroundColor: "#26aa99",
+    display: "inline-block",
+    fontSize: "12px",
+    padding: "3px",
+    letterSpacing: "1px",
+    fontWeight: "550",
+    borderRadius: "5px",
+    color: "white",
+  }
+  const prove2 = {
+    backgroundColor: "#f6c23e",
     display: "inline-block",
     fontSize: "12px",
     padding: "3px",
     letterSpacing: "1px",
     fontWeight: "550",
     borderRadius: "5px"
+  }
+  const prove3 = {
+    backgroundColor: "#e74a3b",
+    display: "inline-block",
+    fontSize: "12px",
+    padding: "3px",
+    letterSpacing: "1px",
+    fontWeight: "550",
+    borderRadius: "5px",
+    color: "white"
   }
   const iconStyle = {
     paddingTop: "3px",
@@ -45,7 +64,15 @@ function CharityProveList({id, num, name, time, status, mail}) {
       <td>{num}</td>
       <td>{name}</td>
       <td>{time}</td>
-      <td><p style={prove}>{status}</p></td>
+      {status === '已啟用' && (
+        <td><p style={prove}>{status}</p></td>
+      )}
+      {status === '待啟用' && (
+        <td><p style={prove2}>{status}</p></td>
+      )}
+      {status === '待審核' && (
+        <td><p style={prove3}>{status}</p></td>
+      )}
       <td>
           <Button as={Link} to="/managerProveData" onClick={e => proveData({"name": name})} style={iconStyle} variant="success"><FontAwesomeIcon icon={faEye} /></Button>&nbsp;    
           {(status === '待審核')
@@ -87,8 +114,8 @@ function ManagerProve() {
 
   return (
     <div>
-      <Navbar />
-      <TitleSec name="公益單位申請-資料審核" />
+      <NavbarAdmin />
+      <TitleSec name="機構申請資料審核" />
       <Card style={cardStyle}>
         <Card.Body>
           <Table striped bordered hover style={{ textAlign: "center" }}>

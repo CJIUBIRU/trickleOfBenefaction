@@ -5,7 +5,7 @@ import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
 import ButtonLink from "../elements/button";
 import DemandStep3 from "../elements/demandStep3";
-import Navbar from "../elements/navbar";
+import NavbarDemand from "../elements/navbarDemand";
 
 function UploadDemand() {
   const nextStepStyle = {
@@ -22,7 +22,7 @@ function UploadDemand() {
   };
   return (
     <div>
-      <Navbar />
+      <NavbarDemand />
       <TitleSec name="刊登物資需求" />
       <Container>
         <TitleStep name="STEP3&nbsp;-&nbsp;確認並送出" />

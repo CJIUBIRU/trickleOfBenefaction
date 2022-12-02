@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import img from "../img/tablet.jpg";
 import Card from "react-bootstrap/Card";
 import ButtonLink from "./button";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
 
 function Product() {
+  const [user] = useAuthState(auth);
   const card = {
     marginBottom: "20px",
     marginLeft: "10px",
@@ -32,8 +35,11 @@ function Product() {
   };
   const goDonateStyle = {
     marginTop: "15px",
-    marginLeft: "25%",
-    marginRight: "25%",
+    marginLeft: "30%",
+  };
+  const goDonateSecStyle = {
+    marginTop: "15px",
+    marginLeft: "20%",
   };
   return (
     <div>
@@ -57,9 +63,30 @@ function Product() {
             </a>
             <br />
             單價：$203／台
-            <div style={goDonateStyle}>
-              <ButtonLink to="/donate" name="前往捐贈" />
-            </div>
+            {!user && (
+              <div style={goDonateSecStyle}>
+                <button
+                  style={{
+                    color: "#ffffff",
+                    backgroundColor: "lightgray",
+                    border: "none",
+                    borderRadius: "30px",
+                    fontSize: "16px",
+                    width: "180px",
+                    textAlign: "center",
+                    height: "35px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  登入後可加入捐贈箱
+                </button>
+              </div>
+            )}
+            {user && (
+              <div style={goDonateStyle}>
+                <ButtonLink to="/donate" name="加入捐贈箱" />
+              </div>
+            )}
           </Card.Text>
         </Card.Body>
       </Card>

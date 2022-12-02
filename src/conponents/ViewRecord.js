@@ -1,4 +1,4 @@
-import { Container, Pagination } from "react-bootstrap";
+import { Container, Pagination, Row, Col } from "react-bootstrap";
 import React, { Component } from "react";
 import "../App.css";
 import Product from "../elements/product";
@@ -16,29 +16,29 @@ function UploadDemand() {
       <TitleSec name="瀏覽紀錄" />
       <Container>
         <div style={titleSecPage}>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div>
+          <Row>
+            <Col>
               <Product />
-            </div>
-            <div>
+            </Col>
+            <Col>
               <Product />
-            </div>
-            <div>
+            </Col>
+            <Col>
               <Product />
-            </div>
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <Product />
-            </div>
-            <div>
+            </Col>
+            <Col>
               <Product />
-            </div>
-            <div>
+            </Col>
+            <Col>
               <Product />
-            </div>
-          </div>
-          <PaginationList />
+            </Col>
+          </Row>
+          {/* <PaginationList /> */}
         </div>
       </Container>
     </div>

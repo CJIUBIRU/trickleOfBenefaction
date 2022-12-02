@@ -2,9 +2,9 @@ import React from "react";
 import google from "../img/Google__G__Logo.svg.png";
 import Button from "react-bootstrap/Button";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
 
 function GoogleLogin() {
   //sign in with google

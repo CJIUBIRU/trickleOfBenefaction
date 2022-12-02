@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCircleArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
-import Navbar from "../elements/navbar";
+import NavbarDemand from "../elements/navbarDemand";
 
 import Form from "react-bootstrap/Form";
 
@@ -111,7 +111,7 @@ function ApplicationUpload3() {
   };
   return (
     <div style={{ paddingBottom: "80px" }}>
-      <Navbar />
+      <NavbarDemand />
       <TitleSec name="公益團體申請資料上傳" />
       <TitleStep name="STEP3&nbsp;-&nbsp;上傳法人登記書一份" />
       <Card style={cardStyle}>
@@ -147,7 +147,7 @@ function ApplicationUpload3() {
           <ul>
             <p style={pStyle}>
               <li>
-                檔案格式：檔案格式：以照片上傳，需保證照片清晰、色調正常，JPG檔、PNG檔均可。
+                檔案格式：以照片上傳，需保證照片清晰、色調正常，JPG檔、PNG檔均可。
               </li>
             </p>
             <p style={pStyle}>

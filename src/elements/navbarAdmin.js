@@ -14,9 +14,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { Button } from "react-bootstrap";
 import ScrollToTop from "react-scroll-to-top";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarComp() {
   const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
   if (loading)
     return (
       <h3
@@ -31,6 +33,9 @@ export default function NavbarComp() {
         網頁載入中...
       </h3>
     );
+    if (!user){
+      navigate("/loginin");
+    }
   const bodyStyle = {
     backgroundColor: "#ffffff",
   };
@@ -141,7 +146,7 @@ export default function NavbarComp() {
         <Container>
           <Navbar.Brand
             as={Link}
-            to="/"
+            to="/homeAdmin"
             className="nav-title"
             style={navtitleStyle}
           >
@@ -156,19 +161,45 @@ export default function NavbarComp() {
               <Nav className="me-auto" style={navpageStyle}>
                 <Nav.Link
                   as={Link}
-                  to="/charity"
+                  to="/managerProve"
                   href="#action/3.2"
                   style={navitemStyle}
                 >
-                  合作機構一覽表
+                  申請資料審核
                 </Nav.Link>
                 <Nav.Link
                   as={Link}
+                  to="/addMember"
                   href="#action/3.2"
                   style={navitemStyle}
                 >
-                  點數兌換專區
+                  新增合作店家
                 </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/allStores"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
+                  合作店家一覽表
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/uploadGoods"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
+                  上架物資
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/allGoods"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
+                  物資一覽表
+                </Nav.Link>
+
                 {user && (
                   <NavDropdown
                     title="登出"
@@ -241,26 +272,6 @@ export default function NavbarComp() {
                 {!user && (
                   <Nav.Link as={Link} to="/loginIn" style={navitemStyle}>
                     註冊／登入
-                  </Nav.Link>
-                )}
-
-                <Nav.Link as={Link} to="/donate" style={navDonateBtnStyle}>
-                  我要捐贈
-                </Nav.Link>
-                {user && (
-                  <Nav.Link style={navCartBtnStyle}>
-                    <FontAwesomeIcon icon={faCartShopping} />
-                  </Nav.Link>
-                )}
-                {!user && (
-                  <Nav.Link style={navCartSecBtnStyle}>
-                    <FontAwesomeIcon icon={faCartShopping} />
-                  </Nav.Link>
-                )}
-                {user && (
-                  <Nav.Link style={navBellBtnStyle}>
-                    <FontAwesomeIcon icon={faBell} />
-                    <sup style={{ fontSize: "14px" }}>1</sup>
                   </Nav.Link>
                 )}
               </Nav>
