@@ -10,10 +10,16 @@ import { doc, setDoc, addDoc, collection } from "firebase/firestore";
 import TitleStep from "../elements/titleStep";
 import ButtonLink from "../elements/button";
 import Link from "next/link";
-import { auth } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
 
 function UploadGoods() {
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
   const [name, setName] = useState("");
   const [store, setStore] = useState("");
   const [price, setPrice] = useState("");

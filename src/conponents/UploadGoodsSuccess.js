@@ -9,8 +9,17 @@ import ButtonLink from "../elements/button";
 
 import SuccessInfo from '../elements/successInfo';
 
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
+
 function UploadSuccess() {
 
+    const navigate = useNavigate("");
+    const [user] = useAuthState(auth);
+    if (!user){
+      navigate("/loginin");
+    }
     const cardStyle = {
         width: "50%",
         color: "black",

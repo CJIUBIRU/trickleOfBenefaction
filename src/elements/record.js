@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Nav } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import img from "../img/tablet.jpg";
 import ButtonLink from "./button";
 
@@ -67,8 +69,24 @@ function Record() {
             付款方式：超商代碼
             <br />
             訂單狀態：已完成
-            <div style={goDonateStyle}>
-              <ButtonLink to="/donateRecordList" name="查看更多" />
+            <div style={{marginLeft: "30%", marginTop: "20px"}}>
+              <Nav.Link
+                style={{
+                  color: "#ffffff",
+                  backgroundColor: "#002B5B",
+                  borderRadius: "30px",
+                  fontSize: "16px",
+                  width: "120px",
+                  textAlign: "center",
+                  height: "35px",
+                  fontWeight: "bold",
+                  lineHeight: "33px"
+                }}
+                to="/donateRecordList"
+                as={Link}
+              >
+                查看更多
+              </Nav.Link>
             </div>
           </Card.Text>
         </Card.Body>

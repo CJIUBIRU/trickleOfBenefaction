@@ -6,13 +6,19 @@ import Form from 'react-bootstrap/Form';
 import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import emailjs from 'emailjs-com';
-import { useNavigate } from "react-router-dom";
 
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
-import {db} from '../utils/firebase'
+import {db} from '../utils/firebase';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
 
 function ManagerProveMail() {
-    const navigate = useNavigate();
+    const navigate = useNavigate("");
+    const [user] = useAuthState(auth);
+    if (!user){
+      navigate("/loginin");
+    }
     // const form = useRef();
     let org = JSON.parse(localStorage.getItem('proveOrg'));
     // console.log("localstorage",org);

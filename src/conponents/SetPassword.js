@@ -12,13 +12,19 @@ import { doc, setDoc, addDoc, collection } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import app from "../utils/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
 
 function SetPassword() {
   const auth = getAuth(app);
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");

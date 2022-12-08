@@ -9,8 +9,16 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import TitleSec from "../elements/titleSec";
 import ProductStep3 from "../elements/productStep3";
 import Navbar from "../elements/navbar";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
 
 function UploadDemand() {
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
   const userTextStyle = {
     color: "#002b5b",
     fontWeight: "bold",

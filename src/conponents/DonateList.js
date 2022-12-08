@@ -13,6 +13,7 @@ import PaginationList from "../elements/paginationList";
 import Navbar from "../elements/navbar";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
+import NavbarHome from "../elements/navbarHome";
 
 const DonateList = () => {
   const [user] = useAuthState(auth);
@@ -34,7 +35,8 @@ const DonateList = () => {
   };
   return (
     <div>
-      <Navbar />
+    {user && <Navbar />}
+    {!user && <NavbarHome />}
       <div style={donPageStyle}>
         <TitleSec name="捐贈物資列表" />
         <Container>

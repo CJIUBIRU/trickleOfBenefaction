@@ -15,8 +15,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import "../App.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 function UploadGoods() {
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
   const [progress, setProgress] = useState(0);
   const formHandler = (e) => {
     e.preventDefault();
@@ -39,6 +47,7 @@ function UploadGoods() {
       (err) => console.log(err),
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => console.log(url));
+      console.log(progress);
       }
     );
   };

@@ -14,8 +14,16 @@ import Col from "react-bootstrap/Col";
 import { doc, getDocFromCache } from "firebase/firestore";
 import { useEffect } from "react";
 import { db } from "../utils/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
 
 function UploadDemand() {
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
   return (
     <div>
       <Navbar />

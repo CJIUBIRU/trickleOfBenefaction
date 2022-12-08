@@ -6,8 +6,16 @@ import TitleStep from "../elements/titleStep";
 import ButtonLink from "../elements/button";
 import ProductStep3 from "../elements/productStep3";
 import Navbar from "../elements/navbar";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
 
 function UploadDemand() {
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user) {
+    navigate("/loginin");
+  }
   const nextStepStyle = {
     marginLeft: "10px",
   };

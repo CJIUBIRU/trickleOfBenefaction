@@ -5,15 +5,21 @@ import TitleSec from "../elements/titleSec";
 import Record from "../elements/record";
 import Col from "react-bootstrap/Col";
 import { Card } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../elements/navbar";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
 
 function ForgetPassword() {
-  const navigate = useNavigate();
-  const auth = getAuth();
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
+  // const auth = getAuth();
 
   const [email, setEmail] = useState("");
 

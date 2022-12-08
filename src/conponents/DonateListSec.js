@@ -5,8 +5,16 @@ import TitleStep from "../elements/titleStep";
 import ButtonLink from "../elements/button";
 import ProductStep2 from "../elements/productStep2";
 import Navbar from "../elements/navbar";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
 
 const DonateList = () => {
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
   const donPageStyle = {
     marginTop: "70px",
   };

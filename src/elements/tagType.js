@@ -17,7 +17,7 @@ function tagType(props) {
     } 
     return (
       <div>
-       <p style={tagStyle}>{props.name}</p>
+       <p style={tagStyle}>#{props.name}</p>
       </div>
     );
   }

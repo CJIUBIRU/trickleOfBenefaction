@@ -8,7 +8,16 @@ import Card from "react-bootstrap/Card";
 import img from "../img/tablet.jpg";
 import ButtonLink from "../elements/button";
 
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router";
+
 function RecordList() {
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
   const card = {
     marginBottom: "20px",
     marginLeft: "6%",

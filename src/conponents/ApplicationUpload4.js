@@ -21,8 +21,12 @@ import { storage } from "../utils/firebase";
 // import { faCloudDownload } from '@fortawesome/free-solid-svg-icons';
 
 import ProgressBar from "react-bootstrap/ProgressBar";
+import NavbarHome from "../elements/navbarHome";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
 
 function ApplicationUpload4() {
+  const [user] = useAuthState(auth);
   const cardStyle = {
     width: "75%",
     color: "black",
@@ -111,7 +115,8 @@ function ApplicationUpload4() {
   };
   return (
     <div style={{ paddingBottom: "80px" }}>
-      <Navbar />
+    {user && <Navbar />}
+    {!user && <NavbarHome />}
       <TitleSec name="公益團體申請資料上傳" />
       <TitleStep name="STEP4&nbsp;-&nbsp;上傳勸募許可函一份" />
       <Card style={cardStyle}>
