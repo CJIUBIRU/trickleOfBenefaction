@@ -176,14 +176,6 @@ function NavbarComp() {
                 >
                   合作機構一覽
                 </Nav.Link>
-                <Nav.Link
-                  as={Link}
-                  to="/allStores"
-                  href="#action/3.2"
-                  style={navitemStyle}
-                >
-                  合作店家一覽
-                </Nav.Link>
                 <Nav.Link as={Link} to="/pointsActivity" href="#action/3.2" style={navitemStyle}>
                   點數兌換專區
                 </Nav.Link>

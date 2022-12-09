@@ -82,11 +82,9 @@ function ApplicationUpload2() {
     border: "none",
   };
 
-  //檔案上傳
   const [progress, setProgress] = useState(0);
 
   const formHandler = (e) => {
-    // preventDefault()阻止預設行為
     e.preventDefault();
     const file = e.target[0].files[0];
     uploadFiles(file);
@@ -94,12 +92,9 @@ function ApplicationUpload2() {
 
   const uploadFiles = (file) => {
     if (!file) return;
-    // ref路徑
     const storageRef = ref(storage, `/AffidavitLetter/${file.name}`);
-    // Resumable uploads work by sending multiple requests
     const UploadTask = uploadBytesResumable(storageRef, file);
 
-    //snapshot是指快照，把資料庫裡面的值拍照起來，然後呈現出來
     UploadTask.on(
       "state_changed",
       (snapshot) => {

@@ -69,7 +69,8 @@ function NavbarComp() {
     <div>
       {user && <Navbar />}
       {!user && <NavbarHome />}
-      <Container>
+      <h1 style={{textAlign: "center", marginTop: "350px"}}>首頁</h1>
+      {/* <Container>
         <div style={bodyStyle}>
           <div style={titleBlockStyle}></div>
           <div>
@@ -150,7 +151,7 @@ function NavbarComp() {
             </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
     </div>
   );
 }

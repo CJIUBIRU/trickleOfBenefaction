@@ -36,7 +36,6 @@ import PointsItemDetails from "./PointsItemDetails";
 import PointsItemSuccess from "./PointsItemSuccess";
 import ManagerProve from "./ManagerProve";
 import ManagerProveMail from "./ManagerProveMail";
-import Dashboard from "../elements/dashboard";
 import SignUp from "./SignUp";
 import UploadGoods from "./UploadGoods";
 import UploadGoodsSec from "./UploadGoodsSec";
@@ -45,10 +44,11 @@ import ApplicationUpload3 from "./ApplicationUpload3";
 import ApplicationUpload4 from "./ApplicationUpload4";
 import ForgetPasseord from "./ForgetPassword";
 import UserUpdatePassword from "./UserUpdatePassword";
-import AddMember from "./AddMember";
+import AddStores from "./AddStores";
 import UploadGoodsSuccess from "./UploadGoodsSuccess";
 import AllGoods from "./AllGoods";
 import AllStores from "./AllStores";
+import UpdateStores from "./UpdateStores";
 
 function App() {
   return (
@@ -97,13 +97,13 @@ function App() {
             <Route element={<PointsItem />} path="/pointsItem" />
             <Route element={<PointsItemDetails />} path="/pointsItemDetails" />
             <Route element={<PointsItemSuccess />} path="/pointsItemSuccess" />
-            <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<ForgetPasseord />} path="/forgetPassword" />
             <Route element={<UserUpdatePassword />} path="/userUpdatePassword" />
-            <Route element={<AddMember />} path="/addMember" />
+            <Route element={<AddStores />} path="/addStores" />
             <Route element={<UploadGoodsSuccess />} path="/uploadGoodsSuccess" />
             <Route element={<AllGoods />} path="/allGoods" />
             <Route element={<AllStores />} path="/allStores" />
+            <Route element={<UpdateStores />} path="/updateStores" />
           </Routes>
         </BrowserRouter>
     </div>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import { Container } from "react-bootstrap";
@@ -6,28 +6,53 @@ import { Row, Col } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { FormControl } from "react-bootstrap";
 import { useState } from "react";
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
-function UploadGoods() {
-  const [name, setName] = useState("");
-  const [store, setStore] = useState("");
-  const [phone, setPhone] = useState("");
-  // const [user] = useAuthState(auth);
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
+
+function UpdateStores() {
+  const navigate = useNavigate("");
+  const [user] = useAuthState(auth);
+  if (!user){
+    navigate("/loginin");
+  }
+
+  let store = JSON.parse(localStorage.getItem('store'));
+    // console.log("localstorage",org);
+
+  const [values, setValues] = useState({
+      name: store.name,
+      address: store.address,
+      phone: store.phone
+  });
+
+  const handleChange = (e) => {
+      setValues(values => ({
+        ...values,
+        [e.target.name]: e.target.value
+      }))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // await setDoc(doc(db, "goodsDemand", user.uid), {
-      await addDoc(collection(db, "stores"), {
-        name: name,
-        store: store,
-        phone: phone,
-      });
-      alert("新增成功。");
-    } catch (err) {
-      console.log(err);
-    }
+    const taskDocRef = doc(db, 'stores', store.id)
+        // console.log(taskDocRef._key.id);
+        console.log(taskDocRef);
+      try{
+          await updateDoc(taskDocRef, {
+            name: values.name,
+            address: values.address,
+            phone: values.phone,
+          })
+          alert("修改成功")
+          navigate("/allStores")
+      } catch(err) {
+          console.log(err);
+          // alert("資料更新有誤：", err)
+      }    
   };
   const subBtnStyle = {
     color: "#ffffff",
@@ -43,7 +68,7 @@ function UploadGoods() {
   return (
     <div>
       <Navbar />
-      <TitleSec name="新增合作店家" />
+      <TitleSec name="修改合作店家資料" />
       <br />
       <Container>
         <div>
@@ -54,26 +79,29 @@ function UploadGoods() {
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
                     placeholder="輸入店家名稱（如：7-ELEVEN 輔大門市）"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={handleChange}
                     type="text"
-                    value={name}
+                    name="name"
+                    value={values.name}
                   />
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
                     placeholder="輸入店家地址（如：242新北市新莊區中正路510號）"
-                    onChange={(e) => setStore(e.target.value)}
+                    onChange={handleChange}
                     type="text"
-                    value={store}
+                    name="address"
+                    value={values.address}
                   />
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
                     placeholder="輸入電話（如：02-2905-6534）"
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={handleChange}
                     type="text"
-                    value={phone}
+                    name="phone"
+                    value={values.phone}
                   />
                   <button type="submit" style={subBtnStyle}>
-                    送出
+                    送出修改
                   </button>
                 </form>
               </Card>
@@ -128,4 +156,4 @@ function UploadGoods() {
   );
 }
 
-export default UploadGoods;
+export default UpdateStores;

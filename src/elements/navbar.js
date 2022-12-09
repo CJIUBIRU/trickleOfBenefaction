@@ -50,19 +50,7 @@ function Task({ id, email, level }) {
           </Col>
         )}
         {email === user.email && level === "member" && (
-          <Col style={{ padding: "0px" }}>
-            <Nav.Link
-              as={Link}
-              to="/allStores"
-              href="#action/3.2"
-              style={{ color: "#002B5B", fontSize: "17px" }}
-            >
-              合作店家一覽
-            </Nav.Link>
-          </Col>
-        )}
-        {email === user.email && level === "member" && (
-          <Col style={{ padding: "0px", paddingLeft: "10px", textAlign: "right" }}>
+          <Col style={{ padding: "0px", paddingLeft: "10px" }}>
             <Nav.Link
               as={Link}
               to="/pointsActivity"
@@ -322,7 +310,7 @@ function Task({ id, email, level }) {
           <Col style={{ padding: "0px" }}>
             <Nav.Link
               as={Link}
-              to="/addMember"
+              to="/addStores"
               href="#action/3.2"
               style={{ color: "#002B5B", fontSize: "17px" }}
             >
