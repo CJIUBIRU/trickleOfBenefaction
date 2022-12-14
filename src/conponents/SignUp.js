@@ -67,7 +67,8 @@ function Login() {
       addDoc(collection(db, "users"), {
         email: email,
         level: "member",
-        uid: user.uid
+        uid: user.uid,
+        name: "使用者"
       });
     } catch (err) {
       console.log(err);

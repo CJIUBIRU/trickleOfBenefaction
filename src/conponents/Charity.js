@@ -92,14 +92,15 @@ function CharityCard({ id, category, name, mail, tel }) {
             </Card.Text>
           </div>
           <div style={{ marginBottom: "0px", paddingBottom: "0px" }}>
-            <div style={btnStyle}>
-              <ButtonLink
+            <div >
+              <Button
+                style={btnStyle}
                 as={Link}
                 to="/charityDetail"
                 onClick={(e) => charityDetailData({ name: name })}
                 variant="primary"
                 name="了解更多"
-              ></ButtonLink>
+              >了解更多</Button>
             </div>
           </div>
         </Card.Body>

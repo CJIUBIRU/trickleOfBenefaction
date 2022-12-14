@@ -31,7 +31,7 @@ function UploadGoods() {
     e.preventDefault();
     try {
       // await setDoc(doc(db, "goodsDemand", user.uid), {
-      await addDoc(collection(db, "goodsDemand"), {
+      await addDoc(collection(db, "supply"), {
         name: name,
         store: store,
         price: price,

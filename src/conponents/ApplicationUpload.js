@@ -63,8 +63,8 @@ function ApplicationUpload() {
           name: name,
           mail: mail,
           status: "待審核",
-          fundraisingNo: "勸募許可文號",
-          tel: "機構聯絡電話",
+          fundraisingNo: "尚未填寫",
+          tel: "尚未填寫",
           registAddress: registerAddress,
           contactAddress: contactAddress,
           manager: {
@@ -72,9 +72,9 @@ function ApplicationUpload() {
             phone: managerPhone,
           },
           details: {
-            category: "機構類別",
-            concept: "機構宗旨",
-            intro: "機構簡介",
+            category: "尚未填寫",
+            concept: "尚未填寫",
+            intro: "尚未填寫",
             authority: authority,
             demandPurpose: demandPurpose,
           },
@@ -162,7 +162,7 @@ function ApplicationUpload() {
                       setName(e.target.value);
                     }}
                     value={name}
-                    placeholder="請輸入文字"
+                    placeholder="請輸入全銜（如：財團法人董氏基金會）"
                   />
                 </span>
               </InputGroup>
@@ -182,7 +182,7 @@ function ApplicationUpload() {
                       setRegisterAddress(e.target.value);
                     }}
                     value={registerAddress}
-                    placeholder="請輸入文字"
+                    placeholder="請輸入註冊地址（如：242新北市新莊區中正路510號）"
                   />
                 </span>
               </InputGroup>
@@ -202,7 +202,7 @@ function ApplicationUpload() {
                       setContactAddress(e.target.value);
                     }}
                     value={contactAddress}
-                    placeholder="請輸入文字"
+                    placeholder="請輸入聯絡地址（如：242新北市新莊區中正路510號）"
                   />
                 </span>
               </InputGroup>
@@ -222,7 +222,7 @@ function ApplicationUpload() {
                       setManagerName(e.target.value);
                     }}
                     value={managerName}
-                    placeholder="請輸入文字"
+                    placeholder="請輸入負責人姓名（如：王曉明）"
                   />
                 </span>
               </InputGroup>
@@ -241,8 +241,9 @@ function ApplicationUpload() {
                     onChange={(e) => {
                       setManagerPhone(e.target.value);
                     }}
+                    pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}"
                     value={managerPhone}
-                    placeholder="請輸入文字"
+                    placeholder="請輸入負責人連絡電話（如：02-1234-5678）"
                   />
                 </span>
               </InputGroup>
@@ -257,12 +258,12 @@ function ApplicationUpload() {
                 <span style={{ width: "65%" }}>
                   <Form.Control
                     style={labelStyle}
-                    type="text"
+                    type="email"
                     onChange={(e) => {
                       setMail(e.target.value);
                     }}
                     value={mail}
-                    placeholder="請輸入文字"
+                    placeholder="請輸入電子信箱（如：abc12345@gmail.com）"
                   />
                 </span>
               </InputGroup>
@@ -282,7 +283,7 @@ function ApplicationUpload() {
                       setAuthority(e.target.value);
                     }}
                     value={authority}
-                    placeholder="請輸入文字"
+                    placeholder="請輸入現行主管機關（如：臺北市政府）"
                   />
                 </span>
               </InputGroup>
@@ -297,7 +298,7 @@ function ApplicationUpload() {
                 <span style={{ width: "65%" }}>
                   <Form.Control
                     type="textarea"
-                    placeholder="請輸入文字"
+                    placeholder="請輸入募捐需求物資目的"
                     onChange={(e) => {
                       setDemandPurpose(e.target.value);
                     }}

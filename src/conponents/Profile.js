@@ -1,9 +1,10 @@
 import { Container, Nav } from "react-bootstrap";
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import Slider from "react-slick";
 import Product from "../elements/product";
 import TitleSec from "../elements/titleSec";
@@ -20,28 +21,71 @@ import Navbar from "../elements/navbar";
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db } from "../utils/firebase";
 
+function Task({ email }) {
+  const [user] = useAuthState(auth);
+  return <div>{email === user.email && <p>{email}</p>}</div>;
+}
+const uploadUserName = (item) => {
+  localStorage.setItem('good',JSON.stringify(item));
+}
+function Task2({ id, email, name }) {
+  const [user] = useAuthState(auth);
+  return (
+    <div>
+      {email === user.email && (
+        <div style={{display: "flex", flexDirection: "row"}}>
+          <p>{name}</p>
+          &nbsp;
+          <Nav.Link
+            as={Link}
+            to="/setUserName"
+            style={{ border: "none", backgroundColor: "white" }}
+            onClick={e => uploadUserName({"id": id, "name": name})}
+          >
+            <FontAwesomeIcon icon={faPen} />
+          </Nav.Link>
+        </div>
+      )}
+    </div>
+  );
+}
 function UploadDemand() {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   if (!user) {
     navigate("/loginin");
   }
-  
+  const [details, setDetails] = useState([]);
+  useEffect(() => {
+    const q = query(collection(db, "users"));
+    onSnapshot(q, (querySnapshot) => {
+      setDetails(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
   function verifiedEmail() {
     if (user.emailVerified === false) {
       sendEmailVerification(auth.currentUser)
         .then(() => {
           // 驗證信發送完成
           navigate("/profile");
-          alert('驗證信已發送到您的信箱，請查收。\n註：若找不到信件，可查看是否被寄送至垃圾郵件裡，謝謝。')
-        }).catch(error => {
+          alert(
+            "驗證信已發送到您的信箱，請查收。\n註：若找不到信件，可查看是否被寄送至垃圾郵件裡，謝謝。"
+          );
+        })
+        .catch((error) => {
           // 驗證信發送失敗
           console.log(error.message);
-          alert('驗證信發送失敗。')
-      })
-    }
-    else {
+          alert("驗證信發送失敗。");
+        });
+    } else {
       alert("未能抓到user資訊");
     }
   }
@@ -92,40 +136,6 @@ function UploadDemand() {
       <Navbar />
       <TitleSec name="個人檔案管理" />
       <Container>
-        {/* <>
-          {["danger"].map((variant) => (
-            <Alert
-              key={variant}
-              variant={variant}
-            >
-              <Row style={{paddingLeft: "120px"}}>
-                <Col style={{textAlign: "right", lineHeight: "30px"}}>
-                    帳號尚未同步，立即
-                    <span style={{ color: "red" }}>前往同步</span>。
-                </Col>
-                <Col>
-                  <Nav.Link
-                    style={{
-                      border: "none",
-                      color: "white",
-                      backgroundColor: "#ff5151",
-                      borderRadius: "50px",
-                      width: "100px",
-                      height: "30px",
-                      fontWeight: "bold",
-                      lineHeight: "30px",
-                      textAlign: "center",
-                    }}
-                    to="/googleSetAccount"
-                    as={Link}
-                  >
-                    同步帳號
-                  </Nav.Link>
-                </Col>
-              </Row>
-            </Alert>
-          ))}
-        </> */}
         <Card style={{ marginTop: "40px", width: "80%", marginLeft: "10%" }}>
           <div style={profileContentStyle}>
             <Row>
@@ -154,17 +164,36 @@ function UploadDemand() {
               </Col>
               <Col>
                 <div style={textStyle}>
-                  {user.displayName && (
-                    <p style={{ marginBottom: "-40px" }}>
-                      <b>用戶名稱：</b>
-                      {user.displayName}&nbsp;
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      height: "0px",
+                    }}
+                  >
+                    <b>用戶名稱：</b>
+                    {details.map((item) => (
+                      <Task2
+                        id={item.id}
+                        key={item.id}
+                        name={item.data.name}
+                        email={item.data.email}
+                      />
+                    ))}
+                  </div>
+                  {/* {!user.displayName && (
+                    <p style={{ marginBottom: "-40px", display: "flex", flexDirection: "row" }}>
+                      <b>用戶名稱：</b>使用者&nbsp;<Nav.Link as={Link} to="/setUserName" style={{border: "none", backgroundColor: "white"}}><FontAwesomeIcon icon={faPen} /></Nav.Link>&nbsp;
                     </p>
-                  )}
-                  {!user.displayName && (
-                    <p style={{ marginBottom: "-40px" }}>
-                      <b>用戶名稱：</b>使用者&nbsp;
-                    </p>
-                  )}
+                  )} */}
+                  {/* {details.map((item) => (
+                      <Task3
+                        id={item.id}
+                        key={item.id}
+                        name={item.data.name}
+                        email={item.data.email}
+                      />
+                    ))} */}
                   <a href="#" style={{ color: "#002b5b" }}></a>
                   <br />
                   <strike>
@@ -185,7 +214,11 @@ function UploadDemand() {
                   {user.email}
                   &nbsp;
                   {user.emailVerified == false && (
-                    <a href="#" style={{ color: "#002b5b" }} onClick={verifiedEmail}>
+                    <a
+                      href="#"
+                      style={{ color: "#002b5b" }}
+                      onClick={verifiedEmail}
+                    >
                       <FontAwesomeIcon
                         style={{ color: "lightgray" }}
                         icon={faCircleCheck}
@@ -201,11 +234,23 @@ function UploadDemand() {
                     </a>
                   )}
                   <br />
-                  <strike>
-                    <b>使用者帳號：</b>monica&nbsp;
-                  </strike>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      height: "45px",
+                    }}
+                  >
+                    <b>使用者帳號：</b>
+                    {details.map((item) => (
+                      <Task
+                        id={item.id}
+                        key={item.id}
+                        email={item.data.email}
+                      />
+                    ))}
+                  </div>
                   <a href="#" style={{ color: "#002b5b" }}></a>
-                  <br />
                   <strike>
                     <b>手機號碼：</b>0987654321&nbsp;
                   </strike>
@@ -218,8 +263,8 @@ function UploadDemand() {
                   <br />
                   <div style={passwordStyle}>
                     <ButtonLink name="修改密碼" to="/userUpdatePassword" />
-                    &nbsp;
-                    <ButtonLink name="修改資料" />
+                    {/* &nbsp; */}
+                    {/* <ButtonLink name="修改資料" /> */}
                   </div>
                 </div>
               </Col>

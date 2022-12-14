@@ -39,7 +39,7 @@ function UpdateGoods() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const taskDocRef = doc(db, 'goodsDemand', good.id)
+    const taskDocRef = doc(db, 'supply', good.id)
         console.log(taskDocRef);
         console.log(good.id)
       try{

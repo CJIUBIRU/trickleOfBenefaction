@@ -84,7 +84,7 @@ function GoodsDetail({ id, name, price, store }) {
     localStorage.setItem('good',JSON.stringify(item));
   }
   const handleDelete = async (id) => {
-    const taskDocRef = doc(db, 'goodsDemand', id)
+    const taskDocRef = doc(db, 'supply', id)
     try{
       alert("刪除成功")
       await deleteDoc(taskDocRef)
@@ -149,7 +149,7 @@ function AllGoods() {
   const [details, setDetails] = useState([]);
   useEffect(() => {
     const q = query(
-      collection(db, "goodsDemand"),
+      collection(db, "supply"),
     );
     onSnapshot(q, (querySnapshot) => {
       setDetails(

@@ -20,7 +20,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
-function Task({ id, email, level }) {
+function Task({ id, email, level, name }) {
   const [user] = useAuthState(auth);
   return (
     <div>
@@ -88,8 +88,8 @@ function Task({ id, email, level }) {
                     使用者
                   </div>
                 )}
-                {!user.displayName && <h6>使用者，您好！</h6>}
-                {user.displayName && <h6>{user.displayName}，您好！</h6>}
+                {/* {!user.displayName && <h6>使用者，您好！</h6>} */}
+                <h6>{name}，您好！</h6>
                 <Button
                   onClick={() => auth.signOut()}
                   style={{
@@ -263,8 +263,9 @@ function Task({ id, email, level }) {
                     使用者
                   </div>
                 )}
-                {!user.displayName && <h6>使用者，您好！</h6>}
-                {user.displayName && <h6>{user.displayName}，您好！</h6>}
+                {/* {!user.displayName && <h6>使用者，您好！</h6>}
+                {user.displayName && <h6>{user.displayName}，您好！</h6>} */}
+                <h6>{name}，您好！</h6>
                 <Button
                   onClick={() => auth.signOut()}
                   style={{
@@ -383,8 +384,9 @@ function Task({ id, email, level }) {
                     使用者
                   </div>
                 )}
-                {!user.displayName && <h6>使用者，您好！</h6>}
-                {user.displayName && <h6>{user.displayName}，您好！</h6>}
+                {/* {!user.displayName && <h6>使用者，您好！</h6>}
+                {user.displayName && <h6>{user.displayName}，您好！</h6>} */}
+                <h6>{name}，您好！</h6>
                 <Button
                   onClick={() => auth.signOut()}
                   style={{
@@ -560,6 +562,7 @@ function NavbarComp() {
                     key={item.id}
                     level={item.data.level}
                     email={item.data.email}
+                    name={item.data.name}
                   />
                 ))}
 

@@ -24,7 +24,7 @@ function Task({ content, user, time }) {
 function News() {
   const [details, setDetails] = useState([]);
   useEffect(() => {
-    const q = query(collection(db, "news"), orderBy("time", "desc"), limit("10"));
+    const q = query(collection(db, "newsCharity"), orderBy("time", "desc"), limit("10"));
     onSnapshot(q, (querySnapshot) => {
       setDetails(
         querySnapshot.docs.map((doc) => ({
@@ -36,8 +36,10 @@ function News() {
   }, []);
   return (
     <div>
+      {/* <Card style={{borderLeft: "3.5px solid #ffb085"}}> */}
       <Card style={{borderLeft: "3.5px solid #808080"}}>
-        <Card.Header style={{ color: "#808080", fontWeight: "bold", backgroundColor: "var(--bs-card-cap-bg)" }}>
+        {/* <Card.Header style={{ color: "#ffb085", fontWeight: "bold", backgroundColor: "#fef1e6" }}> */}
+        <Card.Header style={{ color: "#808080", fontWeight: "bold" }}>
           公告區&nbsp;
           <FontAwesomeIcon icon={faBullhorn} />
         </Card.Header>

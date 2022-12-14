@@ -112,7 +112,7 @@ function CharityCardDetail({
                 <Card.Body style={{ height: "300px" }}>
                   <div style={dataStyle}>
                     <p>
-                      機構類別：<span style={tagStyle}>{category}</span>
+                      機構類別：<span style={tagStyle}>#{category}</span>
                     </p>
                     <p>電子信箱：{mail}</p>
                     <p>機構電話：{tel}</p>
@@ -181,7 +181,9 @@ function CharityDetail() {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
+    
     let org = JSON.parse(localStorage.getItem("CharityDetail"));
+    console.log(org);
     const q = query(
       collection(db, "charity"),
       where("info.name", "==", org.name)

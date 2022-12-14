@@ -50,6 +50,7 @@ import AllGoods from "./AllGoods";
 import AllStores from "./AllStores";
 import UpdateStores from "./UpdateStores";
 import UpdateGoods from "./UpdateGoods";
+import SetUserName from "./SetUserName";
 
 function App() {
   return (
@@ -106,6 +107,7 @@ function App() {
             <Route element={<AllStores />} path="/allStores" />
             <Route element={<UpdateStores />} path="/updateStores" />
             <Route element={<UpdateGoods/>} path="/updateGoods"></Route>
+            <Route element={<SetUserName/>} path="/setUserName"></Route>
           </Routes>
         </BrowserRouter>
     </div>

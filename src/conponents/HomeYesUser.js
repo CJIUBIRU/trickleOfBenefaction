@@ -17,7 +17,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import Table from "react-bootstrap/Table";
 import News from "../elements/news";
+import NewsCharity from "../elements/newsCharity";
 import Notes from "../elements/notes";
+import NotesCharity from "../elements/notesCharity";
 
 function Task({ id, email, level }) {
   const [user] = useAuthState(auth);
@@ -516,19 +518,32 @@ function Task({ id, email, level }) {
               flexDirection: "row",
             }}
           >
-            <div style={{margin: "10px"}}>
+            <div style={{margin: "10px", width: "70%"}}>
               <News />
             </div>
-            <div style={{margin: "10px"}}>
+            <div style={{margin: "10px", width: "30%"}}>
               <Notes />
             </div>
           </div>
         </Container>
       )}
       {email === user.email && level === "charity" && (
-        <Container>
-          <p style={{ marginTop: "350px" }}>機構首頁</p>
-        </Container>
+        <Container style={{marginBottom: "50px"}}>
+        <div
+          style={{
+            marginTop: "100px",
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <div style={{margin: "10px", width: "70%"}}>
+            <NewsCharity />
+          </div>
+          <div style={{margin: "10px", width: "30%"}}>
+            <NotesCharity />
+          </div>
+        </div>
+      </Container>
       )}
     </div>
   );

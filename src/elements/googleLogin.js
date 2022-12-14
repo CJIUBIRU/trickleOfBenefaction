@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { addDoc, collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../utils/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function GoogleLogin() {
   //sign in with google
@@ -57,13 +58,15 @@ function GoogleLogin() {
   // checkUser.map((item) =>
   //   console.log(item.data.email)
   // )
+  // const [user1] = useAuthState(auth);
 
   function addUser(user) {
     try {
       addDoc(collection(db, "users"), {
         email: user.email,
         level: "member",
-        uid: user.uid
+        uid: user.uid,
+        name: user.displayName
       });
     } catch (err) {
       console.log(err);

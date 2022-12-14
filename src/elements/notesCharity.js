@@ -22,7 +22,7 @@ import { useNavigate } from "react-router";
 
 function Task({ id, content }) {
   const handleDelete = async (id) => {
-    const taskDocRef = doc(db, "notes", id);
+    const taskDocRef = doc(db, "notesCharity", id);
     try {
       await deleteDoc(taskDocRef);
     } catch (err) {
@@ -53,7 +53,7 @@ function Task({ id, content }) {
 function News() {
   const [details, setDetails] = useState([]);
   useEffect(() => {
-    const q = query(collection(db, "notes"));
+    const q = query(collection(db, "notesCharity"));
     onSnapshot(q, (querySnapshot) => {
       setDetails(
         querySnapshot.docs.map((doc) => ({
@@ -69,7 +69,7 @@ function News() {
     e.preventDefault();
     try {
       // await setDoc(doc(db, "goodsDemand", user.uid), {
-      await addDoc(collection(db, "notes"), {
+      await addDoc(collection(db, "notesCharity"), {
         content: content,
       });
       //   navigate("/uploadGoodsSuccess");
@@ -82,7 +82,9 @@ function News() {
   };
   return (
     <div>
+      {/* <Card style={{ borderLeft: "3.5px solid #ffb085" }}> */}
       <Card style={{ borderLeft: "3.5px solid #808080" }}>
+        {/* <Card.Header style={{ color: "#ffb085", fontWeight: "bold", backgroundColor: "#fef1e6" }}> */}
         <Card.Header style={{ color: "#808080", fontWeight: "bold" }}>
           備忘錄&nbsp;
           <FontAwesomeIcon icon={faPaperclip} />
@@ -117,7 +119,8 @@ function News() {
             <Button
               type="submit"
               style={{
-                backgroundColor: "gray",
+                // backgroundColor: "#ffb085",
+                backgroundColor: "#808080",
                 border: "none",
                 width: "35%",
                 borderRadius: "20px",

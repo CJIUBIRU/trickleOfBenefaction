@@ -89,7 +89,7 @@ function UploadGoods() {
     width: "100%",
     color: "black",
     left: "50%",
-    marginTop: "60px",
+    marginTop: "35px",
     transform: `translate(${-50}%, ${-5}%)`,
     paddingTop: "5%",
     paddingBottom: "5%",
