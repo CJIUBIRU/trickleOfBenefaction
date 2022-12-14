@@ -12,13 +12,14 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
+import NavbarHome from "../elements/navbarHome";
 
 function ForgetPassword() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
-    navigate("/loginin");
-  }
+  // if (!user){
+  //   navigate("/loginin");
+  // }
   // const auth = getAuth();
 
   const [email, setEmail] = useState("");
@@ -102,7 +103,8 @@ function ForgetPassword() {
 
   return (
     <div>
-      <Navbar />
+      {user && <Navbar />}
+      {!user && <NavbarHome />}
       <TitleSec name="忘記密碼" />
       <Container>
         <Card style={{ marginTop: "80px", width: "60%", marginLeft: "20%" }}>

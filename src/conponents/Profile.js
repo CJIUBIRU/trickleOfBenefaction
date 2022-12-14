@@ -226,7 +226,7 @@ function UploadDemand() {
             </Row>
           </div>
         </Card>
-        <div style={titleSecPage}>
+        {/* <div style={titleSecPage}>
           <h5 style={{ color: "#002b5b", fontWeight: "bold" }}>瀏覽紀錄</h5>
           <Slider {...settingsSec}>
             <div>
@@ -271,7 +271,7 @@ function UploadDemand() {
               <Record />
             </div>
           </Slider>
-        </div>
+        </div> */}
       </Container>
     </div>
   );

@@ -22,9 +22,6 @@ import NavbarHome from "../elements/navbarHome";
 function CharityInfo() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user) {
-    navigate("/loginin");
-  }
   const cardStyle = {
     width: "80%",
     color: "black",
@@ -96,7 +93,7 @@ function CharityInfo() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     //mail接值之後要修
-    const taskDocRef = doc(db, "charity", "ym8YCpbfrt8M3aWQ6ks4");
+    const taskDocRef = doc(db, "charity", "Tiuj6QvdQpCcHJlc5MaY");
 
     // console.log(taskDocRef._key.id);
     console.log(taskDocRef);

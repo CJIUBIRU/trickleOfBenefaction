@@ -156,6 +156,18 @@ function NavbarComp() {
           >
             <div>
               <Nav className="me-auto" style={navpageStyle}>
+                {/* <Nav.Link
+                  as={Link}
+                  to="/setPassword"
+                  href="#home"
+                  style={{
+                    marginRight: "8px",
+                    color: "red",
+                    fontSize: "17px",
+                  }}
+                >
+                  初步設定密碼
+                </Nav.Link> */}
                 <Nav.Link
                   as={Link}
                   to="/applicationInfo"

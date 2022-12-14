@@ -49,6 +49,7 @@ import UploadGoodsSuccess from "./UploadGoodsSuccess";
 import AllGoods from "./AllGoods";
 import AllStores from "./AllStores";
 import UpdateStores from "./UpdateStores";
+import UpdateGoods from "./UpdateGoods";
 
 function App() {
   return (
@@ -104,6 +105,7 @@ function App() {
             <Route element={<AllGoods />} path="/allGoods" />
             <Route element={<AllStores />} path="/allStores" />
             <Route element={<UpdateStores />} path="/updateStores" />
+            <Route element={<UpdateGoods/>} path="/updateGoods"></Route>
           </Routes>
         </BrowserRouter>
     </div>

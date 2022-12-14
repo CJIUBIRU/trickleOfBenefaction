@@ -7,11 +7,10 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-import Input from "../elements/input";
 import app from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
@@ -34,7 +33,8 @@ function Login() {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
+          addUser(user);
           navigate("/loginIn");
           setIsLoading(false);
           alert("註冊成功，正在前往登入頁面...");
@@ -42,9 +42,6 @@ function Login() {
         })
         .catch((error) => {
           const errorCode = error.code;
-          // const errorMessage = error.message;
-          // alert(errorCode);
-          // alert(errorMessage);
           switch (errorCode) {
             case "auth/email-already-in-use":
               setErrorMessage("信箱已存在");
@@ -64,18 +61,18 @@ function Login() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // 新增firebase "users" 資訊
+  function addUser(user) {
     try {
-      // await setDoc(doc(db, "goodsDemand", user.uid), {
-      await addDoc(collection(db, "users"), {
+      addDoc(collection(db, "users"), {
         email: email,
-        password: password,
+        level: "member",
+        uid: user.uid
       });
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   function verifiedEmail(user) {
     if (user.emailVerified === false) {
@@ -155,10 +152,6 @@ function Login() {
     display: "flex",
     flexDirection: "row",
   };
-  const logoItemStyle = {
-    textAlign: "center",
-    lineHeight: "450px",
-  };
   const stepBtnStyle = {
     color: "#ffffff",
     backgroundColor: "#002B5B",
@@ -178,6 +171,7 @@ function Login() {
     border: "1px red solid",
     backgroundColor: "#FFECEC",
   };
+
   return (
     <div style={loginBodyStyle}>
       <img style={{width: "100%"}} src={bgphoto} alt="bgPhoto" />
@@ -188,7 +182,7 @@ function Login() {
         <div style={loginCardStyle}>
           <div style={loginContentStyle}>
             <p style={titleStyle}>註冊</p>
-            <form onSubmit={handleSubmit}>
+            {/* <form> */}
               <Form.Control
                 style={inputStyle}
                 type="email"
@@ -242,7 +236,7 @@ function Login() {
                   註冊
                 </button>
               </div>
-            </form>
+            {/* </form> */}
             {errorMessage && <p style={errorMessageStyle}>{errorMessage}</p>}
           </div>
         </div>

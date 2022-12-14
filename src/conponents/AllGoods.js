@@ -12,19 +12,21 @@ import Navbar from "../elements/navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
-import { doc, getDocFromCache, collection, query, onSnapshot, } from "firebase/firestore";
+import { doc, getDocFromCache, collection, query, onSnapshot,deleteDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import Card from "react-bootstrap/Card";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
+import Button from "react-bootstrap/Button";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function GoodsDetail({  name, price, store }) {
+function GoodsDetail({ id, name, price, store }) {
 
   const cardStyle = {
     width: "280px",
-    height: "500px",
+    height: "450px",
   };
 
   const btnStyle = {
@@ -55,11 +57,47 @@ function GoodsDetail({  name, price, store }) {
     textAlign: "center",
     left: "50%",
   };
+  const editIconStyle = {
+    backgroundColor: "#f6c23e",
+    height: "40px",
+    marginLeft: "10px",
+    width: "40px",
+    fontSize: "16px",
+    borderRadius: "50%",
+    textAlign: "center",
+    color: "white",
+    border: "none",
+    lineHeight: "25px",
+  };
+  const trashIconStyle = {
+    backgroundColor: "#e74a3b",
+    height: "40px",
+    marginLeft: "10px",
+    width: "40px",
+    fontSize: "16px",
+    borderRadius: "50%",
+    textAlign: "center",
+    color: "white",
+    border: "none",
+  };
+  const uploadGoodsData = (item) => {
+    localStorage.setItem('good',JSON.stringify(item));
+  }
+  const handleDelete = async (id) => {
+    const taskDocRef = doc(db, 'goodsDemand', id)
+    try{
+      alert("刪除成功")
+      await deleteDoc(taskDocRef)
+      
+    } catch (err) {
+        alert(err)
+    }
+  }
 
   return (
     <div style={{ display: "inline-block", margin: "10px" }}>
       <Card style={cardStyle}>
-        <div style={{textAlign: "center"}}>
+        <div style={{ textAlign: "center" }}>
           <Card.Img
             style={imgStyle}
             variant="top"
@@ -68,7 +106,7 @@ function GoodsDetail({  name, price, store }) {
         </div>
 
         <Card.Body>
-          
+
           <div style={{ height: "160px" }}>
             <Card.Title style={nameStyle}>{name}</Card.Title>
             <Card.Text style={dataStyle}>
@@ -80,7 +118,23 @@ function GoodsDetail({  name, price, store }) {
               </p>
             </Card.Text>
           </div>
-        
+          <div align="center">
+            <Button
+              style={editIconStyle}
+              variant="primary"
+              as={Link}
+              to="/updateGoods"
+            onClick={e => uploadGoodsData({"id": id, "name": name, "price" : price, "store": store})}
+            >
+              <FontAwesomeIcon icon={faPenToSquare} />
+            </Button>
+            <Button style={trashIconStyle} variant="primary" type="submit"
+            onClick={() => handleDelete(id)}
+            >
+              <FontAwesomeIcon icon={faTrashCan} />
+            </Button>
+          </div>
+
         </Card.Body>
       </Card>
     </div>
@@ -89,7 +143,7 @@ function GoodsDetail({  name, price, store }) {
 function AllGoods() {
   const [user] = useAuthState(auth);
   const navigate = useNavigate("");
-  if (!user){
+  if (!user) {
     navigate("/loginin");
   }
   const [details, setDetails] = useState([]);
@@ -110,7 +164,7 @@ function AllGoods() {
     <div>
       <Navbar />
       <TitleSec name="物資一覽表" />
-       <Container>
+      <Container>
         {/* , display: "flex", flexDirection: "row" */}
         <div style={{ padding: "30px", textSpacing: "1px" }}>
           <div>
@@ -126,7 +180,7 @@ function AllGoods() {
           </div>
         </div>
       </Container>
-      
+
     </div>
   );
 }

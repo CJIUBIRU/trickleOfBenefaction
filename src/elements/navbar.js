@@ -18,8 +18,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+
 function Task({ id, email, level }) {
   const [user] = useAuthState(auth);
   return (
@@ -27,18 +27,6 @@ function Task({ id, email, level }) {
       <Row style={{ textAlign: "center" }}>
         {email === user.email && level === "member" && (
           <Col style={{ padding: "0px", width: "250px" }}>
-            <Nav.Link
-              as={Link}
-              to="/applicationInfo"
-              href="#home"
-              style={{ color: "#002B5B", fontSize: "17px" }}
-            >
-              成為合作機構
-            </Nav.Link>
-          </Col>
-        )}
-        {email === user.email && level === "member" && (
-          <Col style={{ padding: "0px" }}>
             <Nav.Link
               as={Link}
               to="/charity"
@@ -220,7 +208,7 @@ function Task({ id, email, level }) {
             </Nav.Link>
           </Col>
         )}
-        {email === user.email && level === "charity" && (
+        {/* {email === user.email && level === "charity" && (
           <Col
             style={{ padding: "0px", textAlign: "left", paddingRight: "15px" }}
           >
@@ -233,7 +221,7 @@ function Task({ id, email, level }) {
               初步設定密碼
             </Nav.Link>
           </Col>
-        )}
+        )} */}
         {email === user.email && level === "charity" && (
           <Col
             style={{ padding: "0px", textAlign: "left", paddingRight: "15px" }}
@@ -566,12 +554,12 @@ function NavbarComp() {
           >
             <div>
               <Nav className="me-auto" style={navpageStyle}>
-                {details.map((index) => (
+                {details.map((item) => (
                   <Task
-                    id={index.id}
-                    key={index.id}
-                    level={index.data.level}
-                    email={index.data.email}
+                    id={item.id}
+                    key={item.id}
+                    level={item.data.level}
+                    email={item.data.email}
                   />
                 ))}
 

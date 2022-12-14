@@ -12,14 +12,11 @@ import SuccessInfo from "../elements/successInfo";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 
+import NavbarHome from "../elements/navbarHome";
 import { useNavigate } from "react-router";
 
 function PasswordSuccess() {
-  const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user) {
-    navigate("/loginin");
-  }
   const cardStyle = {
     width: "50%",
     color: "black",
@@ -47,7 +44,8 @@ function PasswordSuccess() {
   };
   return (
     <div>
-      <Navbar />
+    {user && <Navbar />}
+    {!user && <NavbarHome />}
       <TitleSec name="基本資料設定" />
 
       <Card style={cardStyle}>

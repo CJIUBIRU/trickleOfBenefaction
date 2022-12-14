@@ -11,13 +11,11 @@ import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
+import NavbarHome from "../elements/navbarHome";
 
 function CharityInfoSuccess() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user) {
-    navigate("/loginin");
-  }
   const cardStyle = {
     width: "50%",
     color: "black",
@@ -45,7 +43,8 @@ function CharityInfoSuccess() {
   };
   return (
     <div>
-      <Navbar />
+    {user && <Navbar />}
+    {!user && <NavbarHome />}
       <TitleSec name="基本資料設定" />
 
       <Card style={cardStyle}>

@@ -1,17 +1,16 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { FormControl } from "react-bootstrap";
-import { useState } from "react";
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 
 function UploadGoods() {
   const navigate = useNavigate("");
@@ -20,7 +19,7 @@ function UploadGoods() {
     navigate("/loginin");
   }
   const [name, setName] = useState("");
-  const [store, setStore] = useState("");
+  const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   // const [user] = useAuthState(auth);
 
@@ -30,9 +29,11 @@ function UploadGoods() {
       // await setDoc(doc(db, "goodsDemand", user.uid), {
       await addDoc(collection(db, "stores"), {
         name: name,
-        store: store,
+        address: address,
         phone: phone,
+        uid: uuidv4(),
       });
+      window.location.reload();
       alert("新增成功。");
     } catch (err) {
       console.log(err);
@@ -70,15 +71,16 @@ function UploadGoods() {
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
                     placeholder="輸入店家地址（如：242新北市新莊區中正路510號）"
-                    onChange={(e) => setStore(e.target.value)}
+                    onChange={(e) => setAddress(e.target.value)}
                     type="text"
-                    value={store}
+                    value={address}
                   />
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
                     placeholder="輸入電話（如：02-2905-6534）"
                     onChange={(e) => setPhone(e.target.value)}
-                    type="text"
+                    type="tel"
+                    pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}"
                     value={phone}
                   />
                   <button type="submit" style={subBtnStyle}>

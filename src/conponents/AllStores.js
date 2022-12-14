@@ -6,8 +6,6 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "react-bootstrap/Button";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import { Container } from "react-bootstrap";
 import { collection, query, onSnapshot, deleteDoc, doc} from "firebase/firestore"
@@ -19,37 +17,9 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
 
 function Stores({id, name, phone, address, num}) {
-  // const card = {
-  //   marginBottom: "20px",
-  //   marginLeft: "10px",
-  //   marginRight: "10px",
-  //   padding: "45px 40px 10px 40px",
-  //   color: "#002B5B",
-  // };
-  // const contentStyle = {
-  //   marginTop: "15px",
-  //   marginBottom: "5px",
-  //   textAlign: "center",
-  // };
-  // const demandHrefStyle = {
-  //   color: "#90AACB",
-  // };
-  // const goodsImgStyle = {
-  //   width: "200px",
-  //   height: "200px",
-  //   marginLeft: "15%",
-  //   marginRight: "75%",
-  // };
-  // const cardText = {
-  //   color: "#6C6C6C",
-  //   textAlign: "left",
-  //   marginLeft: "3px",
-  // };
-  
   const uploadStoreData = (item) => {
     localStorage.setItem('store',JSON.stringify(item));
   }
-
   const editIconStyle = {
     backgroundColor: "#f6c23e",
     height: "40px",
@@ -73,14 +43,6 @@ function Stores({id, name, phone, address, num}) {
     color: "white",
     border: "none",
   };
-  const iconStyle = {
-    paddingTop: "3px",
-    paddingBottom: "3px",
-    paddingLeft: "6px",
-    paddingRight: "6px",
-    fontSize: "13px"
-  }
-
   const handleDelete = async (id) => {
     const taskDocRef = doc(db, 'stores', id)
     try{
@@ -112,19 +74,6 @@ function Stores({id, name, phone, address, num}) {
             </Button>
         </td>
       </tr>
-      {/* <Card style={card}>
-        <Card.Body style={contentStyle}>
-          <Card.Title>
-            店家名稱：<b>{name}</b>
-          </Card.Title>
-          <hr></hr>
-          <Card.Text style={cardText}>
-            店家地址：{address}
-            <br />
-            店家電話：{phone}
-          </Card.Text>
-        </Card.Body>
-      </Card> */}
     </>
   );
 }
@@ -165,10 +114,6 @@ function UploadGoods() {
       <TitleSec name="合作店家一覽表" />
       <br />
       <Container>
-        {/* <Row>
-          <Col>
-          </Col>  
-        </Row> */}
         <Card style={cardStyle}>
           <Card.Body>
             <Table striped bordered hover style={{ textAlign: "center" }}>
