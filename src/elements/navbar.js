@@ -114,7 +114,7 @@ function Task({ id, email, level, name }) {
               </NavDropdown.Item>
               <NavDropdown.Item
                 as={Link}
-                to="/donateRecord"
+                to="/donateRecordPage"
                 href="#action/3.3"
                 style={{ fontWeight: "bold", color: "#002B5B" }}
               >
@@ -222,6 +222,7 @@ function Task({ id, email, level, name }) {
             </Nav.Link>
           </Col>
         )} */}
+
         {email === user.email && level === "charity" && (
           <Col
             style={{ padding: "0px", textAlign: "left", paddingRight: "15px" }}
@@ -277,6 +278,15 @@ function Task({ id, email, level, name }) {
                 >
                   登出
                 </Button>
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  as={Link}
+                  to="/profile"
+                  href="#action/3.4"
+                  style={{ fontWeight: "bold", color: "#002B5B" }}
+                >
+                  個人檔案管理
+                </NavDropdown.Item>
               </div>
             </NavDropdown>
           </Col>
@@ -398,6 +408,15 @@ function Task({ id, email, level, name }) {
                 >
                   登出
                 </Button>
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  as={Link}
+                  to="/profile"
+                  href="#action/3.4"
+                  style={{ fontWeight: "bold", color: "#002B5B" }}
+                >
+                  個人檔案管理
+                </NavDropdown.Item>
               </div>
             </NavDropdown>
           </Col>

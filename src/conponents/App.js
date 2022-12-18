@@ -51,6 +51,7 @@ import AllStores from "./AllStores";
 import UpdateStores from "./UpdateStores";
 import UpdateGoods from "./UpdateGoods";
 import SetUserName from "./SetUserName";
+import UpdateMyDemand from "./UpdateMyDemand";
 
 function App() {
   return (
@@ -71,7 +72,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/donatestep2" element={<DonateListSec />} />
             <Route path="/donatestep3" element={<DonateListThird />} />
-            <Route path="/donateRecord" elelment={<DonateRecord />} />
+            {/* <Route path="/donateRecord" elelment={<DonateRecord />} /> */}
             <Route path="/donateRecordList" element={<DonateRecordList />} />
             <Route path="/process" element={<Process />} />
             <Route path="/processRecordList" element={<ProcessRecordList />} />
@@ -108,6 +109,8 @@ function App() {
             <Route element={<UpdateStores />} path="/updateStores" />
             <Route element={<UpdateGoods/>} path="/updateGoods"></Route>
             <Route element={<SetUserName/>} path="/setUserName"></Route>
+            <Route element={<DonateRecord/>} path="/donateRecordPage"></Route>
+            <Route element={<UpdateMyDemand/>} path="/updateMyDemand"></Route>
           </Routes>
         </BrowserRouter>
     </div>

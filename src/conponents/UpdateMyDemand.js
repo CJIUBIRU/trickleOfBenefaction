@@ -1,37 +1,27 @@
 import { Container } from "react-bootstrap";
 import React, { Component } from "react";
 import "../App.css";
+import PaginationList from "../elements/paginationList";
+import UpdateMyProduct from "../elements/updateMyProduct";
 import TitleSec from "../elements/titleSec";
-import Record from "../elements/record";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../elements/navbar";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router";
-import { Row, Col } from "react-bootstrap";
 
 function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user) {
+  if (!user){
     navigate("/loginin");
   }
   return (
     <div>
       <Navbar />
-      <TitleSec name="捐贈紀錄" />
+      <TitleSec name="修改我的需求" />
       <Container>
         <div>
-          <Row>
-            <Col>
-              <Record />
-            </Col>
-            <Col>
-              <Record />
-            </Col>
-            <Col>
-              <Record />
-            </Col>
-          </Row>
+          <UpdateMyProduct />
         </div>
       </Container>
     </div>

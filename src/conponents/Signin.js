@@ -32,6 +32,12 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  // 清除 localstorage
+  let userEmail = JSON.parse(localStorage.getItem("email"));
+  if (userEmail) {
+    localStorage.clear();
+  }
+
   const signIn = () => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
@@ -40,6 +46,7 @@ function Login() {
         const user = userCredential.user;
         console.log(user);
         navigate("/");
+        localStorage.setItem("email", JSON.stringify(user.email));
         setIsLoading(false);
         // ...
       })
@@ -162,7 +169,7 @@ function Login() {
   };
   return (
     <div style={loginBodyStyle}>
-      <img style={{width: "100%"}} src={bgphoto} alt="bgPhoto" />
+      <img style={{ width: "100%" }} src={bgphoto} alt="bgPhoto" />
       <div style={loginLogoStyle}>
         <img style={loginLogoStyle} src={logo} alt="logoPhoto" />
       </div>

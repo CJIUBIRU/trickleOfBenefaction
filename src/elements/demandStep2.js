@@ -1,11 +1,13 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import img from "../img/tablet.jpg";
 import "../App.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { collection, query, onSnapshot, where } from "firebase/firestore";
+import { db } from "../utils/firebase";
 
-function DemandStep2() {
+function DemandStep2({id, name, store, user, demandList, setDemandList}) {
   const card = {
     marginBottom: "20px",
     marginLeft: "15%",
@@ -30,8 +32,9 @@ function DemandStep2() {
   };
   const inputStyle = {
     border: "1.5px solid #90AACB",
-    width: "8.5%",
+    width: "15%",
     height: "30px",
+    textAlign: "center",
   };
   const inputSecStyle = {
     border: "1.5px solid #90AACB",
@@ -61,17 +64,99 @@ function DemandStep2() {
     marginRight: "3px",
     paddingLeft: "9px",
   };
+
+  const [count, setCount] = useState(1);
+  const [demandInfo, setDemandInfo] = useState('');
+
+  function handleChange(e) {
+    e.preventDefault();
+    let value = Number(e.target.value);
+    if (value <= 0 || value === '-') {
+      setCount(0);
+      value = 0
+    }
+    else setCount(value);
+    handleData(value, demandInfo);
+  }
+
+  function handlePlus() {
+    let value = count + 1
+    setCount(value);
+    handleData(value, demandInfo);
+  }
+
+  function handleMinus() {
+    if (count > 1) {
+      let value = count - 1
+      setCount(value);
+      handleData(value, demandInfo);
+    }
+  }
+
+  function handleDemendInfo(e) {
+    let demandInfoValue = e.target.value;
+    setDemandInfo(demandInfoValue)
+    handleData(count, demandInfoValue);
+  }
+
+  // 抓charity DB data
+  const [charityData, setCharityData] = useState();
+  const [charityName2, setCharityName2] = useState();
+  useEffect(() => {
+    let userEmail = JSON.parse(localStorage.getItem('email'));
+    const q = query(
+      collection(db, "charity"),
+      where("info.mail", "==", userEmail)
+    );
+    onSnapshot(q, (querySnapshot) => {
+      setCharityData(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
+
+  // 更新 chairyName
+  useEffect(() => {
+    if (charityData) {
+      setCharityName2(charityData[0].data.info.name);
+    }
+    else {
+      setCharityName2('');
+    }
+  }, [charityData]);
+
+  function handleData(value, demandInfoValue) {
+    if (value > 0 && demandInfoValue !== '') {
+      if (demandList.some(e => e.id === id)) { // 存在前一個相同id的資料
+        let newDemandList = demandList.filter((e) => {
+          return e.id !== id;
+        })
+        newDemandList.push({id, name, store, count: value, demandInfo: demandInfoValue, charityName: charityName2})
+        setDemandList(newDemandList)
+        localStorage.setItem("demandList", JSON.stringify(newDemandList));
+      }
+      else { // 不存在前一個相同id的資料
+        demandList.push({id, name, store, count: value, demandInfo: demandInfoValue, charityName: charityName2})
+        localStorage.setItem("demandList", JSON.stringify(demandList));
+      }
+    }
+    
+  }
+
   return (
     <div>
-      <Card style={card}>
+      <Card style={card} onChange={handleData}>
         <Card.Img style={goodsImgStyle} variant="top" src={img} />
-        <Card.Body style={contentStyle}>
+        <Card.Body  style={contentStyle}>
           <Card.Title>
-            物資名稱：<b>ASUS 平板電腦</b>
+            物資名稱：<b>{name}</b>
           </Card.Title>
           <hr></hr>
           <Card.Text style={{ color: "#6C6C6C" }}>
-            需求機構：鈺惠協會
+            需求機構：{charityData ? charityData[0].data.info.name : ""}
             <br />
             <br />
             <div
@@ -82,11 +167,16 @@ function DemandStep2() {
               }}
             >
               需求數量：
-              <Button style={btnDashStyle} variant="primary" type="submit">
+              <Button style={btnDashStyle} variant="primary" onClick={handleMinus}>
                 -
               </Button>
-              <Form.Control style={inputStyle} placeholder="0" />
-              <Button style={btnAddStyle} variant="primary" type="submit">
+              <Form.Control
+                type="text"
+                style={inputStyle}
+                value={count}
+                onChange={handleChange}
+              />
+              <Button style={btnAddStyle} variant="primary" onClick={handlePlus}>
                 +
               </Button>
             </div>
@@ -99,12 +189,12 @@ function DemandStep2() {
               }}
             >
               需求說明：
-              <Form.Control style={inputSecStyle} placeholder="請輸入文字..." />
+              <Form.Control style={inputSecStyle} value={demandInfo} placeholder="請輸入需求說明..." onChange={(e) => handleDemendInfo(e)} />
             </div>
             <br />
             物資提供商家：
             <a style={demandHrefStyle} href="#">
-              奕慈麵包坊
+              {store}
             </a>
           </Card.Text>
         </Card.Body>

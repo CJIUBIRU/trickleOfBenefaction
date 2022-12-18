@@ -1,36 +1,69 @@
 import { Container } from "react-bootstrap";
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
 import FromSelect from "../elements/fromSelect";
 import Search from "../elements/search";
-import DemandStep1 from "../elements/demandStep1";
 import ButtonLink from "../elements/button";
+import DemandStep1 from "../elements/demandStep1";
 import PaginationList from "../elements/paginationList";
 import Navbar from "../elements/navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { doc, getDocFromCache } from "firebase/firestore";
-import { useEffect } from "react";
+import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
+  if (!user) {
     navigate("/loginin");
   }
+
+  // 抓supply DB data
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "supply"));
+    onSnapshot(q, (querySnapshot) => {
+      setDetails(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
+
+  // details.map((item) =>
+  //   console.log(item)
+  // )
+
+  //let cart = [];
+  const [cart, setCart] = useState([]);
+
   return (
     <div>
       <Navbar />
       <TitleSec name="刊登物資需求" />
       <Container>
         <TitleStep name="STEP1&nbsp;-&nbsp;選擇需求物資" />
-        <Row>
+        {details.map((item, index) => (
+          <DemandStep1
+            key={index}
+            id={item.id}
+            name={item.data.name}
+            store={item.data.store}
+            cart={cart}
+            setCart={setCart}
+          />
+        ))}
+        {/* <Row>
           <Col>
             <DemandStep1 />
           </Col>
@@ -40,8 +73,9 @@ function UploadDemand() {
           <Col>
             <DemandStep1 />
           </Col>
-        </Row>
-        <PaginationList />
+        </Row> */}
+
+        {/* <PaginationList /> */}
         <div
           style={{
             marginTop: "25px",

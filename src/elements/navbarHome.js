@@ -156,7 +156,7 @@ function NavbarComp() {
           >
             <div>
               <Nav className="me-auto" style={navpageStyle}>
-                {/* <Nav.Link
+                <Nav.Link
                   as={Link}
                   to="/setPassword"
                   href="#home"
@@ -167,7 +167,7 @@ function NavbarComp() {
                   }}
                 >
                   初步設定密碼
-                </Nav.Link> */}
+                </Nav.Link>
                 <Nav.Link
                   as={Link}
                   to="/applicationInfo"

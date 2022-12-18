@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import img from "../img/tablet.jpg";
 
-function DemandStep3() {
+function DemandStep3({id, name, store, count, demandInfo, user}) {
   const card = {
     marginBottom: "20px",
     marginLeft: "15%",
@@ -31,19 +31,19 @@ function DemandStep3() {
         <Card.Img style={goodsImgStyle} variant="top" src={img} />
         <Card.Body style={contentStyle}>
           <Card.Title>
-            物資名稱：<b>ASUS 平板電腦</b>
+            物資名稱：<b>{name}</b>
           </Card.Title>
           <hr></hr>
           <Card.Text style={{ color: "#6C6C6C" }}>
-            需求機構：鈺惠協會
+            需求機構：{user}
             <br />
-            需求數量：10
+            需求數量：{count}
             <br />
-            需求說明：提供給偏鄉孩童授課使用
+            需求說明：{demandInfo}
             <br />
             物資提供商家：
             <a style={demandHrefStyle} href="#">
-              奕慈麵包坊
+              {store}
             </a>
           </Card.Text>
         </Card.Body>

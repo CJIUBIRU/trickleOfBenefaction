@@ -23,10 +23,7 @@ function UploadDemand() {
         <div>
           <MyProduct />
         </div>
-        <div>
-          <MyProduct />
-        </div>
-        <PaginationList />
+        {/* <PaginationList /> */}
       </Container>
     </div>
   );

@@ -39,17 +39,15 @@ function CharityCard({ id, category, name, mail, tel }) {
   };
 
   const btnStyle = {
-    position: "absolute",
-    left: "50%",
-    transform: `translate(${-50}%, ${-50}%)`,
-    paddingTop: "5px",
-    paddingBottom: "5px",
-    paddingLeft: "15px",
-    paddingRight: "15px",
-    borderRadius: "10px",
-    letterSpacing: "1px",
-    fontSize: "2px",
-    margin: "25px 0px 20px 0px",
+    color: "#ffffff",
+    backgroundColor: "#002B5B",
+    borderRadius: "30px",
+    fontSize: "16px",
+    width: "120px",
+    textAlign: "center",
+    height: "35px",
+    fontWeight: "bold",
+    border: "none"
   };
   const imgStyle = {
     width: "150px",
@@ -92,7 +90,7 @@ function CharityCard({ id, category, name, mail, tel }) {
             </Card.Text>
           </div>
           <div style={{ marginBottom: "0px", paddingBottom: "0px" }}>
-            <div >
+            <div style={{marginLeft: "65px"}}>
               <Button
                 style={btnStyle}
                 as={Link}

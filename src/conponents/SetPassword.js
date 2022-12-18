@@ -38,7 +38,7 @@ function SetPassword() {
 
   const signUp = () => {
     if (password === checkPassword) {
-      createUserWithEmailAndPassword(auth, "test@email.com", password)
+      createUserWithEmailAndPassword(auth, "test1218@email.com", password)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -151,7 +151,7 @@ function SetPassword() {
       {!user && <NavbarHome />}
       <TitleSec name="基本資料設定" />
       <Container style={{ marginBottom: "50px" }}>
-        <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
+        {/* <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
           <ProgressBar
             style={{
               position: "absolute",
@@ -192,7 +192,7 @@ function SetPassword() {
             <br />
             <span style={{ fontSize: "15px" }}>填寫機構簡介</span>
           </Col>
-        </Row>
+        </Row> */}
         <TitleStep name="STEP1&nbsp;-&nbsp;設定密碼" />
         <Card style={cardStyle}>
           <Card.Body>
@@ -202,7 +202,7 @@ function SetPassword() {
               </Form.Label>
               <Form.Control
                 style={inputStyle}
-                placeholder="test@email.com"
+                placeholder="test1218@email.com"
                 // value={}
                 aria-label="Username"
                 aria-describedby="basic-addon1"

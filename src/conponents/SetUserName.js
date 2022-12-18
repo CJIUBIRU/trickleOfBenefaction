@@ -131,7 +131,7 @@ function SetPassword() {
             <Card.Body>
               <InputGroup className="mb-3">
                 <Form.Label htmlFor="basic-url" style={labelStyle}>
-                  使用者名稱：
+                  修改使用者名稱：
                 </Form.Label>
                 <Form.Control
                   style={inputStyle}
