@@ -11,6 +11,8 @@ import {
   orderBy,
   onSnapshot,
   limit,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -87,6 +89,16 @@ function Task({
   const uploadMyDemand = (item) => {
     localStorage.setItem("good", JSON.stringify(item));
   };
+
+  const handleDelete = async (id) => {
+    const taskDocRef = doc(db, "demand", id);
+    try {
+      await deleteDoc(taskDocRef);
+      alert("已下架需求。")
+    } catch (err) {
+      alert(err);
+    }
+  };
   return (
     <div>
       {user.uid === uid && (
@@ -135,13 +147,13 @@ function Task({
                   received: received,
                   state: state,
                   store: store,
-                  uid: uid
+                  uid: uid,
                 })
               }
             >
               <FontAwesomeIcon icon={faPenToSquare} />
             </Nav.Link>
-            <Nav.Link style={trashIconStyle}>
+            <Nav.Link style={trashIconStyle} onClick={() => handleDelete(id)}>
               <FontAwesomeIcon icon={faTrashCan} />
             </Nav.Link>
           </div>

@@ -65,10 +65,9 @@ function UploadDemand() {
   };
 
   const stepBtnStyle = {
-    display: "flex",
-    flexDirection: "row",
     marginBottom: "40px",
     marginTop: "20px",
+    textAlign: "center"
   };
 
   const [demandList, setDemandList] = useState([]);
@@ -93,7 +92,7 @@ function UploadDemand() {
               />
             </>
           )))
-          : <p>請返回上一頁選擇需求物資</p>
+          : <p style={{textAlign: "center", color: "red", fontWeight: "bold", marginTop: "35px"}}>※請返回上一頁選擇需求物資。</p>
         }
         <div style={stepBtnStyle}>
           <Link to="/demandstep1">

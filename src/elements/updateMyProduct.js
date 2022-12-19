@@ -92,7 +92,7 @@ function MyProduct() {
         quantity: values.quantity,
         description: values.description,
       });
-      alert("修改成功");
+      alert("修改成功。");
       navigate("/myDemand");
     } catch (err) {
       console.log(err);
@@ -101,7 +101,7 @@ function MyProduct() {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit} style={{marginBottom: "50px"}}>
+      <form onSubmit={handleSubmit} style={{ marginBottom: "50px" }}>
         <Card style={card}>
           <Card.Img
             style={goodsImgStyle}
@@ -116,29 +116,36 @@ function MyProduct() {
             <Card.Text style={{ color: "#6C6C6C" }}>
               需求機構：{good.charity}
               <br />
-              需求數量：
-              <Form.Control
-                placeholder="請輸入需求數量（如：100）"
-                // value={}
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-                onChange={handleChange}
-                type="text"
-                value={values.quantity}
-                name="quantity"
-              />
-              <br />
-              需求說明：
-              <Form.Control
-                placeholder="請輸入需求說明（如：用途等）"
-                // value={}
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-                onChange={handleChange}
-                type="text"
-                value={values.description}
-                name="description"
-              />
+              <div style={{ display: "flex", flexDirection: "row", marginBottom: "10px", marginTop: "15px" }}>
+                <div style={{ width: "120px", lineHeight: "38px" }}>
+                  需求數量：
+                </div>
+                <Form.Control
+                  placeholder="請輸入需求數量（如：100）"
+                  // value={}
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  onChange={handleChange}
+                  type="text"
+                  value={values.quantity}
+                  name="quantity"
+                />
+              </div>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "120px", lineHeight: "38px" }}>
+                  需求說明：
+                </div>
+                <Form.Control
+                  placeholder="請輸入需求說明（如：用途等）"
+                  // value={}
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  onChange={handleChange}
+                  type="text"
+                  value={values.description}
+                  name="description"
+                />
+              </div>
               <br />
               物資提供商家：{good.store}
               {/* <a style={demandHrefStyle} href="#"> */}
@@ -164,7 +171,7 @@ function MyProduct() {
               height: "35px",
               fontWeight: "bold",
               marginLeft: "46.5%",
-              marginTop: "40px"
+              marginTop: "40px",
             }}
           >
             送出

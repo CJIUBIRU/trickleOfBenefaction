@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import img from "../img/tablet.jpg";
+// import img from "../img/tablet.jpg";
 import "../App.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -149,7 +149,7 @@ function DemandStep2({id, name, store, user, demandList, setDemandList}) {
   return (
     <div>
       <Card style={card} onChange={handleData}>
-        <Card.Img style={goodsImgStyle} variant="top" src={img} />
+        <Card.Img style={goodsImgStyle} variant="top" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg" />
         <Card.Body  style={contentStyle}>
           <Card.Title>
             物資名稱：<b>{name}</b>

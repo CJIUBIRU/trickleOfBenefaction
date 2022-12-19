@@ -6,14 +6,12 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
-import ButtonLink from "../elements/button";
-import { useState } from "react";
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { addDoc, collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import app from "../utils/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
@@ -30,15 +28,43 @@ function SetPassword() {
   // if (!user){
   //   navigate("/loginin");
   // }
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("test1218@email.com"); // 應為連結傳進來的email，目前先預設假email
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   // const [user] = useAuthState(auth);
+  const [charityData, setCharityData] = useState();
+  const [charityName2, setCharityName2] = useState();
+  // accquire charity data: get charity's name
+  useEffect(() => {
+    const q = query(
+      collection(db, "charity"),
+      where("info.mail", "==", email)
+    );
+    onSnapshot(q, (querySnapshot) => {
+      setCharityData(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, [email]);
+
+  // 更新 chairyName
+  useEffect(() => {
+    if (charityData) {
+      setCharityName2(charityData[0].data.info.name);
+    }
+    else {
+      setCharityName2('');
+    }
+  }, [charityData]);
+  console.log(charityName2);
 
   const signUp = () => {
     if (password === checkPassword) {
-      createUserWithEmailAndPassword(auth, "test1218@email.com", password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -76,6 +102,7 @@ function SetPassword() {
         email: email,
         level: "charity",
         uid: user.uid,
+        name: charityName2
       });
     } catch (err) {
       console.log(err);
@@ -202,8 +229,7 @@ function SetPassword() {
               </Form.Label>
               <Form.Control
                 style={inputStyle}
-                placeholder="test1218@email.com"
-                // value={}
+                value={email}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 readOnly

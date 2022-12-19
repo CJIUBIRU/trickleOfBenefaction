@@ -68,17 +68,14 @@ function News() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // await setDoc(doc(db, "goodsDemand", user.uid), {
       await addDoc(collection(db, "notes"), {
         content: content,
       });
-      //   navigate("/uploadGoodsSuccess");
-      //   alert("新增成功。");
       navigate("/");
-      //   window.location.reload();
     } catch (err) {
       console.log(err);
     }
+    setContent('')
   };
   return (
     <div>
@@ -111,6 +108,7 @@ function News() {
           >
             <Form.Control
               style={{ width: "65%" }}
+              value={content}
               onChange={(e) => setContent(e.target.value)}
             />
             &nbsp;&nbsp;&nbsp;

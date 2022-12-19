@@ -63,23 +63,10 @@ function UploadDemand() {
             setCart={setCart}
           />
         ))}
-        {/* <Row>
-          <Col>
-            <DemandStep1 />
-          </Col>
-          <Col>
-            <DemandStep1 />
-          </Col>
-          <Col>
-            <DemandStep1 />
-          </Col>
-        </Row> */}
-
-        {/* <PaginationList /> */}
         <div
           style={{
-            marginTop: "25px",
-            marginBottom: "40px",
+            marginTop: "40px",
+            marginBottom: "50px",
             marginLeft: "45%",
             marginRight: "55%",
           }}

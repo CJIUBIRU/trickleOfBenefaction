@@ -52,10 +52,9 @@ function UploadDemand() {
     // marginTop: "40px"
   };
   const stepBtnStyle = {
-    display: "flex",
-    flexDirection: "row",
     marginBottom: "40px",
     marginTop: "25px",
+    textAlign: "center"
   };
 
   let demandList = JSON.parse(localStorage.getItem('demandList'));
@@ -110,7 +109,7 @@ function UploadDemand() {
               />
             </>
           )))
-          : <p>請返回上一頁填寫需求物資之資料</p>
+          : <div style={{textAlign: "center", marginTop: "35px"}}><p style={{color: "red", fontWeight: "bold"}}>※請返回上一頁填寫需求物資之資料。</p></div>
         }
         {
           (demandList)
