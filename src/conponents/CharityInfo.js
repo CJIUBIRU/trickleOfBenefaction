@@ -18,6 +18,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
 import NavbarHome from "../elements/navbarHome";
+import NavbarNoFunction from "../elements/navbarNoFunction";
 
 function CharityInfo() {
   const navigate = useNavigate("");
@@ -118,8 +119,7 @@ function CharityInfo() {
 
   return (
     <div>
-    {user && <Navbar />}
-    {!user && <NavbarHome />}
+    <NavbarNoFunction />
       {/* <form className='form' onSubmit={handleSubmit}> */}
 
       <form className="form">

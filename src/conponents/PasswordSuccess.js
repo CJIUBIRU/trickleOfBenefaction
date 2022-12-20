@@ -15,6 +15,8 @@ import { auth } from "../utils/firebase";
 import NavbarHome from "../elements/navbarHome";
 import { useNavigate } from "react-router";
 
+import NavbarNoFunction from "../elements/navbarNoFunction";
+
 function PasswordSuccess() {
   const [user] = useAuthState(auth);
   const cardStyle = {
@@ -44,8 +46,7 @@ function PasswordSuccess() {
   };
   return (
     <div>
-    {user && <Navbar />}
-    {!user && <NavbarHome />}
+      <NavbarNoFunction />
       <TitleSec name="基本資料設定" />
 
       <Card style={cardStyle}>

@@ -11,7 +11,7 @@ import app from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import { db, auth } from "../utils/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import logo from "../img/coffee.png";
@@ -35,10 +35,11 @@ function Login() {
           const user = userCredential.user;
           // console.log(user);
           addUser(user);
-          navigate("/loginIn");
           setIsLoading(false);
           alert("註冊成功，正在前往登入頁面...");
           verifiedEmail(user);
+          auth.signOut();
+          navigate("/loginIn");
         })
         .catch((error) => {
           const errorCode = error.code;

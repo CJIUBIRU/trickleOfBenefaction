@@ -8,17 +8,17 @@ import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
 import { useState, useEffect } from "react";
 import { addDoc, collection, query, where, onSnapshot } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import { db, auth } from "../utils/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
 import NavbarHome from "../elements/navbarHome";
 import { Container, Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import NavbarNoFunction from "../elements/navbarNoFunction";
 
 function SetPassword() {
   const [user] = useAuthState(auth);
@@ -28,7 +28,7 @@ function SetPassword() {
   // if (!user){
   //   navigate("/loginin");
   // }
-  const [email, setEmail] = useState("test1218@email.com"); // 應為連結傳進來的email，目前先預設假email
+  const [emailCharity, setEmailCharity] = useState("test1218@email.com"); // 應為連結傳進來的email，目前先預設假email
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,7 +39,7 @@ function SetPassword() {
   useEffect(() => {
     const q = query(
       collection(db, "charity"),
-      where("info.mail", "==", email)
+      where("info.mail", "==", emailCharity)
     );
     onSnapshot(q, (querySnapshot) => {
       setCharityData(
@@ -49,7 +49,7 @@ function SetPassword() {
         }))
       );
     });
-  }, [email]);
+  }, [emailCharity]);
 
   // 更新 chairyName
   useEffect(() => {
@@ -64,13 +64,14 @@ function SetPassword() {
 
   const signUp = () => {
     if (password === checkPassword) {
-      createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(auth, emailCharity, password)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
           // console.log(user);
           addUser(user);
           navigate("/passwordSuccess");
+          auth.signOut();
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -99,7 +100,7 @@ function SetPassword() {
   function addUser(user) {
     try {
       addDoc(collection(db, "users"), {
-        email: email,
+        email: emailCharity,
         level: "charity",
         uid: user.uid,
         name: charityName2
@@ -174,8 +175,7 @@ function SetPassword() {
   };
   return (
     <div>
-      {user && <Navbar />}
-      {!user && <NavbarHome />}
+      <NavbarNoFunction />
       <TitleSec name="基本資料設定" />
       <Container style={{ marginBottom: "50px" }}>
         {/* <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
@@ -229,11 +229,11 @@ function SetPassword() {
               </Form.Label>
               <Form.Control
                 style={inputStyle}
-                value={email}
+                value={emailCharity}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 readOnly
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmailCharity(e.target.value)}
               />
             </InputGroup>
             <InputGroup className="mb-3" style={groupStyle}>

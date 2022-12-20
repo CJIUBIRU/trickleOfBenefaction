@@ -12,6 +12,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
 import NavbarHome from "../elements/navbarHome";
+import NavbarNoFunction from "../elements/navbarNoFunction";
+import { Nav } from "react-bootstrap";
 
 function CharityInfoSuccess() {
   const navigate = useNavigate("");
@@ -43,8 +45,7 @@ function CharityInfoSuccess() {
   };
   return (
     <div>
-    {user && <Navbar />}
-    {!user && <NavbarHome />}
+      <NavbarNoFunction />
       <TitleSec name="基本資料設定" />
 
       <Card style={cardStyle}>
@@ -57,7 +58,24 @@ function CharityInfoSuccess() {
 
           {/* 以後要連到首頁，先暫訂查看合作機構 */}
           <div style={btnStyle}>
-            <ButtonLink as={Link} to="/" name="完成" />
+            <Nav.Link
+              style={{
+                color: "#ffffff",
+                backgroundColor: "#002B5B",
+                borderRadius: "30px",
+                fontSize: "16px",
+                width: "120px",
+                textAlign: "center",
+                height: "35px",
+                fontWeight: "bold",
+                lineHeight: "33px"
+              }}
+              as={Link}
+              to="/loginin"
+              onClick={() => auth.signOut()}
+            >
+              完成
+            </Nav.Link>
           </div>
         </Card.Body>
       </Card>

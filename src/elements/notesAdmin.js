@@ -53,7 +53,7 @@ function Task({ id, content }) {
 function News() {
   const [details, setDetails] = useState([]);
   useEffect(() => {
-    const q = query(collection(db, "notes"));
+    const q = query(collection(db, "notesAdmin"));
     onSnapshot(q, (querySnapshot) => {
       setDetails(
         querySnapshot.docs.map((doc) => ({

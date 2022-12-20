@@ -24,7 +24,7 @@ function Task({ content, user, time }) {
 function News() {
   const [details, setDetails] = useState([]);
   useEffect(() => {
-    const q = query(collection(db, "news"), orderBy("time", "desc"), limit("10"));
+    const q = query(collection(db, "newsAdmin"), orderBy("time", "desc"), limit("10"));
     onSnapshot(q, (querySnapshot) => {
       setDetails(
         querySnapshot.docs.map((doc) => ({

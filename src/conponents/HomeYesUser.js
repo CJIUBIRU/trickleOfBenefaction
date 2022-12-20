@@ -16,9 +16,9 @@ import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import Table from "react-bootstrap/Table";
-import News from "../elements/news";
+import News from "../elements/newsAdmin";
 import NewsCharity from "../elements/newsCharity";
-import Notes from "../elements/notes";
+import Notes from "../elements/notesAdmin";
 import NotesCharity from "../elements/notesCharity";
 
 function Task({ id, email, level }) {
