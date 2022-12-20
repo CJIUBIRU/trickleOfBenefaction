@@ -5,7 +5,15 @@ import TitleSec from "../elements/titleSec";
 import { Card, FormControl } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
-import { doc, setDoc, addDoc, collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 import TitleStep from "../elements/titleStep";
 import ButtonLink from "../elements/button";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -14,6 +22,9 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Form from "react-bootstrap/Form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
 function UploadGoods() {
   const navigate = useNavigate("");
@@ -37,7 +48,7 @@ function UploadGoods() {
         price: price,
         uid: uuidv4(),
       });
-      navigate("/uploadGoodsSuccess")
+      navigate("/uploadGoodsSuccess");
       //alert("物資上架成功。");
     } catch (err) {
       console.log(err);
@@ -45,14 +56,16 @@ function UploadGoods() {
   };
 
   useEffect(() => {
-    const q = query(collection(db, 'stores'))
+    const q = query(collection(db, "stores"));
     onSnapshot(q, (querySnapshot) => {
-      setTasks(querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        data: doc.data()
-      })))
-    })
-  }, [])
+      setTasks(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
 
   const subBtnStyle = {
     color: "#ffffff",
@@ -69,15 +82,74 @@ function UploadGoods() {
     <div>
       <Navbar />
       <TitleSec name="上架物資" />
+      <Container>
+        <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
+          <ProgressBar
+            style={{
+              position: "absolute",
+              marginTop: "19px",
+              zIndex: "1",
+              width: "860px",
+              marginLeft: "230px",
+            }}
+            now={98}
+          ></ProgressBar>
+          <Col
+            style={{ textAlign: "center", marginLeft: "100px", zIndex: "2" }}
+          >
+            <FontAwesomeIcon
+              style={{
+                color: "#26aa50",
+                marginRight: "60px",
+                backgroundColor: "white",
+                borderRadius: "100%",
+              }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px", marginRight: "60px" }}>開始</span>
+          </Col>
+          <Col style={{ textAlign: "right", zIndex: "2" }}>
+            <FontAwesomeIcon
+              style={{
+                color: "#26aa50",
+                marginRight: "95px",
+                backgroundColor: "white",
+                borderRadius: "100%",
+              }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px", marginRight: "85px" }}>
+              上傳圖片
+            </span>
+          </Col>
+          <Col
+            style={{ zIndex: "2", textAlign: "right", marginRight: "190px" }}
+          >
+            <FontAwesomeIcon
+              style={{ color: "lightgray", marginRight: "25px" }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px" }}>填寫商品資訊</span>
+          </Col>
+        </Row>
+      </Container>
       <TitleStep name="STEP2 - 填寫商品資訊" />
       <br />
       <Container>
         <div>
           <Row>
             <Col>
-
               <form onSubmit={handleSubmit}>
-                <Card style={{ width: "60%", marginLeft: "20%", paddingBottom: "50px" }}>
+                <Card
+                  style={{
+                    width: "60%",
+                    marginLeft: "20%",
+                    paddingBottom: "50px",
+                  }}
+                >
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
                     placeholder="輸入物資名稱（如：【春風】超細柔抽取式衛生紙110抽24包）"
@@ -111,8 +183,13 @@ function UploadGoods() {
                     value={price}
                   />
                 </Card>
-                <div style={{ marginLeft: "44.3%", marginTop: "80px", width: "auto" }}>
-
+                <div
+                  style={{
+                    marginLeft: "44.3%",
+                    marginTop: "80px",
+                    width: "auto",
+                  }}
+                >
                   {name && price && store && (
                     <button type="submit" style={subBtnStyle}>
                       送出
@@ -125,7 +202,6 @@ function UploadGoods() {
                   </button>
                   )} */}
               </form>
-
             </Col>
           </Row>
 

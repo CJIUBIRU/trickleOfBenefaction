@@ -18,6 +18,7 @@ import "../App.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 function UploadGoods() {
   const navigate = useNavigate("");
@@ -68,6 +69,55 @@ function UploadGoods() {
     <div>
       <Navbar />
       <TitleSec name="上架物資" />
+      <Container>
+        <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
+          <ProgressBar
+            style={{
+              position: "absolute",
+              marginTop: "19px",
+              zIndex: "1",
+              width: "860px",
+              marginLeft: "230px",
+            }}
+            now={49}
+          ></ProgressBar>
+          <Col
+            style={{ textAlign: "center", marginLeft: "100px", zIndex: "2" }}
+          >
+            <FontAwesomeIcon
+              style={{
+                color: "#26aa50",
+                marginRight: "60px",
+                backgroundColor: "white",
+                borderRadius: "100%",
+              }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px", marginRight: "60px" }}>開始</span>
+          </Col>
+          <Col style={{ textAlign: "right", zIndex: "2" }}>
+            <FontAwesomeIcon
+              style={{ color: "lightgray", marginRight: "95px" }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px", marginRight: "85px" }}>
+              上傳圖片
+            </span>
+          </Col>
+          <Col
+            style={{ zIndex: "2", textAlign: "right", marginRight: "190px" }}
+          >
+            <FontAwesomeIcon
+              style={{ color: "lightgray", marginRight: "25px" }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px" }}>填寫商品資訊</span>
+          </Col>
+        </Row>
+      </Container>
       <TitleStep name="STEP1 - 上傳圖片" />
       <br />
       <Container>
@@ -90,7 +140,7 @@ function UploadGoods() {
                   label={`${progress}%`}
                 />
               </form>
-              <div style={{margin: "25px"}}>
+              <div style={{ margin: "25px" }}>
                 <ul>
                   <p style={{ lineHeight: "25px" }}>
                     <li>
