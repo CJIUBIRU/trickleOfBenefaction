@@ -41,7 +41,7 @@ const DonateList = () => {
         <TitleSec name="捐贈物資列表" />
         <Container>
           <TitleStep name="STEP1&nbsp;-&nbsp;選擇捐贈物資" />
-          <div style={selectPageStyle}>
+          {/* <div style={selectPageStyle}>
             <div style={{ width: "50%" }}>
               <FromSelect />
             </div>
@@ -49,7 +49,7 @@ const DonateList = () => {
             <div style={{ width: "50%" }}>
               <Search />
             </div>
-          </div>
+          </div> */}
           {/* <div style={goodsPageStyle}>
             <ProductStep1 />
             <ProductStep1 />

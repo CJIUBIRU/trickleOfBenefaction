@@ -131,7 +131,7 @@ function ApplicationUpload4() {
               <div>
                 <form onSubmit={formHandler}>
                   <span style={{ display: "inline-block", width: "100%" }}>
-                    <Form.Control type="file" className="input" />
+                    <Form.Control type="file" className="input" accept=".jpg, .png, .jpeg" />
                   </span>
                   <div style={{ marginTop: "25px", marginLeft: "43.5%" }}>
                     <button style={uploadBtn} type="submit">
@@ -164,7 +164,7 @@ function ApplicationUpload4() {
                   {" "}
                   " 100 % "{" "}
                 </span>
-                ，代表上傳成功，請按"完成"。
+                ，代表上傳成功，請按"下一步"。
               </li>
             </p>
           </ul>

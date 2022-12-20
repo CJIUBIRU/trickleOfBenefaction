@@ -13,7 +13,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import ProgressBar from "react-bootstrap/ProgressBar";
 import "../App.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 function UploadGoods() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
+  if (!user) {
     navigate("/loginin");
   }
   const [progress, setProgress] = useState(0);
@@ -47,7 +47,7 @@ function UploadGoods() {
       (err) => console.log(err),
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => console.log(url));
-      console.log(progress);
+        console.log(progress);
       }
     );
   };
@@ -78,12 +78,37 @@ function UploadGoods() {
                 <FormControl
                   style={{ margin: "40px", width: "90%" }}
                   type="file"
+                  accept=".jpg, .png, .jpeg"
                 />
                 <button style={stepBtnStyle} type="submit">
-                  上傳&nbsp;<FontAwesomeIcon icon={faCloudArrowUp} />
+                  上傳&nbsp;
+                  <FontAwesomeIcon icon={faCloudArrowUp} />
                 </button>
-                <ProgressBar style={{margin: "20px 0px 30px 40px", width: "90%"}} now={progress} label={`${progress}%`} />
+                <ProgressBar
+                  style={{ margin: "20px 0px 30px 40px", width: "90%" }}
+                  now={progress}
+                  label={`${progress}%`}
+                />
               </form>
+              <div style={{margin: "25px"}}>
+                <ul>
+                  <p style={{ lineHeight: "25px" }}>
+                    <li>
+                      檔案格式：以照片上傳，需保證照片清晰、色調正常，JPG檔、PNG檔均可。
+                    </li>
+                  </p>
+                  <p style={{ lineHeight: "25px" }}>
+                    <li>
+                      注意事項：若顯示
+                      <span style={{ color: "#002B5B", fontWeight: "bold" }}>
+                        {" "}
+                        " 100 % "{" "}
+                      </span>
+                      ，代表上傳成功，請按"下一步"。
+                    </li>
+                  </p>
+                </ul>
+              </div>
             </Card>
           </Col>
           <div>
@@ -117,19 +142,20 @@ function UploadGoods() {
                 Upload {progress} %
               </p>
             )} */}
-            
           </div>
-          <div style={{ marginLeft: "44.3%", marginTop: "80px", width: "auto" }}>
-            {progress===100 && (
+          <div
+            style={{ marginLeft: "44.3%", marginTop: "80px", width: "auto" }}
+          >
+            {progress === 100 && (
               <ButtonLink
-              as={Link}
-              to="/uploadGoodsSec"
-              name="下一步"
-            ></ButtonLink>
+                as={Link}
+                to="/uploadGoodsSec"
+                name="下一步"
+              ></ButtonLink>
             )}
-            {progress!==100 && (
+            {progress !== 100 && (
               <button
-              style={{
+                style={{
                   color: "#ffffff",
                   backgroundColor: "lightgray",
                   borderRadius: "30px",
@@ -139,9 +165,11 @@ function UploadGoods() {
                   textAlign: "center",
                   height: "35px",
                   fontWeight: "bold",
-                  border: "none"
+                  border: "none",
                 }}
-            >下一步</button>
+              >
+                下一步
+              </button>
             )}
           </div>
         </Row>

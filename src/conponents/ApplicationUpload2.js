@@ -125,7 +125,8 @@ function ApplicationUpload2() {
               <div>
                 <form onSubmit={formHandler}>
                   <span style={{ display: "inline-block", width: "100%" }}>
-                    <Form.Control type="file" className="input" />
+                    <Form.Control type="file" className="input" accept=".pdf" />
+                    {/* <input type="file" accept=".pdf, .png" /> */}
                   </span>
                   <br></br>
                   <div style={{ marginTop: "25px", marginLeft: "43.5%" }}>

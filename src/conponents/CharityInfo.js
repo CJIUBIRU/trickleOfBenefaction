@@ -20,6 +20,12 @@ import { useNavigate } from "react-router";
 import NavbarHome from "../elements/navbarHome";
 import NavbarNoFunction from "../elements/navbarNoFunction";
 
+import { Container, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function CharityInfo() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
@@ -94,7 +100,7 @@ function CharityInfo() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     //mail接值之後要修
-    const taskDocRef = doc(db, "charity", "Tiuj6QvdQpCcHJlc5MaY");
+    const taskDocRef = doc(db, "charity", "25y5yPR6rG5MvLX9pmM6");
 
     // console.log(taskDocRef._key.id);
     console.log(taskDocRef);
@@ -119,13 +125,68 @@ function CharityInfo() {
 
   return (
     <div>
-    <NavbarNoFunction />
+      <NavbarNoFunction />
       {/* <form className='form' onSubmit={handleSubmit}> */}
 
       <form className="form">
         <TitleSec name="基本資料設定" />
+        <Container>
+          <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
+            <ProgressBar
+              style={{
+                position: "absolute",
+                marginTop: "19px",
+                zIndex: "1",
+                width: "860px",
+                marginLeft: "230px",
+              }}
+              now={98}
+            ></ProgressBar>
+            <Col
+              style={{ textAlign: "center", marginLeft: "100px", zIndex: "2" }}
+            >
+              <FontAwesomeIcon
+                style={{
+                  color: "#26aa50",
+                  marginRight: "60px",
+                  backgroundColor: "white",
+                  borderRadius: "100%",
+                }}
+                icon={faCircleCheck}
+              />
+              <br />
+              <span style={{ fontSize: "15px", marginRight: "60px" }}>
+                開始
+              </span>
+            </Col>
+            <Col style={{ textAlign: "right", zIndex: "2" }}>
+              <FontAwesomeIcon
+                style={{
+                  color: "#26aa50",
+                  marginRight: "95px",
+                  backgroundColor: "white",
+                  borderRadius: "100%",
+                }}
+                icon={faCircleCheck}
+              />
+              <br />
+              <span style={{ fontSize: "15px", marginRight: "85px" }}>
+                設定密碼
+              </span>
+            </Col>
+            <Col
+              style={{ zIndex: "2", textAlign: "right", marginRight: "190px" }}
+            >
+              <FontAwesomeIcon
+                style={{ color: "lightgray", marginRight: "25px" }}
+                icon={faCircleCheck}
+              />
+              <br />
+              <span style={{ fontSize: "15px" }}>填寫機構簡介</span>
+            </Col>
+          </Row>
+        </Container>
         <TitleStep name="STEP2&nbsp;-&nbsp;填寫機構簡介" />
-
         <Card style={cardStyle}>
           <Card.Body>
             <div>

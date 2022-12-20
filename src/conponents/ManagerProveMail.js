@@ -50,10 +50,10 @@ function ManagerProveMail() {
         }
         else {
             emailjs.send(
-                "service_llxvm9o",
-                "template_wgoxrhn",
+                "service_5uyv6mh",
+                "template_mc4ck0k",
                 values,
-                "jBeceDZrf0-rXYTCw"
+                "vjHGM4GthM0EkFWQC"
             )
             .then((result) => {
                 console.log(result.text);

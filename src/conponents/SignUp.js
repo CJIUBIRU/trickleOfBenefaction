@@ -38,7 +38,7 @@ function Login() {
           setIsLoading(false);
           alert("註冊成功，正在前往登入頁面...");
           verifiedEmail(user);
-          auth.signOut();
+          // auth.signOut();
           navigate("/loginIn");
         })
         .catch((error) => {

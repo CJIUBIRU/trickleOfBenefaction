@@ -164,7 +164,11 @@ function Task({ id, name, email, level }) {
             <b>用戶信箱：</b>
             {user.email}
             &nbsp;
-            {user.emailVerified == false && (
+            <FontAwesomeIcon
+              style={{ color: "#26aa99" }}
+              icon={faCircleCheck}
+            />
+            {/* {user.emailVerified == false && (
               <a href="#" style={{ color: "#002b5b" }} onClick={verifiedEmail}>
                 <FontAwesomeIcon
                   style={{ color: "lightgray" }}
@@ -179,7 +183,7 @@ function Task({ id, name, email, level }) {
                   icon={faCircleCheck}
                 />
               </a>
-            )}
+            )} */}
             <br />
             <div
               style={{
@@ -262,7 +266,36 @@ function UploadDemand() {
             <Row>
               <Col>
                 <div>
-                  {user.photoURL && (
+                  <div style={imgSecStyle}>
+                    <a
+                      href="#"
+                      style={{ textDecoration: "none", color: "#002b5b" }}
+                    >
+                      新增頭像&nbsp;
+                      <FontAwesomeIcon icon={faHandPointer} />
+                    </a>
+                  </div>
+                  {/* {user.photoURL
+                  ? (
+                    <img
+                      src={user.photoURL}
+                      alt="profilePhoto"
+                      referrerPolicy="no-referrer"
+                      style={imgStyle}
+                    ></img>
+                  )
+                  : (
+                    <div style={imgSecStyle}>
+                      <a
+                        href="#"
+                        style={{ textDecoration: "none", color: "#002b5b" }}
+                      >
+                        新增頭像&nbsp;
+                        <FontAwesomeIcon icon={faHandPointer} />
+                      </a>
+                    </div>
+                  )} */}
+                  {/* {user.photoURL && (
                     <img
                       src={user.photoURL}
                       alt="profilePhoto"
@@ -280,7 +313,7 @@ function UploadDemand() {
                         <FontAwesomeIcon icon={faHandPointer} />
                       </a>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </Col>
               <Col>

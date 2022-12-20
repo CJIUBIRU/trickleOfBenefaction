@@ -17,6 +17,12 @@ import { useNavigate } from "react-router";
 
 import NavbarNoFunction from "../elements/navbarNoFunction";
 
+import { Container, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function PasswordSuccess() {
   const [user] = useAuthState(auth);
   const cardStyle = {
@@ -48,7 +54,55 @@ function PasswordSuccess() {
     <div>
       <NavbarNoFunction />
       <TitleSec name="基本資料設定" />
-
+      <Container>
+        <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
+          <ProgressBar
+            style={{
+              position: "absolute",
+              marginTop: "19px",
+              zIndex: "1",
+              width: "860px",
+              marginLeft: "230px",
+            }}
+            now={49}
+          ></ProgressBar>
+          <Col
+            style={{ textAlign: "center", marginLeft: "100px", zIndex: "2" }}
+          >
+            <FontAwesomeIcon
+              style={{
+                color: "#26aa50",
+                marginRight: "60px",
+                backgroundColor: "white",
+                borderRadius: "100%",
+              }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px", marginRight: "60px" }}>開始</span>
+          </Col>
+          <Col style={{ textAlign: "right", zIndex: "2" }}>
+            <FontAwesomeIcon
+              style={{ color: "#26aa50", marginRight: "95px" }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px", marginRight: "85px" }}>
+              設定密碼
+            </span>
+          </Col>
+          <Col
+            style={{ zIndex: "2", textAlign: "right", marginRight: "190px" }}
+          >
+            <FontAwesomeIcon
+              style={{ color: "lightgray", marginRight: "25px" }}
+              icon={faCircleCheck}
+            />
+            <br />
+            <span style={{ fontSize: "15px" }}>填寫機構簡介</span>
+          </Col>
+        </Row>
+      </Container>
       <Card style={cardStyle}>
         <Card.Body>
           <SuccessInfo

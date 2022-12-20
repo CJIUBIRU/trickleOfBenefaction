@@ -129,7 +129,7 @@ function ApplicationUpload3() {
               <div>
                 <form onSubmit={formHandler}>
                   <span style={{ display: "inline-block", width: "100%" }}>
-                    <Form.Control type="file" className="input" />
+                    <Form.Control type="file" className="input" accept=".jpg, .png, .jpeg" />
                   </span>
                   <div style={{ marginTop: "25px", marginLeft: "43.5%" }}>
                     <button style={uploadBtn} type="submit">

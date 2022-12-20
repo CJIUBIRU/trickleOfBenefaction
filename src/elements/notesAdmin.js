@@ -22,7 +22,7 @@ import { useNavigate } from "react-router";
 
 function Task({ id, content }) {
   const handleDelete = async (id) => {
-    const taskDocRef = doc(db, "notes", id);
+    const taskDocRef = doc(db, "notesAdmin", id);
     try {
       await deleteDoc(taskDocRef);
     } catch (err) {
@@ -68,7 +68,7 @@ function News() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "notes"), {
+      await addDoc(collection(db, "notesAdmin"), {
         content: content,
       });
       navigate("/");
