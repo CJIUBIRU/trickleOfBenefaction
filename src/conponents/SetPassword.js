@@ -3,30 +3,32 @@ import "../App.css";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
 import { useState, useEffect } from "react";
-import { addDoc, collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
 import { db, auth } from "../utils/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router";
-import NavbarHome from "../elements/navbarHome";
 import { Container, Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import NavbarNoFunction from "../elements/navbarNoFunction";
 
 function SetPassword() {
-  const [user] = useAuthState(auth);
   // const auth = getAuth(app);
   const navigate = useNavigate();
   // const [user] = useAuthState(auth);
   // if (!user){
-  //   navigate("/loginin");
+  //   navigate("/signIn");
   // }
   const [emailCharity, setEmailCharity] = useState("charityb@email.com"); // 應為連結傳進來的email，目前先預設假email
   const [password, setPassword] = useState("");
@@ -55,9 +57,8 @@ function SetPassword() {
   useEffect(() => {
     if (charityData) {
       setCharityName2(charityData[0].data.info.name);
-    }
-    else {
-      setCharityName2('');
+    } else {
+      setCharityName2("");
     }
   }, [charityData]);
   console.log(charityName2);
@@ -102,7 +103,7 @@ function SetPassword() {
         email: emailCharity,
         level: "charity",
         uid: user.uid,
-        name: charityName2
+        name: charityName2,
       });
       // auth.signOut();
     } catch (err) {
@@ -189,15 +190,20 @@ function SetPassword() {
             }}
             now={49}
           ></ProgressBar>
-          <Col style={{textAlign: "center", marginLeft: "100px", zIndex: "2"}}>
+          <Col
+            style={{ textAlign: "center", marginLeft: "100px", zIndex: "2" }}
+          >
             <FontAwesomeIcon
-              style={{ color: "#26aa50", marginRight: "60px", backgroundColor: "white", borderRadius: "100%" }}
+              style={{
+                color: "#26aa50",
+                marginRight: "60px",
+                backgroundColor: "white",
+                borderRadius: "100%",
+              }}
               icon={faCircleCheck}
             />
             <br />
-            <span style={{ fontSize: "15px", marginRight: "60px" }}>
-              開始
-            </span>
+            <span style={{ fontSize: "15px", marginRight: "60px" }}>開始</span>
           </Col>
           <Col style={{ textAlign: "right", zIndex: "2" }}>
             <FontAwesomeIcon

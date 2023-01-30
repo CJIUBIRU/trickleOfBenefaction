@@ -9,7 +9,6 @@ import {
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 function FbLogin() {
   //sign in with facebook
@@ -34,7 +33,7 @@ function FbLogin() {
   // if (user) {
   //   navigate("/");
   // }
-  
+
   //style
   const mulLoginBtnFbStyle = {
     width: "200px",

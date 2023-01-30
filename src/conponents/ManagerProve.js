@@ -114,8 +114,8 @@ function CharityProveList({ id, num, name, time, status, mail }) {
 function ManagerProve() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
-    navigate("/loginin");
+  if (!user) {
+    navigate("/signIn");
   }
   const [details, setDetails] = useState([]);
 

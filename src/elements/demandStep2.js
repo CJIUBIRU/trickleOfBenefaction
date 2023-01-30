@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import { collection, query, onSnapshot, where } from "firebase/firestore";
 import { db } from "../utils/firebase";
 
-function DemandStep2({id, name, store, user, demandList, setDemandList}) {
+function DemandStep2({ id, name, store, user, demandList, setDemandList }) {
   const card = {
     marginBottom: "20px",
     marginLeft: "15%",
@@ -66,28 +66,27 @@ function DemandStep2({id, name, store, user, demandList, setDemandList}) {
   };
 
   const [count, setCount] = useState(1);
-  const [demandInfo, setDemandInfo] = useState('');
+  const [demandInfo, setDemandInfo] = useState("");
 
   function handleChange(e) {
     e.preventDefault();
     let value = Number(e.target.value);
-    if (value <= 0 || value === '-') {
+    if (value <= 0 || value === "-") {
       setCount(0);
-      value = 0
-    }
-    else setCount(value);
+      value = 0;
+    } else setCount(value);
     handleData(value, demandInfo);
   }
 
   function handlePlus() {
-    let value = count + 1
+    let value = count + 1;
     setCount(value);
     handleData(value, demandInfo);
   }
 
   function handleMinus() {
     if (count > 1) {
-      let value = count - 1
+      let value = count - 1;
       setCount(value);
       handleData(value, demandInfo);
     }
@@ -95,7 +94,7 @@ function DemandStep2({id, name, store, user, demandList, setDemandList}) {
 
   function handleDemendInfo(e) {
     let demandInfoValue = e.target.value;
-    setDemandInfo(demandInfoValue)
+    setDemandInfo(demandInfoValue);
     handleData(count, demandInfoValue);
   }
 
@@ -103,7 +102,7 @@ function DemandStep2({id, name, store, user, demandList, setDemandList}) {
   const [charityData, setCharityData] = useState();
   const [charityName2, setCharityName2] = useState();
   useEffect(() => {
-    let userEmail = JSON.parse(localStorage.getItem('email'));
+    let userEmail = JSON.parse(localStorage.getItem("email"));
     const q = query(
       collection(db, "charity"),
       where("info.mail", "==", userEmail)
@@ -122,35 +121,52 @@ function DemandStep2({id, name, store, user, demandList, setDemandList}) {
   useEffect(() => {
     if (charityData) {
       setCharityName2(charityData[0].data.info.name);
-    }
-    else {
-      setCharityName2('');
+    } else {
+      setCharityName2("");
     }
   }, [charityData]);
 
   function handleData(value, demandInfoValue) {
-    if (value > 0 && demandInfoValue !== '') {
-      if (demandList.some(e => e.id === id)) { // 存在前一個相同id的資料
+    if (value > 0 && demandInfoValue !== "") {
+      if (demandList.some((e) => e.id === id)) {
+        // 存在前一個相同id的資料
         let newDemandList = demandList.filter((e) => {
           return e.id !== id;
-        })
-        newDemandList.push({id, name, store, count: value, demandInfo: demandInfoValue, charityName: charityName2})
-        setDemandList(newDemandList)
+        });
+        newDemandList.push({
+          id,
+          name,
+          store,
+          count: value,
+          demandInfo: demandInfoValue,
+          charityName: charityName2,
+        });
+        setDemandList(newDemandList);
         localStorage.setItem("demandList", JSON.stringify(newDemandList));
-      }
-      else { // 不存在前一個相同id的資料
-        demandList.push({id, name, store, count: value, demandInfo: demandInfoValue, charityName: charityName2})
+      } else {
+        // 不存在前一個相同id的資料
+        demandList.push({
+          id,
+          name,
+          store,
+          count: value,
+          demandInfo: demandInfoValue,
+          charityName: charityName2,
+        });
         localStorage.setItem("demandList", JSON.stringify(demandList));
       }
     }
-    
   }
 
   return (
     <div>
       <Card style={card} onChange={handleData}>
-        <Card.Img style={goodsImgStyle} variant="top" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg" />
-        <Card.Body  style={contentStyle}>
+        <Card.Img
+          style={goodsImgStyle}
+          variant="top"
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+        />
+        <Card.Body style={contentStyle}>
           <Card.Title>
             物資名稱：<b>{name}</b>
           </Card.Title>
@@ -167,7 +183,11 @@ function DemandStep2({id, name, store, user, demandList, setDemandList}) {
               }}
             >
               需求數量：
-              <Button style={btnDashStyle} variant="primary" onClick={handleMinus}>
+              <Button
+                style={btnDashStyle}
+                variant="primary"
+                onClick={handleMinus}
+              >
                 -
               </Button>
               <Form.Control
@@ -176,7 +196,11 @@ function DemandStep2({id, name, store, user, demandList, setDemandList}) {
                 value={count}
                 onChange={handleChange}
               />
-              <Button style={btnAddStyle} variant="primary" onClick={handlePlus}>
+              <Button
+                style={btnAddStyle}
+                variant="primary"
+                onClick={handlePlus}
+              >
                 +
               </Button>
             </div>
@@ -189,7 +213,12 @@ function DemandStep2({id, name, store, user, demandList, setDemandList}) {
               }}
             >
               需求說明：
-              <Form.Control style={inputSecStyle} value={demandInfo} placeholder="請輸入需求說明..." onChange={(e) => handleDemendInfo(e)} />
+              <Form.Control
+                style={inputSecStyle}
+                value={demandInfo}
+                placeholder="請輸入需求說明..."
+                onChange={(e) => handleDemendInfo(e)}
+              />
             </div>
             <br />
             物資提供商家：

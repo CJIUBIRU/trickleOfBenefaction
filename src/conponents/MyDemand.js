@@ -1,7 +1,6 @@
 import { Container } from "react-bootstrap";
-import React, { Component } from "react";
+import React from "react";
 import "../App.css";
-import PaginationList from "../elements/paginationList";
 import MyProduct from "../elements/myProduct";
 import TitleSec from "../elements/titleSec";
 import { useNavigate } from "react-router-dom";
@@ -12,8 +11,8 @@ import { auth } from "../utils/firebase";
 function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
-    navigate("/loginin");
+  if (!user) {
+    navigate("/signIn");
   }
   return (
     <div>

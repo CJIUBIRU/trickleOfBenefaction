@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import React, { Component } from "react";
+import React from "react";
 import "../App.css";
 import TitleSec from "../elements/titleSec";
 import Record from "../elements/record";
@@ -13,7 +13,7 @@ function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   return (
     <div>

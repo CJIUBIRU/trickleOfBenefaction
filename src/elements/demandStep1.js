@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 // import img from "../img/tablet.jpg";
-import { Col } from "react-bootstrap";
 
 function DemandStep1({ id, name, store, cart, setCart }) {
   const card = {
@@ -11,7 +10,7 @@ function DemandStep1({ id, name, store, cart, setCart }) {
     marginTop: "15px",
     padding: "45px 40px 10px 40px",
     color: "#002B5B",
-    height: "480px"
+    height: "480px",
   };
   const contentStyle = {
     marginTop: "15px",
@@ -76,7 +75,11 @@ function DemandStep1({ id, name, store, cart, setCart }) {
     <div style={{ display: "inline-block" }}>
       <button style={buttonStyle} onClick={handleSelect}>
         <Card style={card}>
-          <Card.Img style={goodsImgStyle} variant="top" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg" />
+          <Card.Img
+            style={goodsImgStyle}
+            variant="top"
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+          />
           <Card.Body style={contentStyle}>
             <Card.Title>
               物資名稱：<b>{name}</b>

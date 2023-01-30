@@ -1,11 +1,7 @@
-import React, { Component } from "react";
-import Nav from "react-bootstrap/Nav";
-import { Link } from "react-router-dom";
-import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
-import img from "../img/tablet.jpg";
 import ButtonLink from "../elements/button";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -15,8 +11,8 @@ import { useNavigate } from "react-router";
 function RecordList() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
-    navigate("/loginin");
+  if (!user) {
+    navigate("/signIn");
   }
   const card = {
     marginBottom: "20px",
@@ -60,25 +56,29 @@ function RecordList() {
     <div>
       <div style={goodsPageStyle}>
         <Card style={card}>
-          <Card.Img style={goodsImgStyle} variant="top" src={img} />
+          <Card.Img
+            style={goodsImgStyle}
+            variant="top"
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+          />
           <Card.Body style={contentStyle}>
             <Card.Title>
-              物資名稱：<b>ASUS 平板電腦</b>
+              物資名稱：<b>來復易長時間安心復健褲XL12片</b>
             </Card.Title>
             <hr></hr>
             <Card.Text style={{ color: "#6C6C6C" }}>
-              需求機構：鈺惠協會
+              需求機構：社團法人台灣怡心寶貝社群協會
               <br />
               捐贈數量：<span style={userTextStyle}>8</span>
               <br />
-              需求說明：提供給偏鄉孩童授課使用
+              需求說明：孩童日常使用。
               <br />
               物資提供商家：
               <a style={demandHrefStyle} href="#">
-                奕慈麵包坊
+                全聯福利中心Pxmart 新莊輔大店
               </a>
               <br />
-              單價：$203／台
+              單價：$369
             </Card.Text>
           </Card.Body>
         </Card>
@@ -97,7 +97,7 @@ function RecordList() {
             <Card.Text style={{ color: "#6C6C6C" }}>
               <span style={userTextStyle}>2</span>項物資
               <br />
-              金額：<span style={userTextStyle}>$4060</span>
+              金額：<span style={userTextStyle}>$738</span>
               <br />
               <div
                 style={{

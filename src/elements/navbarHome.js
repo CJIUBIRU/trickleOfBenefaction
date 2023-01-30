@@ -1,5 +1,5 @@
 //打rcc+ENTER
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,17 +7,15 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "../navLink.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { Button } from "react-bootstrap";
 import ScrollToTop from "react-scroll-to-top";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../utils/firebase";
 
 function NavbarComp() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [user, loading] = useAuthState(auth);
   if (loading)
     return (
@@ -84,40 +82,6 @@ function NavbarComp() {
   const navdropItemStyle = {
     fontWeight: "bold",
     color: "#002B5B",
-  };
-  const navCartBtnStyle = {
-    color: "#ffffff",
-    backgroundColor: "#002B5B",
-    borderRadius: "30px",
-    marginTop: "16px",
-    marginBottom: "20px",
-    marginLeft: "10px",
-    lineHeight: "16px",
-    fontSize: "16px",
-    width: "50px",
-    textAlign: "center",
-  };
-  const navCartSecBtnStyle = {
-    color: "#ffffff",
-    backgroundColor: "lightgray",
-    borderRadius: "30px",
-    marginTop: "16px",
-    marginBottom: "20px",
-    marginLeft: "10px",
-    lineHeight: "16px",
-    fontSize: "16px",
-    width: "50px",
-    textAlign: "center",
-  };
-  const navBellBtnStyle = {
-    color: "#002B5B",
-    marginTop: "14.5px",
-    marginBottom: "20px",
-    lineHeight: "16px",
-    fontSize: "20px",
-    width: "50px",
-    textAlign: "center",
-    marginLeft: "5px",
   };
   const profilePhotoStyle = {
     width: "50px",
@@ -188,7 +152,12 @@ function NavbarComp() {
                 >
                   合作機構一覽
                 </Nav.Link>
-                <Nav.Link as={Link} to="/pointsActivity" href="#action/3.2" style={navitemStyle}>
+                <Nav.Link
+                  as={Link}
+                  to="/pointsActivity"
+                  href="#action/3.2"
+                  style={navitemStyle}
+                >
                   點數兌換專區
                 </Nav.Link>
                 {user && (
@@ -261,7 +230,7 @@ function NavbarComp() {
                   </NavDropdown>
                 )}
                 {!user && (
-                  <Nav.Link as={Link} to="/loginIn" style={navitemStyle}>
+                  <Nav.Link as={Link} to="/signIn" style={navitemStyle}>
                     註冊／登入
                   </Nav.Link>
                 )}

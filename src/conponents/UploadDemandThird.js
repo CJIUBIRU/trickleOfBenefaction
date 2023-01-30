@@ -1,9 +1,8 @@
 import { Container, Col, Row } from "react-bootstrap";
-import React, { Component } from "react";
+import React from "react";
 import "../App.css";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
-import ButtonLink from "../elements/button";
 import DemandStep3 from "../elements/demandStep3";
 import Navbar from "../elements/navbar";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -21,7 +20,7 @@ function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   // const nextStepStyle = {
   //   marginLeft: "10px",
@@ -198,7 +197,7 @@ function UploadDemand() {
           ""
         )}
         <div style={stepBtnStyle}>
-          <Link to="/demandstep2">
+          <Link to="/uploadDemandSec">
             <button
               style={returnStepStyle}
               onClick={() => {

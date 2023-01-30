@@ -3,11 +3,8 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
-import FromSelect from "../elements/fromSelect";
-import Search from "../elements/search";
 import ButtonLink from "../elements/button";
 import DemandStep1 from "../elements/demandStep1";
-import PaginationList from "../elements/paginationList";
 import Navbar from "../elements/navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -16,7 +13,6 @@ import { db } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,7 +21,7 @@ function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
 
   // 抓supply DB data
@@ -66,9 +62,7 @@ function UploadDemand() {
             }}
             now={32}
           ></ProgressBar>
-          <Col
-            style={{ textAlign: "center", zIndex: "2" }}
-          >
+          <Col style={{ textAlign: "center", zIndex: "2" }}>
             <FontAwesomeIcon
               style={{
                 color: "#26aa50",
@@ -91,25 +85,25 @@ function UploadDemand() {
               選擇需求物資
             </span>
           </Col>
-          <Col
-            style={{ zIndex: "2" }}
-          >
+          <Col style={{ zIndex: "2" }}>
             <FontAwesomeIcon
               style={{ color: "lightgray", marginLeft: "150px" }}
               icon={faCircleCheck}
             />
             <br />
-            <span style={{ fontSize: "15px", marginLeft: "137px" }}>填寫資料</span>
+            <span style={{ fontSize: "15px", marginLeft: "137px" }}>
+              填寫資料
+            </span>
           </Col>
-          <Col
-            style={{ zIndex: "2" }}
-          >
+          <Col style={{ zIndex: "2" }}>
             <FontAwesomeIcon
               style={{ color: "lightgray", marginLeft: "180px" }}
               icon={faCircleCheck}
             />
             <br />
-            <span style={{ fontSize: "15px", marginLeft: "167px" }}>確認付款</span>
+            <span style={{ fontSize: "15px", marginLeft: "167px" }}>
+              確認送出
+            </span>
           </Col>
         </Row>
         <TitleStep name="STEP1&nbsp;-&nbsp;選擇需求物資" />
@@ -131,7 +125,7 @@ function UploadDemand() {
             marginRight: "55%",
           }}
         >
-          <ButtonLink to="/demandstep2" name="下一步" />
+          <ButtonLink to="/uploadDemandSec" name="下一步" />
         </div>
       </Container>
     </div>

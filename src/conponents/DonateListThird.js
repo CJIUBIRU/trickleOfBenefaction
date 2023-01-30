@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import React, { Component } from "react";
+import React from "react";
 import "../App.css";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
@@ -14,7 +14,7 @@ function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   const nextStepStyle = {
     marginLeft: "10px",
@@ -89,7 +89,7 @@ function UploadDemand() {
         </p>
         <div style={stepBtnStyle}>
           <div style={returnStepStyle}>
-            <ButtonLink to="/donatestep2" name="返回" />
+            <ButtonLink to="/donateListSec" name="返回" />
           </div>
           <div style={nextStepStyle}>
             <ButtonLink to="#" name="下一步" />

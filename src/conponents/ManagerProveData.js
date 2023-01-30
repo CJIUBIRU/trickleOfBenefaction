@@ -145,19 +145,43 @@ function OrgData({
       <ol style={{ lineHeight: "45px", paddingLeft: "50px" }}>
         <li>
           <span style={{ color: "#90AACB", cursor: "pointer" }}>
-            {certificate}&nbsp;
+            <a
+              href={certificate}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "#90AACB" }}
+            >
+              法人登記書
+            </a>
+            &nbsp;
             <FontAwesomeIcon icon={faCloudDownload} />
           </span>
         </li>
         <li>
           <span style={{ color: "#90AACB", cursor: "pointer" }}>
-            {affidavit}&nbsp;
+            <a
+              href={affidavit}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "#90AACB" }}
+            >
+              切結書
+            </a>
+            &nbsp;
             <FontAwesomeIcon icon={faCloudDownload} />
           </span>
         </li>
         <li>
           <span style={{ color: "#90AACB", cursor: "pointer" }}>
-            {permit}&nbsp;
+            <a
+              href={permit}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "#90AACB" }}
+            >
+              政府勸募許可函
+            </a>
+            &nbsp;
             <FontAwesomeIcon icon={faCloudDownload} />
           </span>
         </li>
@@ -173,7 +197,7 @@ function ManagerProveData() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   const [details, setDetails] = useState([]);
 

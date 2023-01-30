@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import GoogleLogin from "../elements/googleLogin";
 import LineLogin from "../elements/lineLogin";
 import FbLogin from "../elements/fbLogin";
@@ -163,7 +163,7 @@ function LoginPage() {
             />
 
             <div style={btnContentStyle}>
-              <ButtonLink to="/signin" name="前往註冊" />
+              <ButtonLink to="/signUp" name="前往註冊" />
               &nbsp;&nbsp;
               <button style={stepBtnStyle} onClick={signIn}>
                 登入

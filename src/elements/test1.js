@@ -1,6 +1,5 @@
-
-import {db} from "../utils/firebase";
-import {doc, getDoc} from "firebase/firestore"
+import { db } from "../utils/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const docRef = doc(db, "cities", "SF");
 const docSnap = await getDoc(docRef);

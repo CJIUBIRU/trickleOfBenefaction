@@ -4,22 +4,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
 import Navbar from "../elements/navbar";
-
+import { useLocation } from "react-router";
 import Form from "react-bootstrap/Form";
-
+import { Link } from "react-router-dom";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
-
-import ButtonLink from "../elements/button";
 
 //檔案上傳
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { useState } from "react";
 import { storage } from "../utils/firebase";
+import { db } from "../utils/firebase";
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCloudDownload } from '@fortawesome/free-solid-svg-icons';
-
+import { doc, updateDoc } from "firebase/firestore";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import NavbarHome from "../elements/navbarHome";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -29,7 +28,14 @@ import { Container } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
 
 function ApplicationUpload3() {
+  const location = useLocation();
+  const [urlID3, setUrlID3] = useState("");
+  const { fromID, fromURL2 } = location.state;
+  console.log("fromID: " + fromID);
+  console.log("fromURL2: " + fromURL2);
+  console.log("urlID3: " + urlID3);
   const [user] = useAuthState(auth);
+  const taskDocRef = doc(db, "charity", fromID);
   const cardStyle = {
     width: "75%",
     color: "black",
@@ -65,12 +71,6 @@ function ApplicationUpload3() {
     marginLeft: "5%",
     marginRight: "5%",
   };
-
-  const h5Style = {
-    fontWeight: "600",
-    letterSpacing: "1px",
-    color: "#002B5B",
-  };
   const uploadBtn = {
     color: "#ffffff",
     backgroundColor: "#90AACB",
@@ -87,11 +87,21 @@ function ApplicationUpload3() {
   //檔案上傳
   const [progress, setProgress] = useState(0);
 
-  const formHandler = (e) => {
+  const formHandler = async (e) => {
     // preventDefault()阻止預設行為
     e.preventDefault();
     const file = e.target[0].files[0];
     uploadFiles(file);
+    try {
+      //console.log("start");
+      await updateDoc(taskDocRef, {
+        "file.doc.affidavit": fromURL2,
+      });
+      //console.log('end');
+      //navigate("/uploadGoodsSuccess");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const uploadFiles = (file) => {
@@ -112,7 +122,10 @@ function ApplicationUpload3() {
       },
       (err) => console.log(err),
       () => {
-        getDownloadURL(UploadTask.snapshot.ref).then((url) => console.log(url));
+        getDownloadURL(UploadTask.snapshot.ref).then((url) => {
+          //let urlID = url;
+          return setUrlID3(url);
+        });
       }
     );
   };
@@ -158,7 +171,7 @@ function ApplicationUpload3() {
             />
             <br />
             <span style={{ fontSize: "15px", marginLeft: "24px" }}>
-              上傳公益團體基本資料
+              上傳勸募許可函一份
             </span>
           </Col>
           <Col style={{ zIndex: "2" }}>
@@ -193,7 +206,7 @@ function ApplicationUpload3() {
             />
             <br />
             <span style={{ fontSize: "15px", marginLeft: "90px" }}>
-              上傳勸募許可函一份
+              上傳公益團體基本資料
             </span>
           </Col>
         </Row>
@@ -255,7 +268,27 @@ function ApplicationUpload3() {
       </Card>
       <div style={btnStyle}>
         {progress === 100 && (
-          <ButtonLink to="/ApplicationUpload4" name="下一步" />
+          <Link
+            to="/ApplicationUpload4"
+            state={{ fromID: fromID, fromURL3: urlID3 }}
+          >
+            <button
+              style={{
+                color: "#ffffff",
+                backgroundColor: "#002B5B",
+                borderRadius: "30px",
+                lineHeight: "30px",
+                fontSize: "16px",
+                width: "120px",
+                textAlign: "center",
+                height: "35px",
+                fontWeight: "bold",
+                border: "none",
+              }}
+            >
+              下一步
+            </button>
+          </Link>
         )}
         {progress !== 100 && (
           <button

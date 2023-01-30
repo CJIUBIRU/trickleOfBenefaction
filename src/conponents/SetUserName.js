@@ -5,51 +5,27 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
-import TitleStep from "../elements/titleStep";
-import ButtonLink from "../elements/button";
 import { useState } from "react";
-import { doc, setDoc, addDoc, collection, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import app from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
 import NavbarHome from "../elements/navbarHome";
-import { Container, Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
-import ProgressBar from "react-bootstrap/ProgressBar";
+import { Container } from "react-bootstrap";
 
 function SetPassword() {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   // const auth = getAuth(app);
   // const [user] = useAuthState(auth);
   // if (!user){
-  //   navigate("/loginin");
+  //   navigate("/signIn");
   // }
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   // const [user] = useAuthState(auth);
-
-  function addUser(user) {
-    try {
-      addDoc(collection(db, "users"), {
-        email: email,
-        level: "charity",
-        uid: user.uid,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }
   let good = JSON.parse(localStorage.getItem("good"));
   const [values, setValues] = useState({
     name: good.name,
@@ -96,9 +72,6 @@ function SetPassword() {
   const inputStyle = {
     borderRadius: "5px",
   };
-  const groupStyle = {
-    marginTop: "30px",
-  };
   const subBtnStyle = {
     color: "#ffffff",
     backgroundColor: "#002B5B",
@@ -110,15 +83,6 @@ function SetPassword() {
     fontWeight: "bold",
     marginLeft: "46.5%",
     marginTop: "40px",
-  };
-  const errorMessageStyle = {
-    fontSize: "16px",
-    fontWeight: "bold",
-    color: "red",
-    textAlign: "center",
-    marginTop: "0px",
-    border: "1px red solid",
-    backgroundColor: "#FFECEC",
   };
   return (
     <div>

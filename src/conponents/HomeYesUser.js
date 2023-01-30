@@ -1,25 +1,20 @@
 //打rcc+ENTER
-import React, { Component } from "react";
+import React from "react";
 import "../navLink.css";
 import Slider from "react-slick";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import Product from "../elements/product";
-import Navbar from "../elements/navbar";
-import NavbarHome from "../elements/navbarHome";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
-import { Card } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBullhorn } from "@fortawesome/free-solid-svg-icons";
-import Table from "react-bootstrap/Table";
 import News from "../elements/newsAdmin";
 import NewsCharity from "../elements/newsCharity";
 import Notes from "../elements/notesAdmin";
 import NotesCharity from "../elements/notesCharity";
+import HomeImg from "../img/home.jpg";
 
 function Task({ id, email, level }) {
   const [user] = useAuthState(auth);
@@ -283,16 +278,15 @@ function Task({ id, email, level }) {
                 }}
               >
                 <div>
-                  <h4
-                    style={{
-                      height: "300px",
-                      textAlign: "center",
-                      lineHeight: "280px",
-                      backgroundColor: "#FEF1E6",
-                    }}
+                  <div
+                    style={{ backgroundColor: "#fef6e4", paddingLeft: "170px" }}
                   >
-                    推播1
-                  </h4>
+                    <img
+                      src={HomeImg}
+                      alt="homeImg"
+                      style={{ height: "300px" }}
+                    ></img>
+                  </div>
                 </div>
                 <div>
                   <h4
@@ -357,7 +351,7 @@ function Task({ id, email, level }) {
               </Slider>
             </div>
 
-            <div style={{ margin: "40px 0px 30px 0px" }}>
+            {/* <div style={{ margin: "40px 0px 30px 0px" }}>
               <h5 style={{ color: "#002B5B", fontWeight: "bold" }}>最新消息</h5>
               <Slider
                 {...{
@@ -453,7 +447,7 @@ function Task({ id, email, level }) {
                   </h4>
                 </div>
               </Slider>
-            </div>
+            </div> */}
 
             <div style={{ margin: "40px 0px 30px 0px" }}>
               <h5 style={{ color: "#002B5B", fontWeight: "bold" }}>
@@ -510,7 +504,7 @@ function Task({ id, email, level }) {
         </Container>
       )}
       {email === user.email && level === "admin" && (
-        <Container style={{marginBottom: "50px"}}>
+        <Container style={{ marginBottom: "50px" }}>
           <div
             style={{
               marginTop: "100px",
@@ -518,32 +512,32 @@ function Task({ id, email, level }) {
               flexDirection: "row",
             }}
           >
-            <div style={{margin: "10px", width: "70%"}}>
+            <div style={{ margin: "10px", width: "70%" }}>
               <News />
             </div>
-            <div style={{margin: "10px", width: "30%"}}>
+            <div style={{ margin: "10px", width: "30%" }}>
               <Notes />
             </div>
           </div>
         </Container>
       )}
       {email === user.email && level === "charity" && (
-        <Container style={{marginBottom: "50px"}}>
-        <div
-          style={{
-            marginTop: "100px",
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <div style={{margin: "10px", width: "70%"}}>
-            <NewsCharity />
+        <Container style={{ marginBottom: "50px" }}>
+          <div
+            style={{
+              marginTop: "100px",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <div style={{ margin: "10px", width: "70%" }}>
+              <NewsCharity />
+            </div>
+            <div style={{ margin: "10px", width: "30%" }}>
+              <NotesCharity />
+            </div>
           </div>
-          <div style={{margin: "10px", width: "30%"}}>
-            <NotesCharity />
-          </div>
-        </div>
-      </Container>
+        </Container>
       )}
     </div>
   );

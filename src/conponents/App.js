@@ -1,14 +1,10 @@
 import "../App.css";
 import NavbarComp from "./Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "../elements/navbar";
-import Login from "./Login";
 import DonateList from "./DonateList";
 import UploadDemand from "./UploadDemand";
 import UploadDemandSec from "./UploadDemandSec";
 import UploadDemandThird from "./UploadDemandThird";
-import LoginDemand from "./LoginDemand";
-import LoginAdmin from "./LoginAdmin";
 import Signin from "./Signin";
 import MyDemand from "./MyDemand";
 import Profile from "./Profile";
@@ -52,67 +48,68 @@ import UpdateStores from "./UpdateStores";
 import UpdateGoods from "./UpdateGoods";
 import SetUserName from "./SetUserName";
 import UpdateMyDemand from "./UpdateMyDemand";
+import QrcodePage from "./QrcodePage";
+import AllQrcode from "./AllQrcode";
+import CharityLogo from "./CharityLogo";
 
 function App() {
   return (
     <div>
-        <BrowserRouter>
-          <Routes>
-            <Route exact path="/" element={<NavbarComp />} />
-            <Route path="/signin" element={<SignUp />} />
-            <Route path="/uploadGoods" element={<UploadGoods />} />
-            <Route path="/uploadGoodsSec" element={<UploadGoodsSec />} />
-            <Route path="/loginin" element={<Signin />} />
-            <Route path="/donate" element={<DonateList />} />
-            <Route path="/upload" element={<UploadDemand />} />
-            <Route path="/demandstep2" element={<UploadDemandSec />} />
-            <Route path="/demandstep1" element={<UploadDemand />} />
-            <Route path="/demandstep3" element={<UploadDemandThird />} />
-            <Route path="/myDemand" element={<MyDemand />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/donatestep2" element={<DonateListSec />} />
-            <Route path="/donatestep3" element={<DonateListThird />} />
-            {/* <Route path="/donateRecord" elelment={<DonateRecord />} /> */}
-            <Route path="/donateRecordList" element={<DonateRecordList />} />
-            <Route path="/process" element={<Process />} />
-            <Route path="/processRecordList" element={<ProcessRecordList />} />
-            <Route path="/viewRecord" element={<ViewRecord />} />
-            <Route element={<ApplicationInfo />} path="/applicationInfo" />
-            <Route element={<ApplicationUpload />} path="/applicationUpload" />
-            <Route element={<ApplicationUpload2 />} path="/applicationUpload2" />
-            <Route element={<ApplicationUpload3 />} path="/applicationUpload3" />
-            <Route element={<ApplicationUpload4 />} path="/applicationUpload4" />
-            <Route element={<UploadSuccess />} path="/uploadSuccess" />
-            <Route element={<ManagerProve />} path="/managerProve" />
-            <Route element={<ManagerProveMail />} path="/managerProveMail" />
-            <Route element={<ManagerProveData />} path="/managerProveData" />
-            <Route element={<SetPassword />} path="/setPassword" />
-            <Route element={<PasswordSuccess />} path="/passwordSuccess" />
-            <Route element={<CharityInfo />} path="/charityInfo" />
-            <Route element={<CharityPreview />} path="/charityPreview" />
-            <Route
-              element={<CharityInfoSuccess />}
-              path="/charityInfoSuccess"
-            />
-            <Route element={<Charity />} path="/charity" />
-            <Route element={<CharityDetail />} path="/charityDetail" />
-            <Route element={<PointsActivity />} path="/pointsActivity" />
-            <Route element={<PointsItem />} path="/pointsItem" />
-            <Route element={<PointsItemDetails />} path="/pointsItemDetails" />
-            <Route element={<PointsItemSuccess />} path="/pointsItemSuccess" />
-            <Route element={<ForgetPasseord />} path="/forgetPassword" />
-            <Route element={<UserUpdatePassword />} path="/userUpdatePassword" />
-            <Route element={<AddStores />} path="/addStores" />
-            <Route element={<UploadGoodsSuccess />} path="/uploadGoodsSuccess" />
-            <Route element={<AllGoods />} path="/allGoods" />
-            <Route element={<AllStores />} path="/allStores" />
-            <Route element={<UpdateStores />} path="/updateStores" />
-            <Route element={<UpdateGoods/>} path="/updateGoods"></Route>
-            <Route element={<SetUserName/>} path="/setUserName"></Route>
-            <Route element={<DonateRecord/>} path="/donateRecordPage"></Route>
-            <Route element={<UpdateMyDemand/>} path="/updateMyDemand"></Route>
-          </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<NavbarComp />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/uploadGoods" element={<UploadGoods />} />
+          <Route path="/uploadGoodsSec" element={<UploadGoodsSec />} />
+          <Route path="/signIn" element={<Signin />} />
+          <Route path="/donateList" element={<DonateList />} />
+          <Route path="/uploadDemandSec" element={<UploadDemandSec />} />
+          <Route path="/uploadDemand" element={<UploadDemand />} />
+          <Route path="/uploadDemandThird" element={<UploadDemandThird />} />
+          <Route path="/myDemand" element={<MyDemand />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/donateListSec" element={<DonateListSec />} />
+          <Route path="/donateListThird" element={<DonateListThird />} />
+          <Route path="/process" element={<Process />} />
+          <Route path="/processRecordList" element={<ProcessRecordList />} />
+          <Route path="/viewRecord" element={<ViewRecord />} />
+          <Route path="/applicationInfo" element={<ApplicationInfo />} />
+          <Route path="/applicationUpload" element={<ApplicationUpload />} />
+          <Route path="/applicationUpload2" element={<ApplicationUpload2 />} />
+          <Route path="/applicationUpload3" element={<ApplicationUpload3 />} />
+          <Route path="/applicationUpload4" element={<ApplicationUpload4 />} />
+          <Route path="/uploadSuccess" element={<UploadSuccess />} />
+          <Route path="/managerProve" element={<ManagerProve />} />
+          <Route path="/managerProveMail" element={<ManagerProveMail />} />
+          <Route path="/managerProveData" element={<ManagerProveData />} />
+          <Route path="/setPassword" element={<SetPassword />} />
+          <Route path="/passwordSuccess" element={<PasswordSuccess />} />
+          <Route path="/charityInfo" element={<CharityInfo />} />
+          <Route path="/charityPreview" element={<CharityPreview />} />
+          <Route path="/charityInfoSuccess" element={<CharityInfoSuccess />} />
+          <Route path="/charity" element={<Charity />} />
+          <Route path="/charityDetail" element={<CharityDetail />} />
+          <Route path="/pointsActivity" element={<PointsActivity />} />
+          <Route path="/pointsItem" element={<PointsItem />} />
+          <Route path="/pointsItemDetails" element={<PointsItemDetails />} />
+          <Route path="/pointsItemSuccess" element={<PointsItemSuccess />} />
+          <Route path="/forgetPassword" element={<ForgetPasseord />} />
+          <Route path="/userUpdatePassword" element={<UserUpdatePassword />} />
+          <Route path="/addStores" element={<AddStores />} />
+          <Route path="/uploadGoodsSuccess" element={<UploadGoodsSuccess />} />
+          <Route path="/allGoods" element={<AllGoods />} />
+          <Route path="/allStores" element={<AllStores />} />
+          <Route path="/updateStores" element={<UpdateStores />} />
+          <Route path="/updateGoods" element={<UpdateGoods />} />
+          <Route path="/setUserName" element={<SetUserName />} />
+          <Route path="/donateRecord" element={<DonateRecord />} />
+          <Route path="/donateRecordList" element={<DonateRecordList />} />
+          <Route path="/updateMyDemand" element={<UpdateMyDemand />} />
+          <Route path="/qrcodePage" element={<QrcodePage />} />
+          <Route path="/allQrcode" element={<AllQrcode />} />
+          <Route path="/charityLogo" element={<CharityLogo />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import img from "../img/tablet.jpg";
+import React from "react"; 
 import Card from "react-bootstrap/Card";
 import ButtonLink from "./button";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -44,7 +43,7 @@ function Product() {
   return (
     <div>
       <Card style={card}>
-        <Card.Img style={goodsImgStyle} variant="top" src={img} />
+        <Card.Img style={goodsImgStyle} variant="top" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg" />
         <Card.Body style={contentStyle}>
           <Card.Title>
             物資名稱：<b>ASUS 平板電腦</b>

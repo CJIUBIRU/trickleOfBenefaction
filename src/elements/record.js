@@ -1,25 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { Nav } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import img from "../img/tablet.jpg";
-import ButtonLink from "./button";
 
 function Record() {
-  const goDonateStyle = {
-    color: "#ffffff",
-    backgroundColor: "#002B5B",
-    borderRadius: "30px",
-    marginTop: "15px",
-    marginLeft: "25%",
-    marginRight: "25%",
-    lineHeight: "35px",
-    fontSize: "16px",
-    width: "50%",
-    textAlign: "center",
-    height: "36px",
-    fontWeight: "bold",
-  };
   const card = {
     marginBottom: "20px",
     marginLeft: "10px",

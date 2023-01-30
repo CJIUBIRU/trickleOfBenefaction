@@ -5,10 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import Slider from "react-slick";
-import Product from "../elements/product";
 import TitleSec from "../elements/titleSec";
-import Record from "../elements/record";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Card } from "react-bootstrap";
@@ -19,9 +16,8 @@ import { sendEmailVerification } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../elements/navbar";
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
-import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../utils/firebase";
 
 function Task({ id, name, email, level }) {
@@ -218,7 +214,7 @@ function UploadDemand() {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   const [details, setDetails] = useState([]);
   useEffect(() => {
@@ -240,12 +236,6 @@ function UploadDemand() {
     letterSpacing: "1px",
     lineHeight: "40px",
     margin: "0 0 0 5%",
-  };
-  const imgStyle = {
-    width: "260px",
-    height: "260px",
-    margin: "50px 0px 30px 100px",
-    borderRadius: "100%",
   };
   const imgSecStyle = {
     width: "260px",

@@ -12,23 +12,20 @@ import SuccessInfo from "../elements/successInfo";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
-import { Col } from "react-bootstrap";
-import ProgressBar from "react-bootstrap/ProgressBar";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import { Stepper } from "react-form-stepper";
 
 function UploadSuccess() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   const cardStyle = {
     width: "50%",
     color: "black",
     left: "50%",
-    marginTop: "230px",
+    marginTop: "200px",
     transform: `translate(${-50}%, ${-50}%)`,
     paddingTop: "3%",
     paddingBottom: "6%",
@@ -55,64 +52,16 @@ function UploadSuccess() {
     <div>
       <Navbar />
       <TitleSec name="上架物資" />
-      <Container>
-        <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
-          <ProgressBar
-            style={{
-              position: "absolute",
-              marginTop: "19px",
-              zIndex: "1",
-              width: "860px",
-              marginLeft: "230px",
-            }}
-            now={98}
-          ></ProgressBar>
-          <Col
-            style={{ textAlign: "center", marginLeft: "100px", zIndex: "2" }}
-          >
-            <FontAwesomeIcon
-              style={{
-                color: "#26aa50",
-                marginRight: "60px",
-                backgroundColor: "white",
-                borderRadius: "100%",
-              }}
-              icon={faCircleCheck}
-            />
-            <br />
-            <span style={{ fontSize: "15px", marginRight: "60px" }}>開始</span>
-          </Col>
-          <Col style={{ textAlign: "right", zIndex: "2" }}>
-            <FontAwesomeIcon
-              style={{
-                color: "#26aa50",
-                marginRight: "95px",
-                backgroundColor: "white",
-                borderRadius: "100%",
-              }}
-              icon={faCircleCheck}
-            />
-            <br />
-            <span style={{ fontSize: "15px", marginRight: "85px" }}>
-              上傳圖片
-            </span>
-          </Col>
-          <Col
-            style={{ zIndex: "2", textAlign: "right", marginRight: "190px" }}
-          >
-            <FontAwesomeIcon
-              style={{
-                color: "#26aa50",
-                marginRight: "25px",
-                backgroundColor: "white",
-                borderRadius: "100%",
-              }}
-              icon={faCircleCheck}
-            />
-            <br />
-            <span style={{ fontSize: "15px" }}>填寫商品資訊</span>
-          </Col>
-        </Row>
+      <Container style={{ marginBottom: "15px" }}>
+        <Stepper
+          steps={[
+            // { label: "開始" },
+            { label: "上傳圖片" },
+            { label: "填寫商品資訊" },
+            { label: "完成" },
+          ]}
+          activeStep={2}
+        />
       </Container>
       <Card style={cardStyle}>
         <Card.Body>

@@ -1,16 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
 import Navbar from "../elements/navbar";
 
 import Form from "react-bootstrap/Form";
-
+import { Link } from "react-router-dom";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
-
-import ButtonLink from "../elements/button";
 
 //檔案上傳
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
@@ -20,7 +17,7 @@ import { storage } from "../utils/firebase";
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCloudDownload } from '@fortawesome/free-solid-svg-icons';
-
+import { useLocation } from "react-router";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import NavbarHome from "../elements/navbarHome";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -28,9 +25,33 @@ import { auth } from "../utils/firebase";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { Container } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../utils/firebase";
 
 function ApplicationUpload2() {
+  const location = useLocation();
+  const { fromID, fromURL1 } = location.state;
+  console.log(fromID);
+  console.log(fromURL1);
   const [user] = useAuthState(auth);
+  const taskDocRef = doc(db, "charity", fromID);
+
+  // const handleSubmit = async (e) => {
+  //   //let uuid = uuidv4();
+  //   e.preventDefault();
+  //   try {
+  //     //console.log("start");
+  //     await updateDoc(taskDocRef, {
+  //       "file.doc.permit": fromURL1
+  //     });
+  //     //console.log('end');
+  //     //navigate("/uploadGoodsSuccess");
+  //   }
+  //  catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   const cardStyle = {
     width: "75%",
     color: "black",
@@ -66,12 +87,6 @@ function ApplicationUpload2() {
     marginLeft: "5%",
     marginRight: "5%",
   };
-
-  const h5Style = {
-    fontWeight: "600",
-    letterSpacing: "1px",
-    color: "#002B5B",
-  };
   const uploadBtn = {
     color: "#ffffff",
     backgroundColor: "#90AACB",
@@ -86,11 +101,24 @@ function ApplicationUpload2() {
   };
 
   const [progress, setProgress] = useState(0);
+  const [urlID2, setUrlID2] = useState("");
+  console.log("urlID2: " + urlID2);
 
-  const formHandler = (e) => {
+  const formHandler = async (e) => {
     e.preventDefault();
     const file = e.target[0].files[0];
     uploadFiles(file);
+
+    try {
+      //console.log("start");
+      await updateDoc(taskDocRef, {
+        "file.doc.permit": fromURL1,
+      });
+      //console.log('end');
+      //navigate("/uploadGoodsSuccess");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const uploadFiles = (file) => {
@@ -108,7 +136,10 @@ function ApplicationUpload2() {
       },
       (err) => console.log(err),
       () => {
-        getDownloadURL(UploadTask.snapshot.ref).then((url) => console.log(url));
+        getDownloadURL(UploadTask.snapshot.ref).then((url) => {
+          //let urlID = url;
+          return setUrlID2(url);
+        });
       }
     );
   };
@@ -154,7 +185,7 @@ function ApplicationUpload2() {
             />
             <br />
             <span style={{ fontSize: "15px", marginLeft: "24px" }}>
-              上傳公益團體基本資料
+              上傳勸募許可函一份
             </span>
           </Col>
           <Col style={{ zIndex: "2" }}>
@@ -184,7 +215,7 @@ function ApplicationUpload2() {
             />
             <br />
             <span style={{ fontSize: "15px", marginLeft: "90px" }}>
-              上傳勸募許可函一份
+              上傳公益團體基本資料
             </span>
           </Col>
         </Row>
@@ -248,7 +279,27 @@ function ApplicationUpload2() {
       </Card>
       <div style={btnStyle}>
         {progress === 100 && (
-          <ButtonLink to="/ApplicationUpload3" name="下一步" />
+          <Link
+            to="/ApplicationUpload3"
+            state={{ fromID: fromID, fromURL2: urlID2 }}
+          >
+            <button
+              style={{
+                color: "#ffffff",
+                backgroundColor: "#002B5B",
+                borderRadius: "30px",
+                lineHeight: "30px",
+                fontSize: "16px",
+                width: "120px",
+                textAlign: "center",
+                height: "35px",
+                fontWeight: "bold",
+                border: "none",
+              }}
+            >
+              下一步
+            </button>
+          </Link>
         )}
         {progress !== 100 && (
           <button

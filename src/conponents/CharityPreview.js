@@ -18,7 +18,7 @@ function CharityPreview() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   const cardStyle = {
     width: "80%",

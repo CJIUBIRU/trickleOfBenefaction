@@ -21,7 +21,7 @@ function UserUpdatePassword() {
   const auth = getAuth();
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
 
   // console.log([user]);
@@ -41,51 +41,55 @@ function UserUpdatePassword() {
   function reauthenticate(password) {
     console.log(password);
     const user = auth.currentUser;
-    const credential = EmailAuthProvider.credential(user.email, password.oldOne);
+    const credential = EmailAuthProvider.credential(
+      user.email,
+      password.oldOne
+    );
     console.log(password.oldOne);
     reauthenticateWithCredential(user, credential)
-        .then(() => {
-            // User re-authenticated.
-            if (password.oldOne === password.newOne) {
-                window.location.reload();
-                alert("新密碼與舊密碼一致，請重新設定新密碼");
-            } else {
-                changePassword(password.newOne);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-            const errorMes = error.code;
-            console.log(errorMes);
-            if (errorMes === 'auth/wrong-password') {
-                window.location.reload();
-                alert('舊密碼不一致，請輸入正確的密碼');
-            }
-            // else if ()
-        });
-}
+      .then(() => {
+        // User re-authenticated.
+        if (password.oldOne === password.newOne) {
+          window.location.reload();
+          alert("新密碼與舊密碼一致，請重新設定新密碼");
+        } else {
+          changePassword(password.newOne);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        const errorMes = error.code;
+        console.log(errorMes);
+        if (errorMes === "auth/wrong-password") {
+          window.location.reload();
+          alert("舊密碼不一致，請輸入正確的密碼");
+        }
+        // else if ()
+      });
+  }
 
-function changePassword(newPassword) {
+  function changePassword(newPassword) {
     const user = auth.currentUser;
     console.log(newPassword);
     updatePassword(user, newPassword)
-        .then(() => {
-            console.log("更新完畢");
-            navigate("/profile");
-            alert("成功設置新密碼！");
-        }).catch((error) => {
-            console.log(error.message);
-        });
-}
+      .then(() => {
+        console.log("更新完畢");
+        navigate("/profile");
+        alert("成功設置新密碼！");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
 
-function sendNewPassword() {
+  function sendNewPassword() {
     try {
-        reauthenticate(password);
-    } catch(err){
-        console.log(err.message);
-        alert("密碼設置失敗，請重試。");
+      reauthenticate(password);
+    } catch (err) {
+      console.log(err.message);
+      alert("密碼設置失敗，請重試。");
     }
-};
+  }
 
   // console.log("password.oldOne", password.oldOne);
   // console.log("password.newOne", password.newOne);
@@ -151,7 +155,7 @@ function sendNewPassword() {
           <div style={profileContentStyle}>
             <Col>
               <div style={textStyle}>
-                <InputGroup style={{marginBottom: "10px"}}>
+                <InputGroup style={{ marginBottom: "10px" }}>
                   <Form.Label htmlFor="basic-url" style={nameStyle}>
                     輸入舊密碼：&nbsp;
                   </Form.Label>

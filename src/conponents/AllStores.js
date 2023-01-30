@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import Card from "react-bootstrap/Card";
@@ -6,20 +6,26 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "react-bootstrap/Button";
-import Table from 'react-bootstrap/Table';
+import Table from "react-bootstrap/Table";
 import { Container } from "react-bootstrap";
-import { collection, query, onSnapshot, deleteDoc, doc} from "firebase/firestore"
+import {
+  collection,
+  query,
+  onSnapshot,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../utils/firebase";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
 
-function Stores({id, name, phone, address, num}) {
+function Stores({ id, name, phone, address, num }) {
   const uploadStoreData = (item) => {
-    localStorage.setItem('store',JSON.stringify(item));
-  }
+    localStorage.setItem("store", JSON.stringify(item));
+  };
   const editIconStyle = {
     backgroundColor: "#f6c23e",
     height: "40px",
@@ -44,13 +50,13 @@ function Stores({id, name, phone, address, num}) {
     border: "none",
   };
   const handleDelete = async (id) => {
-    const taskDocRef = doc(db, 'stores', id)
-    try{
-      await deleteDoc(taskDocRef)
+    const taskDocRef = doc(db, "stores", id);
+    try {
+      await deleteDoc(taskDocRef);
     } catch (err) {
-        alert(err)
+      alert(err);
     }
-  }
+  };
 
   return (
     <>
@@ -60,18 +66,30 @@ function Stores({id, name, phone, address, num}) {
         <td>{address}</td>
         <td>{phone}</td>
         <td>
-            <Button
-              style={editIconStyle}
-              variant="primary"
-              as={Link}
-              to="/updateStores"
-              onClick={e => uploadStoreData({"id": id, "name": name, "address": address, "phone": phone})}
-            >
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </Button>
-            <Button style={trashIconStyle} variant="primary" type="submit" onClick={() => handleDelete(id)}>
-              <FontAwesomeIcon icon={faTrashCan} />
-            </Button>
+          <Button
+            style={editIconStyle}
+            variant="primary"
+            as={Link}
+            to="/updateStores"
+            onClick={(e) =>
+              uploadStoreData({
+                id: id,
+                name: name,
+                address: address,
+                phone: phone,
+              })
+            }
+          >
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </Button>
+          <Button
+            style={trashIconStyle}
+            variant="primary"
+            type="submit"
+            onClick={() => handleDelete(id)}
+          >
+            <FontAwesomeIcon icon={faTrashCan} />
+          </Button>
         </td>
       </tr>
     </>
@@ -81,8 +99,8 @@ function Stores({id, name, phone, address, num}) {
 function UploadGoods() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
-    navigate("/loginin");
+  if (!user) {
+    navigate("/signIn");
   }
   const [details, setDetails] = useState([]);
   const cardStyle = {
@@ -99,14 +117,16 @@ function UploadGoods() {
   };
 
   useEffect(() => {
-      const q = query(collection(db, 'stores'))
-      onSnapshot(q, (querySnapshot) => {
-          setDetails(querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            data: doc.data()
-        })))
-      })
-  },[])
+    const q = query(collection(db, "stores"));
+    onSnapshot(q, (querySnapshot) => {
+      setDetails(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
 
   return (
     <div>
@@ -129,12 +149,12 @@ function UploadGoods() {
               <tbody>
                 {details.map((item, index) => (
                   <Stores
-                    key={index} 
+                    key={index}
                     id={item.id}
                     name={item.data.name}
                     phone={item.data.phone}
                     address={item.data.address}
-                    num={index+1}
+                    num={index + 1}
                   />
                 ))}
               </tbody>

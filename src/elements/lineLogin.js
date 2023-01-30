@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import line from "../img/LINE_logo.svg.webp";
 import Button from "react-bootstrap/Button";
 

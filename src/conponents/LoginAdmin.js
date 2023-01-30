@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "../elements/loginPage";
 import UserLoginShort from "../elements/userLoginShort";
-import AgencyLoginShort from "../elements/agencyLoginShort"
+import AgencyLoginShort from "../elements/agencyLoginShort";
 import AdminLogin from "../elements/adminLogin";
 import ReturnHome from "../elements/returnHome";
 

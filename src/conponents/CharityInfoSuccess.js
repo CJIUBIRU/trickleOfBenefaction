@@ -1,17 +1,12 @@
 import React from "react";
 import "../App.css";
 import Card from "react-bootstrap/Card";
-import Navbar from "../elements/navbar";
 
 import TitleSec from "../elements/titleSec";
 
-import ButtonLink from "../elements/button";
 import SuccessInfo from "../elements/successInfo";
 import { Link } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router";
-import NavbarHome from "../elements/navbarHome";
 import NavbarNoFunction from "../elements/navbarNoFunction";
 import { Nav } from "react-bootstrap";
 import { Container, Row } from "react-bootstrap";
@@ -21,8 +16,6 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function CharityInfoSuccess() {
-  const navigate = useNavigate("");
-  const [user] = useAuthState(auth);
   const cardStyle = {
     width: "50%",
     color: "black",
@@ -129,7 +122,7 @@ function CharityInfoSuccess() {
                 lineHeight: "33px",
               }}
               as={Link}
-              to="/loginin"
+              to="/signIn"
               onClick={() => auth.signOut()}
             >
               完成

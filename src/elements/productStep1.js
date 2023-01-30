@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import img from "../img/tablet.jpg";
+import React from "react";
 import Card from "react-bootstrap/Card";
 
 function Product() {
@@ -32,25 +31,29 @@ function Product() {
   return (
     <div>
       <Card style={card}>
-        <Card.Img style={goodsImgStyle} variant="top" src={img} />
+        <Card.Img
+          style={goodsImgStyle}
+          variant="top"
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+        />
         <Card.Body style={contentStyle}>
           <Card.Title>
-            物資名稱：<b>ASUS 平板電腦</b>
+            物資名稱：<b>來復易長時間安心復健褲XL12片</b>
           </Card.Title>
           <hr></hr>
           <Card.Text style={cardText}>
-            需求機構：鈺惠協會
+            需求機構：社團法人台灣怡心寶貝社群協會
             <br />
-            需求數量：10
+            需求數量：3
             <br />
-            需求說明：提供給偏鄉孩童授課使用
+            需求說明：孩童日常使用。
             <br />
             物資提供商家：
             <a style={demandHrefStyle} href="#">
-              奕慈麵包坊
+              全聯福利中心Pxmart 新莊輔大店
             </a>
             <br />
-            單價：$203／台
+            單價：$369
           </Card.Text>
         </Card.Body>
       </Card>

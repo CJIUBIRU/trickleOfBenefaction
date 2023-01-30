@@ -12,8 +12,8 @@ import { useNavigate } from "react-router";
 const DonateList = () => {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
-    navigate("/loginin");
+  if (!user) {
+    navigate("/signIn");
   }
   const donPageStyle = {
     marginTop: "70px",
@@ -34,25 +34,25 @@ const DonateList = () => {
     <div>
       <Navbar />
       <div style={donPageStyle}>
-      <TitleSec name="捐贈物資列表" />
-      <Container>
-        <TitleStep name="STEP2&nbsp;-&nbsp;填寫資料" />
-        <div>
-          <ProductStep2 />
-        </div>
-        <div>
-          <ProductStep2 />
-        </div>
-        <div style={stepBtnStyle}>
-          <div style={returnStepStyle}>
-            <ButtonLink to="/donate" name="返回" />
+        <TitleSec name="捐贈物資列表" />
+        <Container>
+          <TitleStep name="STEP2&nbsp;-&nbsp;填寫資料" />
+          <div>
+            <ProductStep2 />
           </div>
-          <div style={nextStepStyle}>
-            <ButtonLink to="/donatestep3" name="下一步" />
+          <div>
+            <ProductStep2 />
           </div>
-        </div>
-      </Container>
-    </div>
+          <div style={stepBtnStyle}>
+            <div style={returnStepStyle}>
+              <ButtonLink to="/donate" name="返回" />
+            </div>
+            <div style={nextStepStyle}>
+              <ButtonLink to="/donateListThird" name="下一步" />
+            </div>
+          </div>
+        </Container>
+      </div>
     </div>
   );
 };

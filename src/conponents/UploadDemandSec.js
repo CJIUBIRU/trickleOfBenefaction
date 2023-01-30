@@ -1,14 +1,13 @@
 import { Container, Col, Row } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
-import ButtonLink from "../elements/button";
 import DemandStep2 from "../elements/demandStep2";
 import Navbar from "../elements/navbar";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +17,7 @@ function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
 
   let list = JSON.parse(localStorage.getItem("cart"));
@@ -106,7 +105,12 @@ function UploadDemand() {
           </Col>
           <Col style={{ zIndex: "2" }}>
             <FontAwesomeIcon
-              style={{ color: "#26aa50", marginLeft: "120px", backgroundColor: "white", borderRadius: "100%" }}
+              style={{
+                color: "#26aa50",
+                marginLeft: "120px",
+                backgroundColor: "white",
+                borderRadius: "100%",
+              }}
               icon={faCircleCheck}
             />
             <br />
@@ -162,7 +166,7 @@ function UploadDemand() {
           </p>
         )}
         <div style={stepBtnStyle}>
-          <Link to="/demandstep1">
+          <Link to="/uploadDemand">
             <button
               style={returnStepStyle}
               onClick={() => {
@@ -174,7 +178,7 @@ function UploadDemand() {
             </button>
           </Link>
           {list !== null ? (
-            <Link to="/demandstep3">
+            <Link to="/uploadDemandThird">
               <button style={nextStepStyle}>下一步</button>
             </Link>
           ) : (

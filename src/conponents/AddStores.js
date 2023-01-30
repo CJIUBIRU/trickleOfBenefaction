@@ -16,7 +16,7 @@ function UploadGoods() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");

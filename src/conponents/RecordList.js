@@ -1,7 +1,4 @@
-import React, { Component } from "react";
-import Nav from "react-bootstrap/Nav";
-import { Link } from "react-router-dom";
-import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -24,7 +24,7 @@ function UserLoginShort() {
     <div>
       <Button
         as={Link}
-        to="/loginin"
+        to="/signIn"
         style={loginLevel1Style}
         variant="primary"
         type="button"

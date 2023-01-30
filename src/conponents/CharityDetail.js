@@ -8,13 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ButtonLink from "../elements/button";
 
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  where,
-} from "firebase/firestore";
+import { collection, query, onSnapshot, where } from "firebase/firestore";
 import { db } from "../utils/firebase";
 
 import NavbarHome from "../elements/navbarHome";
@@ -181,7 +175,6 @@ function CharityDetail() {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    
     let org = JSON.parse(localStorage.getItem("CharityDetail"));
     console.log(org);
     const q = query(

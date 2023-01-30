@@ -16,43 +16,43 @@ import { auth } from "../utils/firebase";
 function UpdateStores() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
-    navigate("/loginin");
+  if (!user) {
+    navigate("/signIn");
   }
 
-  let store = JSON.parse(localStorage.getItem('store'));
-    // console.log("localstorage",org);
+  let store = JSON.parse(localStorage.getItem("store"));
+  // console.log("localstorage",org);
 
   const [values, setValues] = useState({
-      name: store.name,
-      address: store.address,
-      phone: store.phone
+    name: store.name,
+    address: store.address,
+    phone: store.phone,
   });
 
   const handleChange = (e) => {
-      setValues(values => ({
-        ...values,
-        [e.target.name]: e.target.value
-      }))
-  }
+    setValues((values) => ({
+      ...values,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const taskDocRef = doc(db, 'stores', store.id)
-        // console.log(taskDocRef._key.id);
-        console.log(taskDocRef);
-      try{
-          await updateDoc(taskDocRef, {
-            name: values.name,
-            address: values.address,
-            phone: values.phone,
-          })
-          alert("修改成功")
-          navigate("/allStores")
-      } catch(err) {
-          console.log(err);
-          // alert("資料更新有誤：", err)
-      }    
+    const taskDocRef = doc(db, "stores", store.id);
+    // console.log(taskDocRef._key.id);
+    console.log(taskDocRef);
+    try {
+      await updateDoc(taskDocRef, {
+        name: values.name,
+        address: values.address,
+        phone: values.phone,
+      });
+      alert("修改成功");
+      navigate("/allStores");
+    } catch (err) {
+      console.log(err);
+      // alert("資料更新有誤：", err)
+    }
   };
   const subBtnStyle = {
     color: "#ffffff",

@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import InputGroup from "react-bootstrap/InputGroup";
 
 function Title() {
-  const inputStyle = {
-  }
+  const inputStyle = {};
   return (
     <div>
       <InputGroup style={inputStyle} className="mb-3">

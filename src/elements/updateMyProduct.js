@@ -1,21 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "react-bootstrap/Button";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 // import img from "../img/tablet.jpg";
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  limit,
-} from "firebase/firestore";
 import { db } from "../utils/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
-import { doc, setDoc, addDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { Form } from "react-bootstrap";
 
@@ -34,40 +21,9 @@ function MyProduct() {
     marginLeft: "30px",
     letterSpacing: "2px",
   };
-  const demandHrefStyle = {
-    color: "#90AACB",
-  };
   const goodsImgStyle = {
     width: "200px",
     height: "200px",
-  };
-  const editIconStyle = {
-    backgroundColor: "#f6c23e",
-    height: "40px",
-    marginLeft: "10px",
-    width: "40px",
-    fontSize: "17px",
-    borderRadius: "50%",
-    textAlign: "center",
-    color: "white",
-    border: "none",
-    marginBottom: "5px",
-  };
-  const trashIconStyle = {
-    backgroundColor: "#e74a3b",
-    height: "40px",
-    marginLeft: "10px",
-    width: "40px",
-    fontSize: "17px",
-    borderRadius: "50%",
-    textAlign: "center",
-    color: "white",
-    border: "none",
-  };
-  const btnpageStyle = {
-    display: "flex",
-    flexDirection: "column",
-    marginTop: "13%",
   };
   const navigate = useNavigate();
   let good = JSON.parse(localStorage.getItem("good"));
@@ -116,7 +72,14 @@ function MyProduct() {
             <Card.Text style={{ color: "#6C6C6C" }}>
               需求機構：{good.charity}
               <br />
-              <div style={{ display: "flex", flexDirection: "row", marginBottom: "10px", marginTop: "15px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginBottom: "10px",
+                  marginTop: "15px",
+                }}
+              >
                 <div style={{ width: "120px", lineHeight: "38px" }}>
                   需求數量：
                 </div>

@@ -2,18 +2,10 @@ import React from "react";
 import "../App.css";
 import Card from "react-bootstrap/Card";
 
-import Navbar from "../elements/navbar";
-
 import TitleSec from "../elements/titleSec";
 
 import ButtonLink from "../elements/button";
 import SuccessInfo from "../elements/successInfo";
-
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
-
-import NavbarHome from "../elements/navbarHome";
-import { useNavigate } from "react-router";
 
 import NavbarNoFunction from "../elements/navbarNoFunction";
 
@@ -24,7 +16,6 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function PasswordSuccess() {
-  const [user] = useAuthState(auth);
   const cardStyle = {
     width: "50%",
     color: "black",
@@ -112,7 +103,7 @@ function PasswordSuccess() {
           />
 
           <div style={btnStyle}>
-            <ButtonLink to="/charityInfo" name="下一步" />
+            <ButtonLink to="/charityLogo" name="下一步" />
           </div>
         </Card.Body>
       </Card>

@@ -7,17 +7,12 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 
 import Card from "react-bootstrap/Card";
-import Navbar from "../elements/navbar";
 
 import TitleSec from "../elements/titleSec";
 import TitleStep from "../elements/titleStep";
-import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
-import ButtonLink from "../elements/button";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router";
-import NavbarHome from "../elements/navbarHome";
+import { useNavigate, useLocation } from "react-router";
 import NavbarNoFunction from "../elements/navbarNoFunction";
 
 import { Container, Row } from "react-bootstrap";
@@ -28,7 +23,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function CharityInfo() {
   const navigate = useNavigate("");
-  const [user] = useAuthState(auth);
   const cardStyle = {
     width: "80%",
     color: "black",
@@ -90,6 +84,10 @@ function CharityInfo() {
     borderRadius: "5px",
   };
 
+  const location = useLocation();
+  const { fromURL } = location.state;
+  console.log(fromURL);
+
   const [charityFundraisingNo, setCharityFundraisingNo] = useState("");
   const [charityTel, setCharityTel] = useState("");
   const [charityCategory, setCharityCategory] = useState("");
@@ -108,6 +106,7 @@ function CharityInfo() {
     try {
       console.log("start");
       await updateDoc(taskDocRef, {
+        "file.img.logo": fromURL,
         "info.status": "已啟用",
         "info.fundraisingNo": charityFundraisingNo,
         "info.tel": charityTel,
@@ -186,7 +185,7 @@ function CharityInfo() {
             </Col>
           </Row>
         </Container>
-        <TitleStep name="STEP2&nbsp;-&nbsp;填寫機構簡介" />
+        <TitleStep name="STEP3&nbsp;-&nbsp;填寫機構簡介" />
         <Card style={cardStyle}>
           <Card.Body>
             <div>
@@ -197,7 +196,7 @@ function CharityInfo() {
                                         <Form.Control type="file" />
                                     </Form.Group>
                                 </div> */}
-                <h4 style={h4Style}>一、機構基本資料</h4>
+                <h4 style={h4Style}>二、機構基本資料</h4>
                 <br></br>
                 <div style={inputStyle}>
                   <div>
@@ -212,6 +211,7 @@ function CharityInfo() {
                           <Form.Control
                             style={labelStyle}
                             placeholder="請輸入文字"
+                            required
                             value={charityFundraisingNo}
                             onChange={(e) =>
                               setCharityFundraisingNo(e.target.value)

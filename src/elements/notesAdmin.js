@@ -7,17 +7,11 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import Table from "react-bootstrap/Table";
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  limit,
-} from "firebase/firestore";
+import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { doc, setDoc, addDoc, deleteDoc } from "firebase/firestore";
+import { doc, addDoc, deleteDoc } from "firebase/firestore";
 import { useNavigate } from "react-router";
 
 function Task({ id, content }) {
@@ -36,11 +30,15 @@ function Task({ id, content }) {
           <tr>
             <td style={{ width: "90%", padding: "6px" }}>{content}</td>
             <td style={{ width: "10%", textAlign: "center" }}>
-              <button onClick={() => handleDelete(id)} style={{backgroundColor: "#e74a3a", border: "none", borderRadius: "100%"}}>
-                <FontAwesomeIcon
-                  style={{ color: "white" }}
-                  icon={faTrashCan}
-                />
+              <button
+                onClick={() => handleDelete(id)}
+                style={{
+                  backgroundColor: "#e74a3a",
+                  border: "none",
+                  borderRadius: "100%",
+                }}
+              >
+                <FontAwesomeIcon style={{ color: "white" }} icon={faTrashCan} />
               </button>
             </td>
             {/* <td style={{ width: "20%", padding: "6px" }}>{time}</td> */}
@@ -75,7 +73,7 @@ function News() {
     } catch (err) {
       console.log(err);
     }
-    setContent('')
+    setContent("");
   };
   return (
     <div>

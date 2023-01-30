@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import React, { Component } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import "../App.css";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
@@ -16,8 +16,8 @@ import { useNavigate } from "react-router";
 function UploadDemand() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
-  if (!user){
-    navigate("/loginin");
+  if (!user) {
+    navigate("/signIn");
   }
   const userTextStyle = {
     color: "#002b5b",

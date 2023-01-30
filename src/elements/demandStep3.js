@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 // import img from "../img/tablet.jpg";
 
-function DemandStep3({id, name, store, count, demandInfo, user}) {
+function DemandStep3({ id, name, store, count, demandInfo, user }) {
   const card = {
     marginBottom: "20px",
     marginLeft: "15%",
@@ -28,7 +28,11 @@ function DemandStep3({id, name, store, count, demandInfo, user}) {
   return (
     <div>
       <Card style={card}>
-        <Card.Img style={goodsImgStyle} variant="top" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg" />
+        <Card.Img
+          style={goodsImgStyle}
+          variant="top"
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+        />
         <Card.Body style={contentStyle}>
           <Card.Title>
             物資名稱：<b>{name}</b>

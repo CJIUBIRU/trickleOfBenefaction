@@ -1,18 +1,16 @@
 import { Container } from "react-bootstrap";
-import React, { Componentt, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import TitleSec from "../elements/titleSec";
-import TitleStep from "../elements/titleStep";
-import FromSelect from "../elements/fromSelect";
-import Search from "../elements/search";
-import DemandStep1 from "../elements/demandStep1";
-import ButtonLink from "../elements/button";
-import PaginationList from "../elements/paginationList";
 import Navbar from "../elements/navbar";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
-import { doc, getDocFromCache, collection, query, onSnapshot,deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  query,
+  onSnapshot,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../utils/firebase";
 import Card from "react-bootstrap/Card";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -22,30 +20,16 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function GoodsDetail({ id, name, price, store }) {
-
+function GoodsDetail({ id, name, price, store, pic }) {
   const cardStyle = {
     width: "280px",
     height: "450px",
-  };
-
-  const btnStyle = {
-    position: "absolute",
-    left: "50%",
-    transform: `translate(${-50}%, ${-50}%)`,
-    paddingTop: "5px",
-    paddingBottom: "5px",
-    paddingLeft: "15px",
-    paddingRight: "15px",
-    borderRadius: "10px",
-    letterSpacing: "1px",
-    fontSize: "2px",
-    margin: "25px 0px 20px 0px"
   };
   const imgStyle = {
     width: "150px",
     height: "120px",
     margin: "30px",
+    borderRadius: "10px",
   };
   const nameStyle = {
     fontWeight: "bold",
@@ -81,37 +65,32 @@ function GoodsDetail({ id, name, price, store }) {
     border: "none",
   };
   const uploadGoodsData = (item) => {
-    localStorage.setItem('good',JSON.stringify(item));
-  }
+    localStorage.setItem("good", JSON.stringify(item));
+  };
   const handleDelete = async (id) => {
-    const taskDocRef = doc(db, 'supply', id)
-    try{
-      alert("刪除成功")
-      await deleteDoc(taskDocRef)
-      
+    const taskDocRef = doc(db, "supply", id);
+    try {
+      alert("刪除成功");
+      await deleteDoc(taskDocRef);
     } catch (err) {
-        alert(err)
+      alert(err);
     }
-  }
+  };
 
   return (
     <div style={{ display: "inline-block", margin: "10px" }}>
       <Card style={cardStyle}>
         <div style={{ textAlign: "center" }}>
-          <Card.Img
-            style={imgStyle}
-            variant="top"
-            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
-          />
+          <Card.Img style={imgStyle} variant="top" src={pic} />
         </div>
 
         <Card.Body>
-
           <div style={{ height: "160px" }}>
             <Card.Title style={nameStyle}>{name}</Card.Title>
             <Card.Text style={dataStyle}>
               <p>
-                <b>合作店家：</b>{store}
+                <b>合作店家：</b>
+                {store}
               </p>
               <p>
                 <b>商品金額：</b>${price}
@@ -124,17 +103,26 @@ function GoodsDetail({ id, name, price, store }) {
               variant="primary"
               as={Link}
               to="/updateGoods"
-            onClick={e => uploadGoodsData({"id": id, "name": name, "price" : price, "store": store})}
+              onClick={(e) =>
+                uploadGoodsData({
+                  id: id,
+                  name: name,
+                  price: price,
+                  store: store,
+                })
+              }
             >
               <FontAwesomeIcon icon={faPenToSquare} />
             </Button>
-            <Button style={trashIconStyle} variant="primary" type="submit"
-            onClick={() => handleDelete(id)}
+            <Button
+              style={trashIconStyle}
+              variant="primary"
+              type="submit"
+              onClick={() => handleDelete(id)}
             >
               <FontAwesomeIcon icon={faTrashCan} />
             </Button>
           </div>
-
         </Card.Body>
       </Card>
     </div>
@@ -144,13 +132,11 @@ function AllGoods() {
   const [user] = useAuthState(auth);
   const navigate = useNavigate("");
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
   const [details, setDetails] = useState([]);
   useEffect(() => {
-    const q = query(
-      collection(db, "supply"),
-    );
+    const q = query(collection(db, "supply"));
     onSnapshot(q, (querySnapshot) => {
       setDetails(
         querySnapshot.docs.map((doc) => ({
@@ -175,12 +161,12 @@ function AllGoods() {
                 name={index.data.name}
                 price={index.data.price}
                 store={index.data.store}
+                pic={index.data.pic}
               />
             ))}
           </div>
         </div>
       </Container>
-
     </div>
   );
 }

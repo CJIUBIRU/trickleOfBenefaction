@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import img from "../img/tablet.jpg";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";

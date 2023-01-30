@@ -7,49 +7,52 @@ import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 import {
   doc,
-  setDoc,
-  addDoc,
   collection,
   query,
-  orderBy,
   onSnapshot,
+  updateDoc,
 } from "firebase/firestore";
 import TitleStep from "../elements/titleStep";
-import ButtonLink from "../elements/button";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+import { useNavigate, useLocation } from "react-router";
+//import { v4 as uuidv4 } from "uuid";
 import Form from "react-bootstrap/Form";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import ProgressBar from "react-bootstrap/ProgressBar";
+import { Stepper } from "react-form-stepper";
 
 function UploadGoods() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   const [tasks, setTasks] = useState([]);
   if (!user) {
-    navigate("/loginin");
+    navigate("/signIn");
   }
+  const location = useLocation();
+  const { fromID, fromURL } = location.state;
+
+  //console.log(fromID);
+  //console.log(fromURL);
+
   const [name, setName] = useState("");
   const [store, setStore] = useState("");
   const [price, setPrice] = useState("");
   // const [user] = useAuthState(auth);
 
+  const taskDocRef = doc(db, "supply", fromID);
+
   const handleSubmit = async (e) => {
+    //let uuid = uuidv4();
     e.preventDefault();
     try {
-      // await setDoc(doc(db, "goodsDemand", user.uid), {
-      await addDoc(collection(db, "supply"), {
+      //console.log("start");
+      await updateDoc(taskDocRef, {
         name: name,
         store: store,
         price: price,
-        uid: uuidv4(),
+        pic: fromURL,
       });
+      //console.log('end');
       navigate("/uploadGoodsSuccess");
-      //alert("物資上架成功。");
     } catch (err) {
       console.log(err);
     }
@@ -76,65 +79,22 @@ function UploadGoods() {
     textAlign: "center",
     height: "35px",
     fontWeight: "bold",
-    margin: "25px 0px",
+    margin: "0px 0px 80px 15px",
   };
   return (
     <div>
       <Navbar />
       <TitleSec name="上架物資" />
-      <Container>
-        <Row style={{ fontSize: "35px", marginBottom: "30px" }}>
-          <ProgressBar
-            style={{
-              position: "absolute",
-              marginTop: "19px",
-              zIndex: "1",
-              width: "860px",
-              marginLeft: "230px",
-            }}
-            now={98}
-          ></ProgressBar>
-          <Col
-            style={{ textAlign: "center", marginLeft: "100px", zIndex: "2" }}
-          >
-            <FontAwesomeIcon
-              style={{
-                color: "#26aa50",
-                marginRight: "60px",
-                backgroundColor: "white",
-                borderRadius: "100%",
-              }}
-              icon={faCircleCheck}
-            />
-            <br />
-            <span style={{ fontSize: "15px", marginRight: "60px" }}>開始</span>
-          </Col>
-          <Col style={{ textAlign: "right", zIndex: "2" }}>
-            <FontAwesomeIcon
-              style={{
-                color: "#26aa50",
-                marginRight: "95px",
-                backgroundColor: "white",
-                borderRadius: "100%",
-              }}
-              icon={faCircleCheck}
-            />
-            <br />
-            <span style={{ fontSize: "15px", marginRight: "85px" }}>
-              上傳圖片
-            </span>
-          </Col>
-          <Col
-            style={{ zIndex: "2", textAlign: "right", marginRight: "190px" }}
-          >
-            <FontAwesomeIcon
-              style={{ color: "lightgray", marginRight: "25px" }}
-              icon={faCircleCheck}
-            />
-            <br />
-            <span style={{ fontSize: "15px" }}>填寫商品資訊</span>
-          </Col>
-        </Row>
+      <Container style={{ marginBottom: "15px" }}>
+        <Stepper
+          steps={[
+            // { label: "開始" },
+            { label: "上傳圖片" },
+            { label: "填寫商品資訊" },
+            { label: "完成" },
+          ]}
+          activeStep={1}
+        />
       </Container>
       <TitleStep name="STEP2 - 填寫商品資訊" />
       <br />

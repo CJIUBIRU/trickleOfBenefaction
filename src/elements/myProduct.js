@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faQrcode } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 // import img from "../img/tablet.jpg";
 import {
   collection,
   query,
-  orderBy,
   onSnapshot,
-  limit,
   deleteDoc,
   doc,
 } from "firebase/firestore";
@@ -49,9 +47,6 @@ function Task({
     marginLeft: "30px",
     letterSpacing: "2px",
   };
-  const demandHrefStyle = {
-    color: "#90AACB",
-  };
   const goodsImgStyle = {
     width: "200px",
     height: "200px",
@@ -79,12 +74,25 @@ function Task({
     textAlign: "center",
     color: "white",
     lineHeight: "38px",
+    marginBottom: "5px",
+    border: "none",
+  };
+  const qrcodeStyle = {
+    backgroundColor: "#002b5b",
+    height: "40px",
+    marginLeft: "10px",
+    width: "40px",
+    fontSize: "17px",
+    borderRadius: "50%",
+    textAlign: "center",
+    color: "white",
+    lineHeight: "38px",
     border: "none",
   };
   const btnpageStyle = {
     display: "flex",
     flexDirection: "column",
-    marginTop: "13%",
+    marginTop: "10%",
   };
   const uploadMyDemand = (item) => {
     localStorage.setItem("good", JSON.stringify(item));
@@ -94,7 +102,7 @@ function Task({
     const taskDocRef = doc(db, "demand", id);
     try {
       await deleteDoc(taskDocRef);
-      alert("已下架需求。")
+      alert("已下架需求。");
     } catch (err) {
       alert(err);
     }
@@ -155,6 +163,9 @@ function Task({
             </Nav.Link>
             <Nav.Link style={trashIconStyle} onClick={() => handleDelete(id)}>
               <FontAwesomeIcon icon={faTrashCan} />
+            </Nav.Link>
+            <Nav.Link style={qrcodeStyle} as={Link} to="/qrcodePage">
+              <FontAwesomeIcon icon={faQrcode} />
             </Nav.Link>
           </div>
         </Card>

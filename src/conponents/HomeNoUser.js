@@ -1,17 +1,13 @@
 //打rcc+ENTER
-import React, { Component } from "react";
+import React from "react";
 import "../navLink.css";
 import Slider from "react-slick";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import Product from "../elements/product";
-import Navbar from "../elements/navbar";
-import NavbarHome from "../elements/navbarHome";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
+import HomeImg from "../img/home.jpg";
 
 function NavbarComp() {
-  const [user] = useAuthState(auth);
   const bodyStyle = {
     backgroundColor: "#ffffff",
   };
@@ -44,22 +40,8 @@ function NavbarComp() {
     fontSize: "18px",
     margin: "5px",
   };
-  const titleSecPage = {
-    margin: "40px 0px 30px 0px", //上右下左
-  };
   const titleSec = {
     color: "#002B5B",
-    fontWeight: "bold",
-  };
-  const titleSecContnet = {
-    paddingTop: "5px",
-  };
-  const titleSecInfo = {
-    width: "100%",
-    height: "250px",
-    backgroundColor: "#FEF1E6",
-    textAlign: "center",
-    lineHeight: "230px",
     fontWeight: "bold",
   };
   const titleBlockStyle = {
@@ -68,88 +50,111 @@ function NavbarComp() {
   return (
     <div>
       {/* <h1 style={{textAlign: "center", marginTop: "350px"}}>首頁</h1> */}
-      <Container>
-        <div style={bodyStyle}>
-          <div style={titleBlockStyle}></div>
-          <div>
-            <Slider {...settings}>
-              <div>
-                <h4 style={report1}>推播1</h4>
-              </div>
-              <div>
-                <h4 style={report1}>推播2</h4>
-              </div>
-              <div>
-                <h4 style={report1}>推播3</h4>
-              </div>
-              <div>
-                <h4 style={report1}>推播4</h4>
-              </div>
-              <div>
-                <h4 style={report1}>推播5</h4>
-              </div>
-              <div>
-                <h4 style={report1}>推播6</h4>
-              </div>
-            </Slider>
-          </div>
+      <div style={bodyStyle}>
+        <div style={titleBlockStyle}></div>
+        <div>
+          <Slider {...settings}>
+            <div>
+              <h4 style={report1}>推播1</h4>
+            </div>
+            <div>
+              <h4 style={report1}>推播2</h4>
+            </div>
+            <div>
+              <h4 style={report1}>推播3</h4>
+            </div>
+            <div>
+              <h4 style={report1}>推播4</h4>
+            </div>
+            <div>
+              <h4 style={report1}>推播5</h4>
+            </div>
+            <div>
+              <h4 style={report1}>推播6</h4>
+            </div>
+          </Slider>
+        </div>
 
-          <div style={titleSecPage}>
-            <h5 style={titleSec}>最新消息</h5>
-            <Slider {...settingsSec}>
-              <div>
-                <h4 style={report2}>消息1</h4>
-              </div>
-              <div>
-                <h4 style={report2}>消息2</h4>
-              </div>
-              <div>
-                <h4 style={report2}>消息3</h4>
-              </div>
-              <div>
-                <h4 style={report2}>消息4</h4>
-              </div>
-              <div>
-                <h4 style={report2}>消息5</h4>
-              </div>
-              <div>
-                <h4 style={report2}>消息6</h4>
-              </div>
-            </Slider>
-          </div>
+        <div style={{ backgroundColor: "#D7E9F7" }}>
+          <Container>
+            <div
+              style={{
+                margin: "40px 0px 0px 0px",
+                padding: "20px 0px 30px 0px",
+              }}
+            >
+              <h5 style={titleSec}>最新消息</h5>
+              <Slider {...settingsSec}>
+                <div>
+                  <h4 style={report2}>消息1</h4>
+                </div>
+                <div>
+                  <h4 style={report2}>消息2</h4>
+                </div>
+                <div>
+                  <h4 style={report2}>消息3</h4>
+                </div>
+                <div>
+                  <h4 style={report2}>消息4</h4>
+                </div>
+                <div>
+                  <h4 style={report2}>消息5</h4>
+                </div>
+                <div>
+                  <h4 style={report2}>消息6</h4>
+                </div>
+              </Slider>
+            </div>
+          </Container>
+        </div>
+        <div style={{ backgroundColor: "white" }}>
+          <Container>
+            <div style={{ padding: "20px 0px 30px 0px" }}>
+              <h5 style={titleSec}>機構需求物資</h5>
+              <Slider {...settingsSec}>
+                <div>
+                  <Product />
+                </div>
+                <div>
+                  <Product />
+                </div>
+                <div>
+                  <Product />
+                </div>
+                <div>
+                  <Product />
+                </div>
+                <div>
+                  <Product />
+                </div>
+                <div>
+                  <Product />
+                </div>
+              </Slider>
+            </div>
+          </Container>
+        </div>
 
-          <div style={titleSecPage}>
-            <h5 style={titleSec}>機構需求物資</h5>
-            <Slider {...settingsSec}>
-              <div>
-                <Product />
-              </div>
-              <div>
-                <Product />
-              </div>
-              <div>
-                <Product />
-              </div>
-              <div>
-                <Product />
-              </div>
-              <div>
-                <Product />
-              </div>
-              <div>
-                <Product />
-              </div>
-            </Slider>
-          </div>
-
-          <div style={titleSecPage}>
+        {/* <Container>
+          <div style={{margin: "40px 0px 40px 0px"}}>
             <h5 style={titleSec}>聯絡我們</h5>
             <div style={titleSecContnet}>
               <div style={titleSecInfo}>基本資訊</div>
             </div>
           </div>
-        </div>
-      </Container>
+        </Container> */}
+
+        <footer
+          style={{
+            backgroundColor: "#90AACB",
+            height: "300px",
+            textAlign: "center",
+            lineHeight: "300px",
+          }}
+        >
+          聯絡我們
+        </footer>
+      </div>
     </div>
   );
 }

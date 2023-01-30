@@ -2,13 +2,11 @@ import { Container } from "react-bootstrap";
 import React, { useState } from "react";
 import "../App.css";
 import TitleSec from "../elements/titleSec";
-import Record from "../elements/record";
 import Col from "react-bootstrap/Col";
 import { Card } from "react-bootstrap";
 import Navbar from "../elements/navbar";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
@@ -18,7 +16,7 @@ function ForgetPassword() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   // if (!user){
-  //   navigate("/loginin");
+  //   navigate("/signIn");
   // }
   // const auth = getAuth();
 
@@ -29,7 +27,7 @@ function ForgetPassword() {
   function sendResetEmail() {
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        navigate("/loginin");
+        navigate("/signIn");
         alert(
           "已寄送密碼重置信至您的電子信箱。\n請依照指示設置密碼，並重新登入！\n註：若找尋不到信件，可查看是否在垃圾郵件中，謝謝"
         );
@@ -98,7 +96,7 @@ function ForgetPassword() {
     width: "95%",
     height: "35px",
     lineHeight: "35px",
-    marginLeft: "25px"
+    marginLeft: "25px",
   };
 
   return (

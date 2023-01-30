@@ -1,92 +1,163 @@
-import React, { useState, useEffect }  from "react";
-import { db } from "../utils/firebase";
+import React, { useState, useEffect } from "react";
+import { db, storage } from "../utils/firebase";
 import Navbar from "../elements/navbar";
 import TitleSec from "../elements/titleSec";
 import { Card, FormControl } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
-import { doc, setDoc, addDoc, collection, updateDoc, onSnapshot, query } from "firebase/firestore";
-import TitleStep from "../elements/titleStep";
-import ButtonLink from "../elements/button";
+import {
+  doc,
+  collection,
+  updateDoc,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
 function UpdateGoods() {
   const navigate = useNavigate("");
   const [user] = useAuthState(auth);
   const [tasks, setTasks] = useState([]);
-  if (!user){
-    navigate("/loginin");
+  if (!user) {
+    navigate("/signIn");
   }
-  let good = JSON.parse(localStorage.getItem('good'));
+  //上傳圖片
+  const [progress, setProgress] = useState(0);
+  const [urlID, setUrlID] = useState("");
+  console.log(urlID);
+  const formHandler = (e) => {
+    e.preventDefault();
+    const file = e.target[0].files[0];
+    uploadFiles(file);
+    console.log(file.name);
+  };
+  const uploadFiles = (file) => {
+    if (!file) return;
+    const storageRef = ref(storage, `/goods/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(prog);
+      },
+      (err) => console.log(err),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          return setUrlID(url);
+        });
+      }
+    );
+  };
+  //圖片結束
+  let good = JSON.parse(localStorage.getItem("good"));
 
-
-   const [values, setValues] = useState({
-      name: good.name,
-      store: good.store,
-      price: good.price
+  const [values, setValues] = useState({
+    name: good.name,
+    store: good.store,
+    price: good.price,
   });
 
   const handleChange = (e) => {
-      setValues(values => ({
-        ...values,
-        [e.target.name]: e.target.value
-      }))
-  }
+    setValues((values) => ({
+      ...values,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const taskDocRef = doc(db, 'supply', good.id)
-        console.log(taskDocRef);
-        console.log(good.id)
-      try{
-          await updateDoc(taskDocRef, {
-            
-            name: values.name,
-            store: values.store,
-            price: values.price,
-          })
-          alert("修改成功")
-          navigate("/allGoods")
-      } catch(err) {
-          console.log(err);
-          // alert("資料更新有誤：", err)
-      }    
+    const taskDocRef = doc(db, "supply", good.id);
+    console.log(taskDocRef);
+    console.log(good.id);
+    try {
+      await updateDoc(taskDocRef, {
+        pic: urlID,
+        name: values.name,
+        store: values.store,
+        price: values.price,
+      });
+      alert("修改成功");
+      navigate("/allGoods");
+    } catch (err) {
+      console.log(err);
+      // alert("資料更新有誤：", err)
+    }
   };
   useEffect(() => {
-    const q = query(collection(db, 'stores'))
+    const q = query(collection(db, "stores"));
     onSnapshot(q, (querySnapshot) => {
-      setTasks(querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        data: doc.data()
-      })))
-    })
-  }, [])
-  const subBtnStyle = {
+      setTasks(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      );
+    });
+  }, []);
+
+  const stepBtnStyle = {
     color: "#ffffff",
-    backgroundColor: "#002B5B",
+    backgroundColor: "#90aacb",
+    border: "1px #90aacb solid",
     borderRadius: "30px",
     fontSize: "16px",
     width: "120px",
     textAlign: "center",
     height: "35px",
     fontWeight: "bold",
-    margin: "50px 0px 50px 42.5%",
+    marginLeft: "43%",
+    marginBottom: "20px",
   };
   return (
     <div>
       <Navbar />
       <TitleSec name="修改物資資訊" />
       {/* <TitleStep name="STEP2 - 填寫商品資訊" /> */}
-      <br />
+
       <Container>
         <div>
-          <Row>
+          <Row style={{ marginTop: "35px" }}>
             <Col>
-              <Card style={{ width: "60%", marginLeft: "20%" }}>
+              <Card style={{ width: "100%" }}>
+                <form onSubmit={formHandler}>
+                  <FormControl
+                    style={{ margin: "40px", width: "90%" }}
+                    type="file"
+                    accept=".jpg, .png, .jpeg"
+                  />
+                  <button style={stepBtnStyle} type="submit">
+                    上傳&nbsp;
+                    <FontAwesomeIcon icon={faCloudArrowUp} />
+                  </button>
+                  <ProgressBar
+                    style={{ margin: "20px 0px 30px 40px", width: "90%" }}
+                    now={progress}
+                    label={`${progress}%`}
+                  />
+                </form>
+                <div style={{ margin: "25px" }}>
+                  <ul>
+                    <p style={{ lineHeight: "25px" }}>
+                      <li>
+                        檔案格式：以照片上傳，需保證照片清晰、色調正常，JPG檔、PNG檔均可。
+                      </li>
+                    </p>
+                  </ul>
+                </div>
+              </Card>
+            </Col>
+            <Col>
+              <Card style={{ width: "100%", height: "100%" }}>
                 <form onSubmit={handleSubmit}>
                   <FormControl
                     style={{ margin: "30px 30px 0 30px", width: "90%" }}
@@ -122,9 +193,44 @@ function UpdateGoods() {
                     name="price"
                     value={values.price}
                   />
-                  <button type="submit" style={subBtnStyle}>
+                  {/* {progress === 0 && (
+                    <p
+                      type="button"
+                      style={{
+                        color: "#ffffff",
+                        backgroundColor: "lightgray",
+                        border: "none",
+                        borderRadius: "30px",
+                        fontSize: "16px",
+                        width: "120px",
+                        textAlign: "center",
+                        height: "35px",
+                        fontWeight: "bold",
+                        margin: "40px 0px 50px 42.5%",
+                        lineHeight: "35px",
+                      }}
+                    >
+                      送出修改
+                    </p>
+                  )} */}
+                  {/* {progress === 100 && ( */}
+                  <button
+                    type="submit"
+                    style={{
+                      color: "#ffffff",
+                      backgroundColor: "#002B5B",
+                      borderRadius: "30px",
+                      fontSize: "16px",
+                      width: "120px",
+                      textAlign: "center",
+                      height: "35px",
+                      fontWeight: "bold",
+                      margin: "40px 0px 50px 42.5%",
+                    }}
+                  >
                     送出修改
                   </button>
+                  {/* )} */}
                 </form>
               </Card>
             </Col>

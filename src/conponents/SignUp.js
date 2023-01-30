@@ -11,7 +11,7 @@ import app from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { db, auth } from "../utils/firebase";
+import { db } from "../utils/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import logo from "../img/coffee.png";
@@ -39,7 +39,7 @@ function Login() {
           alert("註冊成功，正在前往登入頁面...");
           verifiedEmail(user);
           // auth.signOut();
-          navigate("/loginIn");
+          navigate("/signIn");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -69,7 +69,7 @@ function Login() {
         email: email,
         level: "member",
         uid: user.uid,
-        name: "使用者"
+        name: "使用者",
       });
     } catch (err) {
       console.log(err);
@@ -82,8 +82,10 @@ function Login() {
         .then(() => {
           // 驗證信發送完成
           // window.location.reload();
-          alert("驗證信已發送到您的信箱，請查收。\n註：\n1. 若找不到信件可查看是否被寄送至垃圾郵件裡。\n2. 若過有效時間，可至'個人檔案管理'重新發送驗證信。");
-          navigate("/loginin");
+          alert(
+            "驗證信已發送到您的信箱，請查收。\n註：\n1. 若找不到信件可查看是否被寄送至垃圾郵件裡。\n2. 若過有效時間，可至'個人檔案管理'重新發送驗證信。"
+          );
+          navigate("/signIn");
         })
         .catch((error) => {
           // 驗證信發送失敗
@@ -176,7 +178,7 @@ function Login() {
 
   return (
     <div style={loginBodyStyle}>
-      <img style={{width: "100%"}} src={bgphoto} alt="bgPhoto" />
+      <img style={{ width: "100%" }} src={bgphoto} alt="bgPhoto" />
       <div style={loginLogoStyle}>
         <img style={loginLogoStyle} src={logo} alt="logoPhoto" />
       </div>
@@ -185,59 +187,59 @@ function Login() {
           <div style={loginContentStyle}>
             <p style={titleStyle}>註冊</p>
             {/* <form> */}
+            <Form.Control
+              style={inputStyle}
+              type="email"
+              placeholder="請輸入帳號"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Form.Control
+              style={inputStyle}
+              type="password"
+              placeholder="請輸入密碼"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div style={{ display: "flex", flexDirection: "row" }}>
               <Form.Control
-                style={inputStyle}
-                type="email"
-                placeholder="請輸入帳號"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Form.Control
-                style={inputStyle}
+                style={{
+                  marginBottom: "20px",
+                  border: "1.5px solid #90AACB",
+                  width: "90%",
+                }}
                 type="password"
-                placeholder="請輸入密碼"
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder="再次輸入密碼"
+                onChange={(e) => setCheckPassword(e.target.value)}
               />
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <Form.Control
+              {password === checkPassword && (
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
                   style={{
-                    marginBottom: "20px",
-                    border: "1.5px solid #90AACB",
-                    width: "90%",
+                    color: "#1cc88a",
+                    fontSize: "20px",
+                    marginTop: "8px",
+                    marginLeft: "10px",
                   }}
-                  type="password"
-                  placeholder="再次輸入密碼"
-                  onChange={(e) => setCheckPassword(e.target.value)}
                 />
-                {password === checkPassword && (
-                  <FontAwesomeIcon
-                    icon={faCircleCheck}
-                    style={{
-                      color: "#1cc88a",
-                      fontSize: "20px",
-                      marginTop: "8px",
-                      marginLeft: "10px",
-                    }}
-                  />
-                )}
-                {password !== checkPassword && (
-                  <FontAwesomeIcon
-                    icon={faCircleCheck}
-                    style={{
-                      color: "lightgray",
-                      fontSize: "20px",
-                      marginTop: "8px",
-                      marginLeft: "10px",
-                    }}
-                  />
-                )}
-              </div>
-              <div style={btnContentStyle}>
-                <ButtonLink to="/loginIn" name="返回登入" />
-                &nbsp;&nbsp;
-                <button style={stepBtnStyle} type="submit" onClick={signUp}>
-                  註冊
-                </button>
-              </div>
+              )}
+              {password !== checkPassword && (
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  style={{
+                    color: "lightgray",
+                    fontSize: "20px",
+                    marginTop: "8px",
+                    marginLeft: "10px",
+                  }}
+                />
+              )}
+            </div>
+            <div style={btnContentStyle}>
+              <ButtonLink to="/signIn" name="返回登入" />
+              &nbsp;&nbsp;
+              <button style={stepBtnStyle} type="submit" onClick={signUp}>
+                註冊
+              </button>
+            </div>
             {/* </form> */}
             {errorMessage && <p style={errorMessageStyle}>{errorMessage}</p>}
           </div>

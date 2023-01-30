@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Navbar from "../elements/navbar";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import ButtonLink from "../elements/button";
 import TagType from "../elements/tagType";
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  where,
-} from "firebase/firestore";
+import { collection, query, onSnapshot, where } from "firebase/firestore";
 import { db } from "../utils/firebase";
 
 import TitleSec from "../elements/titleSec";
@@ -27,7 +18,7 @@ import NavbarHome from "../elements/navbarHome";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
 
-function CharityCard({ id, category, name, mail, tel }) {
+function CharityCard({ id, category, name, mail, tel, logo }) {
   // CharityDetail
   const charityDetailData = (item) => {
     localStorage.setItem("CharityDetail", JSON.stringify(item));
@@ -47,12 +38,13 @@ function CharityCard({ id, category, name, mail, tel }) {
     textAlign: "center",
     height: "35px",
     fontWeight: "bold",
-    border: "none"
+    border: "none",
   };
   const imgStyle = {
     width: "150px",
     height: "120px",
     margin: "30px",
+    borderRadius: "10px",
   };
   const nameStyle = {
     fontWeight: "bold",
@@ -69,11 +61,7 @@ function CharityCard({ id, category, name, mail, tel }) {
     <div style={{ display: "inline-block", margin: "10px" }}>
       <Card style={cardStyle}>
         <div style={{ textAlign: "center" }}>
-          <Card.Img
-            style={imgStyle}
-            variant="top"
-            src="https://www.post.gov.tw/post/FileCenter/post_ww2//PW_TeamIntroduction/small_pic/s_1658221203795.png"
-          />
+          <Card.Img style={imgStyle} variant="top" src={logo} />
         </div>
 
         <Card.Body>
@@ -90,7 +78,7 @@ function CharityCard({ id, category, name, mail, tel }) {
             </Card.Text>
           </div>
           <div style={{ marginBottom: "0px", paddingBottom: "0px" }}>
-            <div style={{marginLeft: "65px"}}>
+            <div style={{ marginLeft: "65px" }}>
               <Button
                 style={btnStyle}
                 as={Link}
@@ -98,7 +86,9 @@ function CharityCard({ id, category, name, mail, tel }) {
                 onClick={(e) => charityDetailData({ name: name })}
                 variant="primary"
                 name="了解更多"
-              >了解更多</Button>
+              >
+                了解更多
+              </Button>
             </div>
           </div>
         </Card.Body>
@@ -143,6 +133,7 @@ function Charity() {
                 category={item.data.info.details.category}
                 mail={item.data.info.mail}
                 tel={item.data.info.tel}
+                logo={item.data.file.img.logo}
                 // fundraisingNo={item.data.info.fundraisingNo}
                 // intro={item.data.info.details.intro}
                 // demandPurpose={item.data.info.details.demandPurpose}
